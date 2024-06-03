@@ -1,0 +1,48 @@
+;;  Music 
+(defwidget music [] 
+  (eventbox
+    :onhover "eww update music_reveal=true && ~/.config/eww/scripts/pop music"
+    :onhoverlost "eww update music_reveal=false"
+    (box
+      :class "module-2"
+      :orientation "h"
+      :space-evenly "false"
+      :vexpand "false"
+      :hexpand "false"
+      (box
+        :class "song_cover_art"
+        :vexpand "false"
+        :hexpand "false"
+        :style "background-image: url('${cover_art}');"
+      )
+      (button 
+        :class "song"
+        :onclick "~/.config/eww/scripts/pop music"
+        song
+      )
+      (revealer
+        :transition "slideright"
+        :reveal music_reveal
+        :duration "350ms"
+        (box :vexpand "false" :hexpand "false" :orientation "h" 
+          (button
+            :class "song_btn_prev"
+            :onclick "playerctl previous"
+            ""
+          )
+          (button 
+            :class "song_btn_play"
+            :onclick "./scripts/music_info --toggle"
+            song_status
+          )
+          (button 
+            :class "song_btn_next"
+            :onclick "playerctl next"
+            ""
+          )
+        )
+      )
+    )
+  )
+)
+

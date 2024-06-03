@@ -1,0 +1,18 @@
+
+pkgname=my-local-openjdk
+pkgver=17.0.6
+pkgrel=5
+epoch=1
+arch=('x86_64')
+license=('custom')
+provides=('java-runtime' 'java-runtime-openjdk' 'jdk-openjdk' 'jre-openjdk' 'jre17-openjdk' 'java-environment=17' 'java-environment-openjdk')
+conflicts=('java-runtime' 'java-runtime-openjdk' 'jdk-openjdk' 'jre-openjdk' 'jre17-openjdk' 'java-environment=17' 'java-environment-openjdk')
+
+
+package() {
+  LIB_JVM=/usr/lib/jvm
+  if [ ! -f "${LIB_JVM}/default" ]; then
+    install -d "$pkgdir/${LIB_JVM}"
+    ln -s /opt/android-studio/jbr "${pkgdir}/${LIB_JVM}/default"
+  fi
+}

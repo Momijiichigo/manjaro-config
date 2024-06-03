@@ -1,0 +1,65 @@
+[$Version]
+update_info=dolphin_detailsmodesettings.upd:rename-leading-padding,dolphin_detailsmodesettings.upd:move-content-display
+
+[General]
+OpenExternallyCalledFolderInNewTab=false
+RememberOpenedTabs=false
+Version=202
+ViewPropsTimestamp=2022,4,30,8,18,59.598
+
+[IconsMode]
+PreviewSize=48
+
+[KFileDialog Settings]
+Places Icons Auto-resize=false
+Places Icons Static Size=22
+Recent Files[$e]=wine,file:$HOME/.local/share/Steam/steamapps/common/Proton - Experimental/files/bin/wine
+Recent URLs[$e]=file:$HOME/.local/share/Steam/steamapps/common/Proton - Experimental/files/bin/
+detailViewIconSize=32
+
+[KPropertiesDialog]
+1728x1080 screen: Height=562
+1728x1080 screen: Width=400
+1975x1234 screen: Height=472
+1975x1234 screen: Width=393
+2 screens: Height=636
+2 screens: Width=384
+eDP-1 DP-4 Height 1536x960=472
+eDP-1 DP-4 Width 1536x960=396
+eDP-1 Height 1536x960=472
+eDP-1 Height 1536x960 eDP-1=484
+eDP-1 Width 1536x960=466
+eDP-1 Width 1536x960 eDP-1=388
+
+[MainWindow]
+DP-4 Height 768x432=368
+DP-4 Height 853x480=412
+DP-4 Width 768x432=760
+DP-4 Width 853x480=853
+MenuBar=Disabled
+ToolBarsMovable=Disabled
+eDP-1 DP-4 Height 1536x960=894
+eDP-1 DP-4 Width 1536x960=768
+eDP-1 DP-4 XPosition 1382x864=317
+eDP-1 DP-4 XPosition 1536x960=0
+eDP-1 DP-4 XPosition 1707x960=3682
+eDP-1 DP-4 XPosition 853x480=285
+eDP-1 DP-4 YPosition 1382x864=237
+eDP-1 DP-4 YPosition 1536x960=29
+eDP-1 DP-4 YPosition 1707x960=154
+eDP-1 DP-4 YPosition 853x480=143
+eDP-1 Height 1536x960=544
+eDP-1 Height 3456x2160=864
+eDP-1 Width 1536x960=768
+eDP-1 Width 3456x2160=1227
+eDP-1 XPosition 1536x960=451
+eDP-1 XPosition 1728x1080=484
+eDP-1 YPosition 1536x960=270
+eDP-1 YPosition 1728x1080=257
+
+[Open-with settings]
+CompletionMode=1
+History=kdenl,gwen,imh,bra,code,neo,vim,vis,proton-call -p experimental -r ,'/home/daichi/.local/share/Steam/steamapps/common/Proton - Experimental/files/bin/wine'
+
+[PreviewSettings]
+Plugins=appimagethumbnail,audiothumbnail,blenderthumbnail,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,imagethumbnail,jpegthumbnail,windowsexethumbnail,windowsimagethumbnail,opendocumentthumbnail,gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs

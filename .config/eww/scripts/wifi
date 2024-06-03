@@ -1,0 +1,34 @@
+#!/bin/bash
+
+status=$(nmcli g | grep -oE "disconnected")
+
+if [ $status ] ; then
+    col="#575268"
+
+else
+    col="#a1bdce"
+fi
+
+
+
+if [[ "$1" == "--COL" ]]; then
+    echo $col
+
+elif [[ "$1" == "--ESSID" ]]; then
+
+    nmcli c | grep wlp | awk '{print ($1)}'
+
+elif [[ "$1" == "--ICON" ]]; then
+
+    connectivity=$(nmcli networking connectivity)
+
+    if [ $connectivity == "full" ]; then
+        echo "󰤨"
+    elif [ $connectivity == "limited" ]; then
+        echo "󰤠"
+    else
+        echo "󰤯"
+    fi
+
+fi
+

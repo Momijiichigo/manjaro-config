@@ -1,0 +1,19 @@
+
+(defwidget mem []
+  (box :class "mem_module" :vexpand "false" :hexpand "false" 
+    (circular-progress
+      :value {EWW_RAM.used_mem_perc}
+      :class "membar"
+      :thickness 2
+      (button 
+        :class "iconmem"
+        :limit-width 2
+        :tooltip "using ${round(EWW_RAM.used_mem_perc, 0)}% ram"
+        :onclick "$HOME/.config/eww/scripts/pop system"
+        :show-truncated false
+        :wrap false
+        " "
+      )
+    )
+  )
+)

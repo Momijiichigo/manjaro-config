@@ -1,0 +1,256 @@
+{
+    "hex.builtin.setting.data_inspector": {
+        "hex.builtin.setting.data_inspector.hidden_rows": []
+    },
+    "hex.builtin.setting.folders": {
+        "hex.builtin.setting.folders": [],
+        "hex.builtin.setting.folders.description": []
+    },
+    "hex.builtin.setting.font": {
+        "hex.builtin.setting.font.custom_font_enable": true,
+        "hex.builtin.setting.font.custom_font_info": null,
+        "hex.builtin.setting.font.font_antialias": true,
+        "hex.builtin.setting.font.font_bold": false,
+        "hex.builtin.setting.font.font_italic": false,
+        "hex.builtin.setting.font.font_path": "/usr/share/fonts/TTF/FiraCode-Regular.ttf",
+        "hex.builtin.setting.font.font_size": 18,
+        "hex.builtin.setting.font.load_all_unicode_chars": false
+    },
+    "hex.builtin.setting.general": {
+        "hex.builtin.setting.general.auto_backup_time": 0,
+        "hex.builtin.setting.general.auto_load_patterns": 1,
+        "hex.builtin.setting.general.check_for_updates": 0,
+        "hex.builtin.setting.general.curr_workspace": "Default",
+        "hex.builtin.setting.general.enable_unicode": 1,
+        "hex.builtin.setting.general.load_all_unicode_chars": 0,
+        "hex.builtin.setting.general.network_interface": 0,
+        "hex.builtin.setting.general.prev_launch_version": "1.32.2",
+        "hex.builtin.setting.general.save_recent_providers": 1,
+        "hex.builtin.setting.general.server_contact": 0,
+        "hex.builtin.setting.general.show_tips": 1,
+        "hex.builtin.setting.general.sync_pattern_source": 0,
+        "hex.builtin.setting.general.upload_crash_logs": 0,
+        "hex.builtin.setting.general.uuid": "7156f6a3-3c99-4010-bff6-a3a5215ef4e0"
+    },
+    "hex.builtin.setting.hex_editor": {
+        "hex.builtin.setting.hex_editor.advanced_decoding": 1,
+        "hex.builtin.setting.hex_editor.ascii": 1,
+        "hex.builtin.setting.hex_editor.byte_padding": 0,
+        "hex.builtin.setting.hex_editor.bytes_per_row": 16,
+        "hex.builtin.setting.hex_editor.char_padding": 0,
+        "hex.builtin.setting.hex_editor.grey_zeros": 1,
+        "hex.builtin.setting.hex_editor.highlight_color": 1623228544,
+        "hex.builtin.setting.hex_editor.sync_scrolling": 0,
+        "hex.builtin.setting.hex_editor.uppercase_hex": 1,
+        "hex.builtin.setting.hex_editor.visualizer": "hex.builtin.visualizer.hexadecimal.8bit"
+    },
+    "hex.builtin.setting.interface": {
+        "hex.builtin.setting.interface.achievement_popup": true,
+        "hex.builtin.setting.interface.color": "Dark",
+        "hex.builtin.setting.interface.fps": 60,
+        "hex.builtin.setting.interface.language": "en-US",
+        "hex.builtin.setting.interface.layout_locked": false,
+        "hex.builtin.setting.interface.multi_windows": 1,
+        "hex.builtin.setting.interface.pattern_data_row_bg": false,
+        "hex.builtin.setting.interface.pattern_tree_style": 0,
+        "hex.builtin.setting.interface.restore_window_pos": 0,
+        "hex.builtin.setting.interface.scaling": 4,
+        "hex.builtin.setting.interface.scaling_factor": 0.0,
+        "hex.builtin.setting.interface.simplified_welcome_screen": false,
+        "hex.builtin.setting.interface.wiki_explain_language": "en",
+        "hex.builtin.setting.interface.window.": 0,
+        "hex.builtin.setting.interface.window.height": 2122,
+        "hex.builtin.setting.interface.window.maximized": 0,
+        "hex.builtin.setting.interface.window.width": 3456,
+        "hex.builtin.setting.interface.window.x": 3840,
+        "hex.builtin.setting.interface.window.y": 0
+    },
+    "hex.builtin.setting.proxy": {
+        "hex.builtin.setting.proxy.enable": false,
+        "hex.builtin.setting.proxy.url": ""
+    },
+    "hex.builtin.setting.shortcuts": {
+        "hex.builtin.menu.edit.bookmark.create": [
+            66,
+            16777216
+        ],
+        "hex.builtin.menu.edit.redo": [
+            89,
+            16777216
+        ],
+        "hex.builtin.menu.edit.undo": [
+            90,
+            16777216
+        ],
+        "hex.builtin.menu.file.close": [
+            87,
+            16777216
+        ],
+        "hex.builtin.menu.file.create_file": [
+            78,
+            16777216
+        ],
+        "hex.builtin.menu.file.open_file": [
+            79,
+            16777216
+        ],
+        "hex.builtin.menu.file.project.open": [
+            79,
+            33554432
+        ],
+        "hex.builtin.menu.file.project.save": [
+            83,
+            33554432
+        ],
+        "hex.builtin.menu.file.project.save_as": [
+            83,
+            33554432,
+            67108864
+        ],
+        "hex.builtin.menu.file.quit": [
+            293,
+            33554432
+        ],
+        "hex.builtin.menu.file.reload_provider": [
+            82,
+            16777216
+        ],
+        "hex.builtin.shortcut.next_provider": [
+            262,
+            16777216,
+            33554432,
+            536870912
+        ],
+        "hex.builtin.shortcut.prev_provider": [
+            263,
+            16777216,
+            33554432,
+            536870912
+        ],
+        "hex.builtin.view.command_palette.name": [
+            80,
+            16777216,
+            67108864
+        ],
+        "hex.builtin.view.find.shortcut.select_all": [
+            65,
+            16777216
+        ],
+        "hex.builtin.view.hex_editor.copy.ascii": [
+            67,
+            16777216,
+            67108864
+        ],
+        "hex.builtin.view.hex_editor.menu.edit.copy": [
+            67,
+            16777216
+        ],
+        "hex.builtin.view.hex_editor.menu.edit.paste": [
+            86,
+            16777216
+        ],
+        "hex.builtin.view.hex_editor.menu.edit.paste_all": [
+            86,
+            16777216,
+            67108864
+        ],
+        "hex.builtin.view.hex_editor.menu.edit.select_all": [
+            65,
+            16777216
+        ],
+        "hex.builtin.view.hex_editor.menu.file.goto": [
+            71,
+            16777216
+        ],
+        "hex.builtin.view.hex_editor.menu.file.save": [
+            83,
+            16777216
+        ],
+        "hex.builtin.view.hex_editor.menu.file.save_as": [
+            83,
+            16777216,
+            67108864
+        ],
+        "hex.builtin.view.hex_editor.menu.file.search": [
+            70,
+            16777216
+        ],
+        "hex.builtin.view.hex_editor.menu.file.select": [
+            65,
+            16777216,
+            67108864
+        ],
+        "hex.builtin.view.hex_editor.shortcut.cursor_down": [
+            264
+        ],
+        "hex.builtin.view.hex_editor.shortcut.cursor_end": [
+            269
+        ],
+        "hex.builtin.view.hex_editor.shortcut.cursor_left": [
+            263
+        ],
+        "hex.builtin.view.hex_editor.shortcut.cursor_page_down": [
+            267
+        ],
+        "hex.builtin.view.hex_editor.shortcut.cursor_page_up": [
+            266
+        ],
+        "hex.builtin.view.hex_editor.shortcut.cursor_right": [
+            262
+        ],
+        "hex.builtin.view.hex_editor.shortcut.cursor_start": [
+            268
+        ],
+        "hex.builtin.view.hex_editor.shortcut.cursor_up": [
+            265
+        ],
+        "hex.builtin.view.hex_editor.shortcut.enter_editing": [
+            257
+        ],
+        "hex.builtin.view.hex_editor.shortcut.remove_selection": [
+            256
+        ],
+        "hex.builtin.view.hex_editor.shortcut.selection_down": [
+            264,
+            67108864
+        ],
+        "hex.builtin.view.hex_editor.shortcut.selection_left": [
+            263,
+            67108864
+        ],
+        "hex.builtin.view.hex_editor.shortcut.selection_page_down": [
+            267,
+            67108864
+        ],
+        "hex.builtin.view.hex_editor.shortcut.selection_page_up": [
+            266,
+            67108864
+        ],
+        "hex.builtin.view.hex_editor.shortcut.selection_right": [
+            262,
+            67108864
+        ],
+        "hex.builtin.view.hex_editor.shortcut.selection_up": [
+            265,
+            67108864
+        ],
+        "hex.builtin.view.pattern_editor.shortcut.add_breakpoint": [
+            297,
+            536870912
+        ],
+        "hex.builtin.view.pattern_editor.shortcut.continue_debugger": [
+            298,
+            67108864,
+            536870912
+        ],
+        "hex.builtin.view.pattern_editor.shortcut.run_pattern": [
+            294,
+            536870912
+        ],
+        "hex.builtin.view.pattern_editor.shortcut.step_debugger": [
+            296,
+            67108864,
+            536870912
+        ]
+    }
+}

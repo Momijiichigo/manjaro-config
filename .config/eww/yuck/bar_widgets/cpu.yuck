@@ -1,0 +1,19 @@
+
+(defwidget cpu []
+  (box :class "cpu_module" :vexpand "false" :hexpand "false" 
+    (circular-progress
+      :value {EWW_CPU.avg}
+      :class "cpubar"
+      :thickness 2
+      (button 
+        :class "iconcpu"
+        :limit-width 2
+        :tooltip "using ${round(EWW_CPU.avg, 0)}% CPU"
+        :onclick "$HOME/.config/eww/scripts/pop system"
+        :show-truncated false
+        :wrap false
+        " "
+      )
+    )
+  )
+)

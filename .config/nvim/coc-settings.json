@@ -1,0 +1,35 @@
+{
+  "tsserver.enable": true,
+  "tsserver.log": "verbose",
+  "svelte.enable-ts-plugin": true,
+  "tailwindCSS.includeLanguages": {
+    "rust": "html"
+  },
+  "inlayHint.enable": true,
+  "rust-analyzer.inlayHints.chainingHints.enable": true,
+  "rust-analyzer.inlayHints.closingBraceHints.enable": true,
+  "Lua.workspace.library": [
+    "/usr/share/nvim/runtime/lua"
+  ],
+  "workspace.rootPatterns": [
+    ".git",
+    ".hg",
+    ".projections.json",
+    "Cargo.toml",
+    "uno.config.ts",
+    "uno.config.js",
+    "tailwind.config.js",
+    "tailwind.config.cjs",
+    "tailwind.config.ts"
+  ],
+  "languageserver": {
+    "wgsl": {
+      "command": "wgsl_analyzer",
+      "filetypes": ["wgsl"]
+    },
+    "typst": {
+        "command": "/home/daichi/workspace/temp/typst-lsp/target/release/typst-lsp",
+        "filetypes": ["typst"]
+    }
+  }
+}

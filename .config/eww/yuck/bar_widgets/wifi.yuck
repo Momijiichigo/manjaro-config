@@ -1,0 +1,24 @@
+
+(defwidget wifi [] 
+  (eventbox
+    :onhover "eww update wifi_rev=true"
+    :onhoverlost "eww update wifi_rev=false"
+    (box :vexpand "false" :hexpand "false" :space-evenly "false"
+      (button
+        :class "module-wif"
+        :onclick "networkmanager_dmenu"
+        :style "color: ${COL_WLAN};" 
+        WLAN_ICON)
+      (revealer
+        :transition "slideright"
+        :reveal wifi_rev
+        :duration "350ms"
+        (label
+          :class "module_essid"
+          :text ESSID_WLAN
+        )
+      )
+    )
+  )
+)
+

@@ -1,0 +1,143 @@
+(include "./yuck/variables.yuck")
+
+(defwindow bar [screen]
+  :geometry
+    (geometry
+      :x "0%"
+      :y "2px"
+      :width "99.5%"
+      :height "14px"
+      :anchor "top center"
+    )
+  :stacking "fg"
+  :windowtype "dock"
+  :exclusive true
+  (box
+    :class "bar_class"
+    :orientation "h"
+    (left :screen screen)
+    (center)
+    (right)
+  )
+)
+
+(defwidget sep []
+  (box :class "module-2" :vexpand "false" :hexpand "false"
+    (label :class "separ" :text "|")
+  )
+)
+
+(include "./yuck/bar_widgets/bright.yuck")
+(include "./yuck/bar_widgets/volume.yuck")
+(include "./yuck/bar_widgets/wifi.yuck")
+
+(include "./yuck/bar_widgets/battery.yuck")
+(include "./yuck/bar_widgets/memory.yuck")
+(include "./yuck/bar_widgets/cpu.yuck")
+
+(include "./yuck/bar_widgets/clock.yuck")
+
+(defwidget right []
+  (box
+    :orientation "h"
+    :space-evenly false  
+    :halign "end"
+    :class "right_modules"
+    (bright)
+    (volume)
+    (wifi)
+    (sep)
+    
+    (eventbox
+      :onhover "./scripts/pop system"
+      (box
+        :space-evenly true  
+        :halign "end"
+        (bat)
+        (mem)
+        (cpu)
+      )
+    )
+
+    (sep)
+
+    (clock_module)
+  )
+)
+
+(include "./yuck/bar_widgets/workspaces.yuck")
+(defwidget left [screen]
+  (box
+    :orientation "h" 
+    :space-evenly false  
+    :halign "start"
+    :class "left_modules"
+    (workspaces :screen screen)
+  )
+)
+
+(include "./yuck/bar_widgets/music.yuck")
+(defwidget center []
+  (box
+    :orientation "h" 
+    :space-evenly false
+    :halign "center"
+    :class "center_modules"
+    (music)
+  )
+)
+
+
+(include "./yuck/popups/calendar.yuck")
+(defwindow calendar
+  :geometry 
+    (geometry
+      :x "0px"
+      :y "5px" 
+      :anchor "top right"
+      :width "270px" 
+      :height "60px"
+    )
+  (cal)
+)
+
+
+
+(include "./yuck/popups/audio.yuck")
+(defwindow audio_ctl
+  :geometry 
+    (geometry
+      :x "0px" 
+      :y "5px"
+      :anchor "top right"
+      :width "280px" 
+      :height "60px"
+    )
+  (audio)
+)
+
+(include "./yuck/popups/system.yuck")
+(defwindow system
+  :geometry 
+    (geometry
+      :x "0px" 
+      :y "5px" 
+      :anchor "top right"
+      :width "290px" 
+      :height "120px"
+    )
+  (system)
+)
+
+
+;;  music
+(include "./yuck/popups/music.yuck")
+(defwindow music_win 
+  :stacking "fg" 
+  :focusable "false" 
+  :screen 1
+  :geometry 
+    (geometry :x "0" :y "5px" :width 428 :height 104 :anchor "top center")
+  (music_pop)
+)
+

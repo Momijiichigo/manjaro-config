@@ -1,0 +1,16 @@
+
+; calendar
+(defwidget cal []
+  (eventbox
+    :onhoverlost "~/.config/eww/scripts/pop calendar"
+    (box :class "cal" :orientation "v"
+      (box :class "cal-in"
+        (calendar
+          :class "cal" 
+          :day {formattime(EWW_TIME, "%d")}
+          :year {formattime(EWW_TIME, "%y")}
+        )
+      )
+    )
+  )
+)

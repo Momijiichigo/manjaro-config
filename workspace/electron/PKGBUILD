@@ -1,0 +1,8 @@
+
+
+pkgname=my-electron
+pkgver=0.1.1
+pkgrel=2
+arch=('x86_64')
+license=('MIT')
+provides=('electron')
