@@ -1,0 +1,6 @@
+[Desktop Entry]
+Exec=/home/daichi/.deno/bin/deno run
+MimeType=x-content/typescript;
+Name=deno run
+NoDisplay=true
+Type=Application
