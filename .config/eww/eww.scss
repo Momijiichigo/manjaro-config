@@ -12,6 +12,8 @@ Created by saimoom **/
   padding: 0;
 }
 
+circular-progress {}
+
 /** General **/
 .bar_class {
   background-color: rgba(15, 15, 23, 0.8);
@@ -49,11 +51,6 @@ tooltip label {
   font-size: 17;
 }
 
-.clock_date_class {
-  font-size: 14;
-  margin: 0px 20px 0px -1px;
-  color: #d7beda;
-}
 
 .clock_minute_class {
   margin: 0px 10px 0px 3px;
@@ -177,6 +174,7 @@ scale trough {
   font-size: 18px;
   font-weight: normal;
   margin: 0px 0px 0px 10px;
+  color: #a1bdce;
   // background-color: #0f0f17;
 }
 
@@ -209,7 +207,7 @@ scale trough {
   background-position: center;
   margin: 5px 10px 5px 10px;
   min-height: 10px;
-  min-width: 30px;
+  min-width: 25px;
   // margin: 2px;
   border-radius: 100px;
 }
@@ -240,24 +238,27 @@ scale trough {
 // Calendar
 .cal {
   // background-color: #0f0f17;
-  background-color: rgba(15, 15, 23, 0.5);
-  font-family: JetBrainsMono Nerd Font;
-  font-size: 18px;
+  background-color: rgba(15, 15, 23, 0.7);
+  font-family: FiraCode Nerd Font;
   font-weight: normal;
   border-radius: 16px;
-  margin-right: 5px;
+  border-color: cyan;
+  border-width: 2px;
+  padding: 10px;
 
+  .clock_date {
+    font-size: 24px;
+    margin: 0px;
+    color: #d7beda;
+  }
   .cal-in {
     padding: 0px 10px 0px 10px;
     color: #bfc9db;
-
-    .cal {
+    calendar {
+      font-size: 22px;
       &.highlight {
         padding: 20px;
       }
-
-      padding: 5px 5px 5px 5px;
-      margin-left: 10px;
     }
   }
 }
@@ -336,7 +337,7 @@ calendar:indeterminate {
 }
 
 .sys_cpu {
-  color: #afbea2;
+  color: #a1bdce;
   background-color: #38384d;
   border-radius: 10px;
 }

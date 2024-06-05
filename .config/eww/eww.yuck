@@ -10,7 +10,7 @@
       :anchor "top center"
     )
   :stacking "fg"
-  :windowtype "dock"
+  :windowtype "toolbar"
   :exclusive true
   (box
     :class "bar_class"
@@ -92,10 +92,10 @@
 (defwindow calendar
   :geometry 
     (geometry
-      :x "0px"
-      :y "5px" 
+      :x "6px"
+      :y "6px" 
       :anchor "top right"
-      :width "270px" 
+      :width "300px" 
       :height "60px"
     )
   (cal)
@@ -141,3 +141,27 @@
   (music_pop)
 )
 
+
+;; Wallpaper Widgets
+
+;; System
+
+(defwindow wallpaper_sys
+  :geometry 
+    (geometry
+      :x "0px" 
+      :y "0px" 
+      :anchor "top left"
+      :width "1000px" 
+      :height "600px"
+    )
+  :namespace "wallpaper"
+  :focusable false
+  :stacking "bg"
+  :exclusive false
+  (box
+    (label
+      :text "${round(EWW_DISK["/"]?.used_perc, 1)}%"
+    )
+  )
+)

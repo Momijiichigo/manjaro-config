@@ -15,10 +15,9 @@
             : cover_art
         }');"
       )
-      (button 
+      (label 
         :class "song"
-        :onclick "~/.config/eww/scripts/pop music"
-        song
+        :text song
       )
       (revealer
         :transition "slideright"

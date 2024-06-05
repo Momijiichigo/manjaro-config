@@ -1,17 +1,16 @@
 
 (defwidget bat []
   (box :class "bat_module" :vexpand "false" :hexpand "false"
-    (circular-progress 
+    (circ-prog
       :value {EWW_BATTERY["BAT0"].capacity}
       :class "batbar"
       :thickness 2
-      (button 
+      (label 
         :class "iconbat"
         :tooltip "battery on ${EWW_BATTERY["BAT0"].capacity}%"
         :show-truncated false
-        :onclick "$HOME/.config/eww/scripts/pop system"
         :wrap false
-        "󱐋󱐋"
+        :text "󱐋󱐋"
       )
     )
   )

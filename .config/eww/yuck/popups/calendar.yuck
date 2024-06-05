@@ -4,9 +4,11 @@
   (eventbox
     :onhoverlost "~/.config/eww/scripts/pop calendar"
     (box :class "cal" :orientation "v"
+      (label
+        :class "clock_date"
+        :text clock_date)
       (box :class "cal-in"
         (calendar
-          :class "cal" 
           :day {formattime(EWW_TIME, "%d")}
           :year {formattime(EWW_TIME, "%y")}
         )
