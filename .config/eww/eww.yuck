@@ -145,13 +145,13 @@
 ;; Wallpaper Widgets
 
 ;; System
-
+(include "./yuck/wallp_widgets/default.yuck")
 (defwindow wallpaper_sys
   :geometry 
     (geometry
       :x "0px" 
       :y "0px" 
-      :anchor "top left"
+      :anchor "right"
       :width "1000px" 
       :height "600px"
     )
@@ -159,9 +159,5 @@
   :focusable false
   :stacking "bg"
   :exclusive false
-  (box
-    (label
-      :text "${round(EWW_DISK["/"]?.used_perc, 1)}%"
-    )
-  )
+  (wallp-widget)
 )

@@ -1,0 +1,9 @@
+
+(defwidget wallp-widget []
+  
+  (box
+    (label
+      :text "${round(EWW_DISK["/"]?.used_perc, 1)}%"
+    )
+  )
+)
