@@ -7,7 +7,7 @@
       :thickness 2
       (button 
         :class "iconcpu"
-        :limit-width 2
+        ; :limit-width 2
         :tooltip "using ${round(EWW_CPU.avg, 0)}% CPU"
         :onclick "$HOME/.config/eww/scripts/pop system"
         :show-truncated false

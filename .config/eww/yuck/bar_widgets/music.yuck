@@ -7,13 +7,13 @@
       :class "module-2"
       :orientation "h"
       :space-evenly "false"
-      :vexpand "false"
-      :hexpand "false"
       (box
         :class "song_cover_art"
-        :vexpand "false"
-        :hexpand "false"
-        :style "background-image: url('${cover_art}');"
+        :style "background-image: url('${
+          cover_art == ""
+            ? "images/music.png"
+            : cover_art
+        }');"
       )
       (button 
         :class "song"
@@ -24,7 +24,7 @@
         :transition "slideright"
         :reveal music_reveal
         :duration "350ms"
-        (box :vexpand "false" :hexpand "false" :orientation "h" 
+        (box :orientation "h" 
           (button
             :class "song_btn_prev"
             :onclick "playerctl previous"
@@ -33,7 +33,7 @@
           (button 
             :class "song_btn_play"
             :onclick "./scripts/music_info --toggle"
-            song_status
+            {song_status == "Playing" ? " " : " "} 
           )
           (button 
             :class "song_btn_next"

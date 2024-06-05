@@ -18,7 +18,7 @@
           "hyprctl dispatch workspace ${entry}
           eww update \
           current_workspace=\"$(./scripts/current_workspace.ts)\""
-        {entry == current_workspace ? "" : ""}
+        {entry == current_workspace ? "  " : "  "}
       )
     )
   )

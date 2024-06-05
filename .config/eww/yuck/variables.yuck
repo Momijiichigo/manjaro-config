@@ -32,19 +32,34 @@
 (defvar time_rev false)
 
 
-(defpoll COL_WLAN :interval "1m" "~/.config/eww/scripts/wifi --COL")
+(defpoll COL_WLAN 
+  :interval "1m"
+  :initial "#a1bdce"
+  "~/.config/eww/scripts/wifi --COL"
+)
 (defpoll ESSID_WLAN :interval "1m" "~/.config/eww/scripts/wifi --ESSID")
 (defpoll WLAN_ICON :interval "1m" "~/.config/eww/scripts/wifi --ICON")
 
 
-(defpoll song :interval "2s"  "~/.config/eww/scripts/music_info --song")
-(defpoll song_artist :interval "2s"  "~/.config/eww/scripts/music_info --artist")
+(deflisten song
+  :initial ""
+  "playerctl metadata --format \"{{ xesam:title }}\" -F"
+)
+(deflisten song_artist
+  :initial ""
+  "playerctl metadata --format \"{{ xesam:artist }}\" -F"
+)
+
 (defpoll current_status
   :interval "1s"
   :initial 0
   "~/.config/eww/scripts/music_info --time")
-(defpoll song_status :interval "10s"  "~/.config/eww/scripts/music_info --status")
-(defpoll cover_art :interval "1s"  "~/.config/eww/scripts/music_info --cover")
+(deflisten song_status
+  :initial "Stopped"
+  "playerctl -F status")
+(deflisten cover_art 
+  :initial "images/music.png"
+  "playerctl metadata --format \"{{ mpris:artUrl }}\" -F")
 
 (defpoll calendar_day :interval "20h" "date '+%d'")
 (defpoll calendar_year :interval "20h" "date '+%Y'")

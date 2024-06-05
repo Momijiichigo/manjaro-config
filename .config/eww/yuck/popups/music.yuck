@@ -49,7 +49,7 @@
           (button 
             :class "music_btn_play" 
             :onclick "~/.config/eww/scripts/music_info --toggle"
-            song_status
+            {song_status == "Playing" ? " " : " "}
           )
           (button 
             :class "music_btn_next" 
