@@ -17,7 +17,15 @@
           :class "sys_bat"
           :thickness 9
           (label
-            :text "󱐋󱐋"
+            :text "${
+              EWW_BATTERY["BAT0"].status == "Charging"
+                ? battery_icons_charging?.[
+                  round(EWW_BATTERY["BAT0"].capacity / 10, 0)
+                ] ?: battery_icons_charging[10]
+                : battery_icons?.[
+                  round(EWW_BATTERY["BAT0"].capacity / 10, 0)
+                ] ?: battery_icons[10]
+            } "
             :class "sys_icon_bat"
             :limit-width 2
             :show-truncated false

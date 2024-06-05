@@ -32,6 +32,13 @@
 (defvar time_rev false)
 
 
+(defvar battery_icons 
+  `["󰂎", "󰁺", "󰁼", "󰁽", "󰁾", "󰁿", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]`
+)
+(defvar battery_icons_charging 
+  `["󰢟", "󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"]`
+)
+
 (defpoll COL_WLAN 
   :interval "1m"
   :initial "#a1bdce"
