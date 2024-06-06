@@ -5,6 +5,7 @@
   all: unset;
   font-family: feather;
   font-family: FiraCode Nerd Font, DaddyTimeMono NF;
+  // border: 1px solid red;
 }
 
 .phantom {
@@ -13,17 +14,15 @@
   padding: 0;
 }
 
-circular-progress {}
-
 /** General **/
 .bar_class {
-  background-color: rgba(15, 15, 23, 0.8);
-  border-radius: 13px;
+  background-color: rgba(15, 15, 23, 0.6);
+  border-radius: 12px;
 }
 
 .module {
   margin: 0px 0px 0px 0px;
-  border-radius: 5px 16px 0px 10px;
+  border-radius: 0px 16px 0px 10px;
 }
 
 /** tooltip!! **/
@@ -42,14 +41,14 @@ tooltip label {
 /** Widgets **/
 
 .clock_time_sep {
-  font-size: 11;
+  font-size: 11px;
   color: #bfc9db;
   margin: 0px 4px 1px 4px;
 }
 
 .clock_hour_class,
 .clock_minute_class {
-  font-size: 17;
+  font-size: 18px;
 }
 
 
@@ -93,20 +92,20 @@ tooltip label {
 }
 
 .volume_icon {
-  font-size: 22;
+  font-size: 18px;
   color: #a1bdce;
   margin: 0px 10px 0px 10px;
 }
 
 
 .module_essid {
-  font-size: 14;
+  font-size: 14px;
   color: #a1bdce;
   margin: 0px 10px 0px 0px;
 }
 
 .module-wif {
-  font-size: 18;
+  font-size: 14px;
   color: #a1bdce;
   border-radius: 100%;
   margin: 0px 10px 0px 5px;
@@ -129,11 +128,11 @@ tooltip label {
 .iconmem,
 .iconcpu {
   font-size: 13px;
-  margin: 7px;
+  margin: 3px;
 }
 
 .bright_icon {
-  font-size: 18px;
+  font-size: 15px;
   color: #e4c9af;
   margin: 0px 10px 0px 10px;
 }
@@ -142,7 +141,7 @@ tooltip label {
 .separ {
   color: #3e424f;
   font-weight: bold;
-  font-size: 22px;
+  font-size: 16px;
   margin: 0px 8px 0px 8px;
 }
 
@@ -164,7 +163,7 @@ tooltip label {
 scale trough {
   all: unset;
   background-color: #22242b;
-  box-shadow: 0 2px 3px 2px #06060b;
+  box-shadow: 0px 2px 3px 2px #06060b;
   border-radius: 16px;
   min-height: 10px;
   min-width: 70px;
@@ -199,43 +198,43 @@ scale trough {
 //   color: #a1bdce;
 // }
 
-// .module-2 {
-//   padding: 5px 0px 5px 0px;
-// }
+.music_module {
+  // padding: 0px 5px 0px 5px;
 
-.song_cover_art {
-  background-size: cover;
-  background-position: center;
-  margin: 5px 10px 5px 10px;
-  min-height: 10px;
-  min-width: 25px;
-  // margin: 2px;
-  border-radius: 100px;
+  .song_cover_art {
+    background-size: cover;
+    background-position: center;
+    margin: 2px 0px 2px 0px;
+    min-height: 10px;
+    min-width: 23px;
+    // margin: 2px;
+    border-radius: 100px;
+  }
+  
+  .song {
+    color: #a1bdce;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0px 0px 0px 10px;
+  }
+  
+  .song_btn_play {
+    color: #a1bdce;
+    font-size: 20px;
+    margin: 0px 0px 0px 10px;
+  
+  }
+  
+  
+  .song_btn_prev,
+  .song_btn_next {
+    color: #bfc9db;
+    font-size: 17px;
+    margin: 0px 0px 0px 7px;
+  
+  }
+
 }
-
-.song {
-  color: #a1bdce;
-  font-size: 14px;
-  font-weight: bold;
-  margin: 0px 5px 0px 0px;
-}
-
-.song_btn_play {
-  color: #a1bdce;
-  font-size: 24px;
-  margin: 0px 0px 0px 10px;
-
-}
-
-
-.song_btn_prev,
-.song_btn_next {
-  color: #bfc9db;
-  font-size: 20px;
-  margin: 0px 0px 0px 7px;
-
-}
-
 // Calendar
 .cal {
   // background-color: #0f0f17;
@@ -243,14 +242,13 @@ scale trough {
   font-family: FiraCode Nerd Font;
   font-weight: normal;
   border-radius: 16px;
-  border-color: cyan;
-  border-width: 2px;
   padding: 10px;
 
   .clock_date {
     font-size: 24px;
     margin: 0px;
     color: #d7beda;
+    min-height: 10px;
   }
   .cal-in {
     padding: 0px 10px 0px 10px;
@@ -290,7 +288,11 @@ calendar:indeterminate {
   color: #bfc9db;
 }
 
-
+.color_border {
+  border-style: solid;
+  border-width: 2px;
+  border-color: #7bc1cc;
+}
 
 
 
@@ -365,84 +367,78 @@ calendar:indeterminate {
 }
 
 
-
-
-
-
-
-
 .music_pop {
-  background-color: rgba(15, 15, 23, 0.7);
+  background-color: rgba(15, 15, 23, 0.6);
   border-radius: 16px;
-}
 
-.music_cover_art {
-  background-size: cover;
-  background-position: center;
-  min-height: 100px;
-  box-shadow: 5px 5px 5px 5px #06060b;
-  min-width: 170px;
-  margin: 20px;
-  border-radius: 20px;
-}
+  .music_cover_art {
+    background-size: cover;
+    background-position: center;
+    min-height: 100px;
+    box-shadow: 5px 5px 5px 5px #06060b;
+    min-width: 170px;
+    margin: 20px;
+    border-radius: 20px;
+  }
+  
+  .music {
+    color: #a1bdce;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 20px 0px 0px -15px;
+  }
+  
+  .music_artist {
+    color: #bbc5d7;
+    font-size: 16px;
+    font-weight: normal;
+    margin: 0px 0px 0px 0px;
+  }
+  
+  .music_btn_prev,
+  .music_btn_play,
+  .music_btn_next {
+    font-family: Iosevka Nerd Font;
+  }
+  
+  .music_btn_prev {
+    color: #bbc5d7;
+    font-size: 32px;
+    font-weight: normal;
+    margin: 0px 0px 0px 0px;
+  }
+  
+  .music_btn_play {
+    color: #a1bdce;
+    font-size: 48px;
+    font-weight: normal;
+    margin: 0px 0px 0px 10px;
+  }
+  
+  .music_btn_next {
+    color: #bbc5d7;
+    font-size: 32px;
+    font-weight: normal;
+    margin: 0px 0px 0px 0px;
+  }
+  
+  .music_bar scale trough highlight {
+    all: unset;
+    background-image: linear-gradient(to right, #afcee0 30%, #a1bdce 50%, #77a5bf 100% *50);
+    border-radius: 24px;
+  }
+  
+  .music_bar scale trough {
+    all: unset;
+    background-color: #232232;
+    box-shadow: 0 6px 5px 2px #06060b;
+    border-radius: 24px;
+    min-height: 13px;
+    min-width: 190px;
+    margin-bottom: 30px;
+  }
 
-.music {
-  color: #a1bdce;
-  font-size: 20px;
-  font-weight: bold;
-  margin: 20px 0px 0px -15px;
 }
-
-.music_artist {
-  color: #bbc5d7;
-  font-size: 16px;
-  font-weight: normal;
-  margin: 0px 0px 0px 0px;
-}
-
-.music_btn_prev,
-.music_btn_play,
-.music_btn_next {
-  font-family: Iosevka Nerd Font;
-}
-
-.music_btn_prev {
-  color: #bbc5d7;
-  font-size: 32px;
-  font-weight: normal;
-  margin: 0px 0px 0px 0px;
-}
-
-.music_btn_play {
-  color: #a1bdce;
-  font-size: 48px;
-  font-weight: normal;
-  margin: 0px 0px 0px 10px;
-}
-
-.music_btn_next {
-  color: #bbc5d7;
-  font-size: 32px;
-  font-weight: normal;
-  margin: 0px 0px 0px 0px;
-}
-
-.music_bar scale trough highlight {
-  all: unset;
-  background-image: linear-gradient(to right, #afcee0 30%, #a1bdce 50%, #77a5bf 100% *50);
-  border-radius: 24px;
-}
-
-.music_bar scale trough {
-  all: unset;
-  background-color: #232232;
-  box-shadow: 0 6px 5px 2px #06060b;
-  border-radius: 24px;
-  min-height: 13px;
-  min-width: 190px;
-  margin: -10px 10px 20px 0px;
-}
-
 .audio-box {
   background-color: #0f0f17;
   border-radius: 16px;

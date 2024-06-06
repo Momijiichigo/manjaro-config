@@ -4,7 +4,7 @@
     :onhover "eww update music_reveal=true && ~/.config/eww/scripts/pop music"
     :onhoverlost "eww update music_reveal=false"
     (box
-      :class "module-2"
+      :class "music_module"
       :orientation "h"
       :space-evenly "false"
       (box

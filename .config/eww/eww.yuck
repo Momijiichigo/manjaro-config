@@ -6,7 +6,7 @@
       :x "0%"
       :y "2px"
       :width "99.5%"
-      :height "14px"
+      :height "10px"
       :anchor "top center"
     )
   :stacking "fg"

@@ -3,7 +3,10 @@
 (defwidget cal []
   (eventbox
     :onhoverlost "~/.config/eww/scripts/pop calendar"
-    (box :class "cal" :orientation "v"
+    (box 
+      :class "cal"
+      :orientation "v"
+      :space-evenly "false"
       (label
         :class "clock_date"
         :text clock_date)
