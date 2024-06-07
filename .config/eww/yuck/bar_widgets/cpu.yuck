@@ -11,7 +11,8 @@
         :tooltip "using ${round(EWW_CPU.avg, 0)}% CPU"
         :show-truncated false
         :wrap false
-        :text " "
+        :unindent true
+        :text ""
       )
     )
   )

@@ -152,8 +152,8 @@
       :x "0px" 
       :y "0px" 
       :anchor "right"
-      :width "1000px" 
-      :height "600px"
+      :width "100px" 
+      :height "100px"
     )
   :namespace "wallpaper"
   :focusable false

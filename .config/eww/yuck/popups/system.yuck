@@ -17,6 +17,7 @@
           :class "sys_bat"
           :thickness 9
           (label
+            :unindent false
             :text "${
               EWW_BATTERY["BAT0"].status == "Charging"
                 ? battery_icons_charging?.[

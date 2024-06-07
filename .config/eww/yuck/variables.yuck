@@ -44,8 +44,8 @@
   :initial "#a1bdce"
   "~/.config/eww/scripts/wifi --COL"
 )
-(defpoll ESSID_WLAN :interval "1m" "~/.config/eww/scripts/wifi --ESSID")
-(defpoll WLAN_ICON :interval "1m" "~/.config/eww/scripts/wifi --ICON")
+(defpoll ESSID_WLAN :interval "5m" "~/.config/eww/scripts/wifi/wifi_old --ESSID")
+(defpoll WLAN_ICON :interval "5m" "~/.config/eww/scripts/wifi/wifi_old --ICON")
 
 
 (deflisten song

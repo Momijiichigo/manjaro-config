@@ -28,3 +28,4 @@ do
   screen_counter=$((screen_counter+1))
 done
 
+bun run ./scripts/wifi/index.ts

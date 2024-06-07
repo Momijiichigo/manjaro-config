@@ -86,14 +86,6 @@ elif [[ "$1" == "--ttime" ]]; then
     get_ttime
 elif [[ "$1" == "--cover" ]]; then
     get_cover
-elif [[ "$1" == "--toggle" ]]; then
-    playerctl play-pause
-    if [[ $STATUS == *"Playing"* ]]; then
-        eww update song_status=" "
-    else
-        eww update song_status=" "
-    fi
-
 elif [[ "$1" == "--next" ]]; then
     playerctl next
 elif [[ "$1" == "--prev" ]]; then
