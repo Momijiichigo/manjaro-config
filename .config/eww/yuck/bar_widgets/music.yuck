@@ -31,7 +31,7 @@
           )
           (button 
             :class "song_btn_play"
-            :onclick "./scripts/music_info --toggle"
+            :onclick "playerctl play-pause"
             {song_status == "Playing" ? " " : " "} 
           )
           (button 

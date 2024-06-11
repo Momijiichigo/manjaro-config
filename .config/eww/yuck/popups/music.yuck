@@ -42,18 +42,20 @@
           :space-evenly "false" 
           :vexpand "false" 
           :hexpand "false"
-        	(button 
+          (button 
             :class "music_btn_prev" 
-            :onclick "~/.config/eww/scripts/music_info --prev" ""
+            :onclick "playerctl previous"
+            ""
           )
           (button 
             :class "music_btn_play" 
-            :onclick "~/.config/eww/scripts/music_info --toggle"
+            :onclick "playerctl play-pause"
             {song_status == "Playing" ? " " : " "}
           )
           (button 
             :class "music_btn_next" 
-            :onclick "~/.config/eww/scripts/music_info --next" ""
+            :onclick "playerctl next"
+            ""
           )
         )
         (box 

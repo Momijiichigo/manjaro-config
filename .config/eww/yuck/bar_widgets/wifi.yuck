@@ -7,7 +7,7 @@
       (button
         :class "module-wif"
         :onclick "networkmanager_dmenu"
-        :style "color: ${COL_WLAN};" 
+        :style "color: ${WLAN_ICON_COLOR};" 
         WLAN_ICON)
       (revealer
         :transition "slideright"
@@ -15,6 +15,7 @@
         :duration "350ms"
         (label
           :class "module_essid"
+          :style "color: ${WLAN_ICON_COLOR};"
           :text ESSID_WLAN
         )
       )

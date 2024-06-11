@@ -39,13 +39,13 @@
   `["󰢟", "󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"]`
 )
 
-(defpoll COL_WLAN 
-  :interval "1m"
-  :initial "#a1bdce"
-  "~/.config/eww/scripts/wifi --COL"
+(defpoll WLAN_ICON_COLOR 
+  :interval "5m"
+  :initial "#a1ceb2"
+  "bun run scripts/wifi/index.ts icon-color"
 )
-(defpoll ESSID_WLAN :interval "5m" "~/.config/eww/scripts/wifi/wifi_old --ESSID")
-(defpoll WLAN_ICON :interval "5m" "~/.config/eww/scripts/wifi/wifi_old --ICON")
+(defpoll ESSID_WLAN :interval "5m" "bun run scripts/wifi/index.ts essid")
+(defpoll WLAN_ICON :interval "5m" "bun run scripts/wifi/index.ts icon")
 
 
 (deflisten song

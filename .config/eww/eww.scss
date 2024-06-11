@@ -1,6 +1,7 @@
 /** EWW.SCSS
  **/
 @import './yuck/wallp_widgets/style.scss';
+
 * {
   all: unset;
   font-family: feather;
@@ -100,7 +101,7 @@ tooltip label {
 
 .module_essid {
   font-size: 14px;
-  color: #a1bdce;
+  // color: #a1bdce;
   margin: 0px 10px 0px 0px;
 }
 
@@ -151,6 +152,7 @@ tooltip label {
   border-radius: 16px;
   margin: 2px 4px 2px 4px;
 }
+
 .mem_module {
   border-radius: 16px;
   margin: 2px 4px 2px 4px;
@@ -212,31 +214,32 @@ scale trough {
     // margin: 2px;
     border-radius: 100px;
   }
-  
+
   .song {
     color: #a1bdce;
     font-size: 14px;
     font-weight: bold;
     margin: 0px 0px 0px 10px;
   }
-  
+
   .song_btn_play {
     color: #a1bdce;
     font-size: 20px;
     margin: 0px 0px 0px 10px;
-  
+
   }
-  
-  
+
+
   .song_btn_prev,
   .song_btn_next {
     color: #bfc9db;
     font-size: 17px;
     margin: 0px 0px 0px 7px;
-  
+
   }
 
 }
+
 // Calendar
 .cal {
   // background-color: #0f0f17;
@@ -252,11 +255,14 @@ scale trough {
     color: #d7beda;
     min-height: 10px;
   }
+
   .cal-in {
     padding: 0px 10px 0px 10px;
     color: #bfc9db;
+
     calendar {
       font-size: 22px;
+
       &.highlight {
         padding: 20px;
       }
@@ -300,72 +306,84 @@ calendar:indeterminate {
 
 
 
-.sys_sep {
-  color: #38384d;
-  font-size: 18px;
-  margin: 0px 10px 0px 10px;
-}
-
-.sys_text_bat_sub,
-.sys_text_cpu_sub,
-.sys_text_mem_sub {
-  font-size: 16px;
-  color: #bbc5d7;
-  margin: 5px 0px 0px 25px;
-}
-
-.sys_text_bat,
-.sys_text_cpu,
-.sys_text_mem {
-  font-size: 21px;
-  font-weight: bold;
-  margin: 14px 0px 0px 25px;
-}
-
-.sys_icon_bat,
-.sys_icon_cpu,
-.sys_icon_mem {
-  font-size: 30px;
-  margin: 30px;
-}
-
 .sys_win {
+
   background-color: rgba(15, 15, 23, 0.7);
   border-radius: 16px;
   margin-right: 5px;
-}
 
-.sys_bat {
-  color: #afbea2;
-  background-color: #38384d;
-  border-radius: 10px;
-}
+  .box {
+    border-radius: 16px;
+    margin: 15px 10px 10px 20px;
+  }
 
-.sys_cpu {
-  color: #a1bdce;
-  background-color: #38384d;
-  border-radius: 10px;
-}
+  .sep {
+    color: #38384d;
+    font-size: 18px;
+    margin: 0px 10px 0px 10px;
+  }
 
-.sys_mem {
-  color: #e4c9af;
-  background-color: #38384d;
-  border-radius: 10px;
-}
+  .text_bat_sub,
+  .text_cpu_sub,
+  .text_mem_sub {
+    font-size: 16px;
+    color: #bbc5d7;
+    margin: 5px 0px 0px 25px;
+  }
 
-.sys_icon_bat,
-.sys_text_bat {
-  color: #afbea2;
-}
+  .title {
+    font-size: 21px;
+    font-weight: bold;
+    margin: 14px 0px 0px 25px;
+  }
 
-.sys_icon_mem,
-.sys_text_mem {
-  color: #e4c9af;
-}
+  .icon_bat,
+  .icon_cpu,
+  .icon_mem {
+    font-size: 30px;
+    margin: 30px;
+  }
 
-.sys_box {
-  border-radius: 16px;
-  margin: 15px 10px 10px 20px;
+
+  .bat {
+    color: #afbea2;
+    background-color: #38384d;
+    border-radius: 10px;
+  }
+
+  .cpu {
+    color: #a1bdce;
+    background-color: #38384d;
+    border-radius: 10px;
+  }
+
+  .mem {
+    color: #e4c9af;
+    background-color: #38384d;
+    border-radius: 10px;
+  }
+
+  .icon_bat,
+  .text_bat {
+    color: #afbea2;
+  }
+
+  .icon_mem,
+  .text_mem {
+    color: #e4c9af;
+  }
+
+  progress.storage {
+    background-color: #38384d;
+    border-radius: 10px;
+    trough {
+      background-color: #22242b;
+      min-height: 2px;
+      min-width: 70px;
+      margin: 0px 10px 0px 0px;
+    
+    }
+  }
 }
 
 
@@ -382,54 +400,54 @@ calendar:indeterminate {
     margin: 20px;
     border-radius: 20px;
   }
-  
+
   .music {
     color: #a1bdce;
     font-size: 20px;
     font-weight: bold;
     margin: 20px 0px 0px -15px;
   }
-  
+
   .music_artist {
     color: #bbc5d7;
     font-size: 16px;
     font-weight: normal;
     margin: 0px 0px 0px 0px;
   }
-  
+
   .music_btn_prev,
   .music_btn_play,
   .music_btn_next {
     font-family: Iosevka Nerd Font;
   }
-  
+
   .music_btn_prev {
     color: #bbc5d7;
     font-size: 32px;
     font-weight: normal;
     margin: 0px 0px 0px 0px;
   }
-  
+
   .music_btn_play {
     color: #a1bdce;
     font-size: 48px;
     font-weight: normal;
     margin: 0px 0px 0px 10px;
   }
-  
+
   .music_btn_next {
     color: #bbc5d7;
     font-size: 32px;
     font-weight: normal;
     margin: 0px 0px 0px 0px;
   }
-  
+
   .music_bar scale trough highlight {
     all: unset;
     background-image: linear-gradient(to right, #afcee0 30%, #a1bdce 50%, #77a5bf 100% *50);
     border-radius: 24px;
   }
-  
+
   .music_bar scale trough {
     all: unset;
     background-color: #232232;
@@ -441,6 +459,7 @@ calendar:indeterminate {
   }
 
 }
+
 .audio-box {
   background-color: #0f0f17;
   border-radius: 16px;
