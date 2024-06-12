@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/sh
 
 
 current_monitor=$(hyprctl activeworkspace | grep -oP 'monitorID: \K\d')
