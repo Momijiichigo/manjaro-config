@@ -4,6 +4,9 @@
 ## The original config has bspc commands, 
 ## but I've replaced them with hyprctl commands;
 ## Some lines with `bspc` are just commented out.
+#
+# Make a symlink to `/etc/swhkd/swhkdrc` to use swhkd.
+
 
 # Terminal emulator
 super + Return
