@@ -88,22 +88,6 @@
 )
 
 
-;; Popups
-
-(include "./yuck/popups/powermenu.yuck")
-(defwindow powermenu
-  :monitor 0
-  :stacking "overlay"
-  :geometry 
-    (geometry 
-      :anchor "center"
-      :width "100%"
-      :height "120%")
-  :namespace "eww-blur"
-  (powermenu)
-)
-
-
 (include "./yuck/popups/calendar.yuck")
 (defwindow calendar
   :geometry 

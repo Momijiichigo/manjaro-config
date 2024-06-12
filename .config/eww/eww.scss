@@ -122,15 +122,12 @@ tooltip label {
 
 .iconcpu {
   color: #a1bdce;
-  font-size: 11px;
-  margin-top: 4px;
-  margin-right: 4px;
 }
 
 .iconmem {
   color: #e0b089;
   font-size: 10px;
-  margin-left: 6px;
+  margin-left: 6px
 }
 
 .iconbat {
@@ -242,11 +239,6 @@ scale trough {
   }
 
 }
-
-
-// Popups 
-
-@import './yuck/popups/powermenu.scss';
 
 // Calendar
 .cal {

@@ -29,4 +29,4 @@ do
 done
 
 # Run the main loop of wifi status listener
-bun run $HOME/.config/eww/scripts/wifi/index.ts main
+bun run ./scripts/wifi/index.ts main

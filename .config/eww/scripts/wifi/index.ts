@@ -57,22 +57,18 @@ async function mainLoop() {
         await handleLogMessage(text);
 
       }
-      await cleanup();
+      cleanup();
     }
   } catch (e) {
     // just in case the script didn't finish properly,
     // we want to remove the temp file
-    await cleanup();
+    cleanup();
     throw e;
   }
 
   function cleanup() {
-    return $`rm ${TMP_FILE}`.text();
+    $`rm ${TMP_FILE}`;
   }
-  process.on("beforeExit", async (code) => {
-    console.log("Exiting with code", code);
-    await cleanup();
-  })
 
 }
 
