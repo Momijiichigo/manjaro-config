@@ -21,59 +21,32 @@ switch (arg) {
   default:
     break;
 }
-
+// ps o command | grep -qE '[/ \w]+\.config/eww/scripts/wifi/index\.ts main'
+//
 async function mainLoop() {
+  const foundProcess = await $`ps o command | grep -E '[/ \w]+\.config/eww/scripts/wifi/index\.ts main'`
+    .nothrow()
+    .text();
+  console.log("foundProcess:", foundProcess)
+  const processNotRunning = foundProcess.length === 0;
+  console.log("processNotRunning", processNotRunning)
+  if (processNotRunning) {
+    const proc = Bun.spawn(["nmcli", "monitor"])
+    const reader = proc.stdout.getReader();
 
-  const TMP_FILE = "/tmp/eww-wifi-script-running";
+    const decoder = new TextDecoder();
 
-  // true if the temp file exists
-  const tempFileExists: boolean = (
-    await $`
-    if [ -f ${TMP_FILE} ]; then
-      echo 1;
-    else
-      echo 0;
-    fi`.text()
-  ).trim() === "1";
+    let done = false;
+    while (!done) {
+      const {value, done: d} = await reader.read()
+      done = d;
+      const text = decoder.decode(value);
+      console.log(text)
 
-  // If the temp file exists, then the script is already running
-  try {
-    if (!tempFileExists) {
-      // if (true) {
-      await $`touch ${TMP_FILE}`;
+      await handleLogMessage(text);
 
-      const proc = Bun.spawn(["nmcli", "monitor"])
-      const reader = proc.stdout.getReader();
-
-      const decoder = new TextDecoder();
-
-      let done = false;
-      while (!done) {
-        const {value, done: d} = await reader.read()
-        done = d;
-        const text = decoder.decode(value);
-        console.log(text)
-
-        await handleLogMessage(text);
-
-      }
-      await cleanup();
     }
-  } catch (e) {
-    // just in case the script didn't finish properly,
-    // we want to remove the temp file
-    await cleanup();
-    throw e;
   }
-
-  function cleanup() {
-    return $`rm ${TMP_FILE}`.text();
-  }
-  process.on("beforeExit", async (code) => {
-    console.log("Exiting with code", code);
-    await cleanup();
-  })
-
 }
 
 async function handleLogMessage(text: string) {
