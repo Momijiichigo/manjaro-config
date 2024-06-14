@@ -3,17 +3,17 @@
 (defpoll clock_minute :interval "5s" "date +\%M")
 (defpoll clock_date :interval "10h" "date '+%Y-%m-%d'")
 (defpoll wspaces
-  :interval "5s"
+  :interval "10s"
   :initial "[[], [], [], []]"
-  "./scripts/workspaces.ts"
+  "./scripts/workspaces.ts print"
 )
 (defpoll current_workspace
-  :interval "3s"
+  :interval "10s"
   :initial "1"
   ; This didn't work, idk why :(
   ; "hyprctl activewindow | grep -oP 'workspace: \K\d'"
   ; so I'm using TS script
-  "./scripts/current_workspace.ts"
+  "./scripts/current_workspace.ts print"
 )
 (defpoll volume_percent 
   :interval "3s"

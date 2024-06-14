@@ -28,7 +28,7 @@ async function mainLoop() {
     .nothrow()
     .text();
   console.log("foundProcess:", foundProcess)
-  const processNotRunning = foundProcess.length === 0;
+  const processNotRunning = foundProcess.trim().split('\n').length < 2;
   console.log("processNotRunning", processNotRunning)
   if (processNotRunning) {
     const proc = Bun.spawn(["nmcli", "monitor"])

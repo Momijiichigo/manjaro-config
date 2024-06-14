@@ -20,7 +20,7 @@ super + v
   copyq toggle
 
 # program launcher
-alt + @space
+alt + space
   wofi --show drun
 
 # make sxhkd reload its configuration files:
@@ -113,8 +113,7 @@ super + shift + {h,j,k,l}
 
 # focus the next/previous desktop in the current monitor
 alt + {_ +, shift + }bracket{left,right}
-  hyprctl dispatch {workspace, movetoworkspace} {"r-1", "r+1"} && \
-  eww update current_workspace=$(bun run ~/.config/eww/scripts/current_workspace.ts)
+  hyprctl dispatch {workspace, movetoworkspace} {"r-1", "r+1"}
 
 # # focus the last node/desktop
 # super + {grave,Tab}
@@ -127,9 +126,8 @@ alt + {_ +, shift + }bracket{left,right}
 # 	bspc wm -h on
 
 # focus or send to the given desktop
-super + {_,shift + }{1-9,0}
-  hyprctl dispatch {workspace, movetoworkspace} '^{1-9,10}' && \
-  eww update current_workspace=$(bun run ~/.config/eww/scripts/current_workspace.ts)
+super + {_, shift} + {1-9,0}
+  hyprctl dispatch {workspace, movetoworkspace} '^{1-9,10}'
 
 # #
 # # preselect
