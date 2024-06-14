@@ -65,7 +65,7 @@ super + w
 
 # alternate between the tiled and monocle layout
 super + m
-  hyprctl dispatch fullscreen
+  hyprctl dispatch fullscreen 2
 
 super + t
   hyprctl dispatch togglesplit
