@@ -1,0 +1,5 @@
+# Config
+
+`hyprland.conf`
+
+# Script
