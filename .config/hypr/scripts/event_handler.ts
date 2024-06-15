@@ -56,8 +56,6 @@ export async function listenToS2EventLoop() {
     done = d;
     const text = decoder.decode(value)
 
-    console.log("text:", text)
-
     const eventLines = text.trim().split("\n")
 
     // eventStr: "eventName>>data1,data2,data3"
@@ -66,7 +64,7 @@ export async function listenToS2EventLoop() {
       const [event, dataStr] = eventStr.split(">>");
       const data = dataStr.trim().split(",");
 
-      console.log("event:", event, "data:", data)
+      // console.log("event:", event, "data:", data)
 
       if (event in S2Listeners) {
         await Promise.all(S2Listeners[event].map(listener => listener(data)))
