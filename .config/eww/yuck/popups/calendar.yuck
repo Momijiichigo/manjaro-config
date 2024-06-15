@@ -9,7 +9,8 @@
       :space-evenly "false"
       (label
         :class "clock_date"
-        :text clock_date)
+        :text {formattime(EWW_TIME, "%Y-%m-%d")}
+      )
       (box :class "cal-in"
         (calendar
           :day {formattime(EWW_TIME, "%d")}

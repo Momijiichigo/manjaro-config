@@ -1,20 +1,4 @@
 ;; Variables
-(defpoll clock_hour :interval "5m" "date +\%I")
-(defpoll clock_minute :interval "5s" "date +\%M")
-(defpoll clock_date :interval "10h" "date '+%Y-%m-%d'")
-(defpoll wspaces
-  :interval "10s"
-  :initial "[[], [], [], []]"
-  "./scripts/workspaces.ts print"
-)
-(defpoll current_workspace
-  :interval "10s"
-  :initial "1"
-  ; This didn't work, idk why :(
-  ; "hyprctl activewindow | grep -oP 'workspace: \K\d'"
-  ; so I'm using TS script
-  "./scripts/current_workspace.ts print"
-)
 (defpoll volume_percent 
   :interval "3s"
   :initial 0
@@ -25,6 +9,12 @@
   :initial 0
   "brightnessctl -m -d intel_backlight | awk -F, '{print substr($4, 0, length($4)-1)}' | tr -d '%'"
 )
+
+;; Workspaces
+; these are updated by the scripts in `~/.config/hypr/scripts`
+(defvar wspaces "[[], [], [], []]")
+(defvar current_workspace "1")
+
 (defvar vol_reveal false)
 (defvar br_reveal false)
 (defvar music_reveal false)

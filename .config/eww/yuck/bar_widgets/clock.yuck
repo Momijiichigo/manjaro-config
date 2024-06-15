@@ -7,9 +7,15 @@
       :space-evenly "false"
       :orientation "h"
       :spacing "3" 
-      (label :text clock_hour :class "clock_hour_class" )
+      (label
+        :text {formattime(EWW_TIME, "\%I")}
+        :class "clock_hour_class"
+      )
       (label :text "" :class "clock_time_sep" )
-      (label :text clock_minute :class "clock_minute_class")
+      (label
+        :text {formattime(EWW_TIME, "\%M")}
+        :class "clock_minute_class"
+      )
     )
   )
 )

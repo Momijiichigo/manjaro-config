@@ -32,7 +32,7 @@ async function mainLoop() {
   const processNotRunning = foundProcess.trim().split('\n').length < 2;
   console.log("processNotRunning", processNotRunning)
   if (processNotRunning) {
-
+    setEwwVarWspaces();
     registerListeners();
     await listenToS2EventLoop();
   }

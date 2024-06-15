@@ -8,39 +8,38 @@
 )
 
 (defwidget powermenu []
-  (box 
-    :orientation "h"
-    :space-evenly true 
-    :valign "center"
-    :halign "center"
-    :class "powermenu-box"
-    (powermenu_entry
-      :label "Power off"
-      :icon "󰐥"
-      :onclick "systemctl poweroff")
-    (powermenu_entry
-      :label "Reboot"
-      :icon "󰜉"
-      :onclick "systemctl reboot")
-    (powermenu_entry
-      :label "Hibernate"
-      :icon "󰖔"
-      :onclick "sleep 0.1 && gtklock & systemctl hibernate & eww close powermenu &")
-    (powermenu_entry
-      :label "Sleep"
-      :icon "󰤄"
-      :onclick "sleep 0.1 && gtklock & systemctl suspend & eww close powermenu &")
-    (powermenu_entry
-      :label "Lock"
-      :icon ""
-      :onclick "sleep 0.1 && gtklock & eww close powermenu &")
-    (powermenu_entry
-      :label "Sign out"
-      :icon "󰗼"
-      :onclick "hyprctl dispatch exit 0")
-    (powermenu_entry
-      :label "Cancel"
-      :icon "󰅖"
-      :onclick "eww close powermenu")
+  (eventbox
+    :onclick "eww close powermenu"
+    (box 
+      :orientation "h"
+      :space-evenly true 
+      :valign "center"
+      :halign "center"
+      :class "powermenu-box"
+      (powermenu_entry
+        :label "Power off"
+        :icon "󰐥"
+        :onclick "systemctl poweroff")
+      (powermenu_entry
+        :label "Reboot"
+        :icon "󰜉"
+        :onclick "systemctl reboot")
+      (powermenu_entry
+        :label "Hibernate"
+        :icon "󰖔"
+        :onclick "sleep 0.1 && gtklock & systemctl hibernate & eww close powermenu &")
+      (powermenu_entry
+        :label "Sleep"
+        :icon "󰤄"
+        :onclick "sleep 0.1 && gtklock & systemctl suspend & eww close powermenu &")
+      (powermenu_entry
+        :label "Lock"
+        :icon ""
+        :onclick "sleep 0.1 && gtklock & eww close powermenu &")
+      (powermenu_entry
+        :label "Sign out"
+        :icon "󰗼"
+        :onclick "hyprctl dispatch exit 0")
     )
+  )
 )
