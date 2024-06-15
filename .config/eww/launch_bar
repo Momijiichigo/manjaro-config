@@ -21,8 +21,8 @@ screen_counter=0
 for monitor in "${monitor_array[@]}"
 do
   echo "$monitor"
-  eww open-many bar:$screen_counter \
-    --arg $screen_counter:screen=$screen_counter
+  eww open-many bar:bar_$monitor \
+    --arg bar_$monitor:screen=$screen_counter
 
 
   screen_counter=$((screen_counter+1))
