@@ -23,6 +23,10 @@ super + v
 alt + space
   wofi --show drun
 
+# Screenshot and copy to Clipboard
+super + shift + 5
+  slurp | grim -g - - | wl-copy
+
 # make sxhkd reload its configuration files:
 super + Escape
   sudo pkill -HUP swhkd
