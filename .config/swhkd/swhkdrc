@@ -25,7 +25,8 @@ alt + space
 
 # Screenshot and copy to Clipboard
 super + shift + 5
-  slurp | grim -g - - | wl-copy
+  slurp | grim -g - - | wl-copy && \
+  hyprctl notify 1 2000 0 "Screenshot copied"
 
 # make sxhkd reload its configuration files:
 super + Escape
