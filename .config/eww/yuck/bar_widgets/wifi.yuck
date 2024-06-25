@@ -3,12 +3,15 @@
   (eventbox
     :onhover "eww update wifi_rev=true"
     :onhoverlost "eww update wifi_rev=false"
-    (box :vexpand "false" :hexpand "false" :space-evenly "false"
-      (button
+    :onclick "nm-connection-editor"
+    (box
+      :vexpand "false"
+      :hexpand "false"
+      :space-evenly "false"
+      (label
         :class "module-wif"
-        :onclick "networkmanager_dmenu"
         :style "color: ${WLAN_ICON_COLOR};" 
-        WLAN_ICON)
+        :text WLAN_ICON)
       (revealer
         :transition "slideright"
         :reveal wifi_rev

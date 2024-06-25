@@ -4,22 +4,26 @@
   (eventbox
     :onhover "eww update br_reveal=true"
     :onhoverlost "eww update br_reveal=false"
-    (box :class "module-2" :space-evenly "false" :orientation "h" :spacing "3" 
+    (box
+      :class "module-2"
+      :space-evenly "false"
+      :orientation "h"
+      :spacing "3" 
       (label :text "󰃟" :class "bright_icon" :tooltip "brightness")
-      (revealer
-        :transition "slideleft"
-        :reveal br_reveal
-        :duration "350ms"
-	(scale
-          :class "brightbar"
-          :value brightness_percent
-          :orientation "h"
-          :tooltip "${brightness_percent}%"
-          :max 100
-          :min 0
-          :onchange "brightnessctl set {}%"
-        )
-      )
+      ; (revealer
+      ;   :transition "slideleft"
+      ;   :reveal br_reveal
+      ;   :duration "350ms"
+      ;   (scale
+      ;     :class "brightbar"
+      ;     :value brightness_percent
+      ;     :orientation "h"
+      ;     :tooltip "${brightness_percent}%"
+      ;     :max 100
+      ;     :min 0
+      ;     :onchange "brightnessctl set {}%"
+      ;   )
+      ; )
     )
   )
 )

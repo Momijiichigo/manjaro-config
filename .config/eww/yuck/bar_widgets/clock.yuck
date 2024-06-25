@@ -3,10 +3,14 @@
   (eventbox
     :onhover "$HOME/.config/eww/scripts/pop calendar"
     (box
-      :class "module"
+      :class "module clock_module"
       :space-evenly "false"
       :orientation "h"
-      :spacing "3" 
+      ; :spacing "3"
+      (label
+        :class "clock_date"
+        :text {formattime(EWW_TIME, "%m/%d")}
+      )
       (label
         :text {formattime(EWW_TIME, "\%I")}
         :class "clock_hour_class"
@@ -15,6 +19,18 @@
       (label
         :text {formattime(EWW_TIME, "\%M")}
         :class "clock_minute_class"
+      )
+      (box
+        :orientation "v"
+        :class "clock_wday_year"
+        (label
+          :text {formattime(EWW_TIME, "%a")}
+          :class "weekday"
+        )
+        (label
+          :text {formattime(EWW_TIME, "%Y")}
+          :class "year"
+        )
       )
     )
   )

@@ -1,18 +1,20 @@
-(include "yuck/components/circ_progress.yuck")
 (defwidget mem []
-  (box :class "mem_module" :vexpand "false" :hexpand "false" 
-    (circ-prog
-      :value {EWW_RAM.used_mem_perc}
-      :class "membar"
-      :thickness 2
-      (label 
-        :class "iconmem"
-        :limit-width 2
-        :tooltip "using ${round(EWW_RAM.used_mem_perc, 0)}% ram"
-        :show-truncated false
-        :wrap false
-        :text " "
-      )
+  (box
+    :class "mem_module"
+    :vexpand "false"
+    :hexpand "false" 
+    :tooltip "using ${round(EWW_RAM.used_mem_perc, 0)}% ram"
+    (label 
+      :class "iconmem"
+      :limit-width 2
+      :show-truncated false
+      :wrap false
+      :unindent true
+      :text " "
+    )
+    (label 
+      :class "mem_perc"
+      :text "${round(EWW_RAM.used_mem_perc, 0)}%"
     )
   )
 )

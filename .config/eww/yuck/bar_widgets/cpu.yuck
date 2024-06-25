@@ -1,19 +1,20 @@
-
 (defwidget cpu []
-  (box :class "cpu_module" :vexpand "false" :hexpand "false" 
-    (circ-prog
-      :value {EWW_CPU.avg}
-      :class "cpubar"
-      :thickness 2
-      (label 
-        :class "iconcpu"
-        :limit-width 2
-        :tooltip "using ${round(EWW_CPU.avg, 0)}% CPU"
-        :show-truncated false
-        :wrap false
-        :unindent true
-        :text ""
-      )
+  (box 
+    :class "cpu_module"
+    :vexpand "false"
+    :hexpand "false"
+    :tooltip "using ${round(EWW_CPU.avg, 0)}% CPU"
+    (label 
+      :class "iconcpu"
+      :limit-width 2
+      :show-truncated false
+      :wrap false
+      :unindent true
+      :text " "
+    )
+    (label 
+      :class "cpu_perc"
+      :text "${round(EWW_CPU.avg, 0)}%"
     )
   )
 )
