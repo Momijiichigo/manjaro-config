@@ -9,6 +9,7 @@
   // border: 1px solid red;
 }
 
+
 .phantom {
   font-size: 0;
   margin: 0;
@@ -18,7 +19,7 @@
 /** General **/
 .bar_class {
   background-color: rgba(15, 15, 23, 0.6);
-  border-radius: 12px;
+  border-radius: 8px;
 }
 
 .module {
@@ -41,27 +42,47 @@ tooltip label {
 
 /** Widgets **/
 
-.clock_time_sep {
-  font-size: 11px;
+.clock_module {
+
   color: #bfc9db;
-  margin: 0px 4px 1px 4px;
-}
+  .clock_wday_year {
+    margin: 0px;
+    margin-right: 8px;
+    .weekday {
+      font-size: 13px;
+      margin-bottom: -8px;
+    }
+    .year {
+      font-size: 8px;
+      margin-bottom: -2px;
+    }
+  }
+  .clock_date {
+    font-size: 14px;
+    margin: 0px;
+    margin-right: 10px;
+    margin-top: 3px;
+  }
 
-.clock_hour_class,
-.clock_minute_class {
-  font-size: 18px;
-}
+  .clock_time_sep {
+    font-size: 11px;
+    margin: 1px 0px 0px 0px;
+  }
+
+  .clock_hour_class,
+  .clock_minute_class {
+    font-size: 16px;
+  }
 
 
-.clock_minute_class {
-  margin: 0px 10px 0px 3px;
-  color: #bfc9db;
-}
+  .clock_minute_class {
+    margin: 0px 10px 0px 3px;
+  }
 
-.clock_hour_class {
-  color: #bfc9db;
-  font-weight: bold;
-  margin: 0px 5px 0px 0px;
+  .clock_hour_class {
+    // font-weight: bold;
+    margin: 0px 5px 0px 0px;
+  }
 }
 
 .cpubar {
@@ -76,11 +97,6 @@ tooltip label {
   border-radius: 10px;
 }
 
-.batbar {
-  color: #afbea2;
-  background-color: #38384d;
-  border-radius: 10px;
-}
 
 .brightbar trough highlight {
   background-image: linear-gradient(to right, #e4c9af 30%, #f2cdcd 50%, #e0b089 100% *50);
@@ -100,7 +116,7 @@ tooltip label {
 
 
 .module_essid {
-  font-size: 14px;
+  font-size: 12px;
   // color: #a1bdce;
   margin: 0px 10px 0px 0px;
 }
@@ -112,30 +128,6 @@ tooltip label {
   margin: 0px 10px 0px 5px;
 }
 
-
-.iconbat,
-.iconmem,
-.iconcpu {
-  font-size: 13px;
-  margin: 3px;
-}
-
-.iconcpu {
-  color: #a1bdce;
-  font-size: 11px;
-  margin-top: 4px;
-  margin-right: 4px;
-}
-
-.iconmem {
-  color: #e0b089;
-  font-size: 10px;
-  margin-left: 6px;
-}
-
-.iconbat {
-  color: #afbea2;
-}
 
 .bright_icon {
   font-size: 15px;
@@ -151,20 +143,45 @@ tooltip label {
   margin: 0px 8px 0px 8px;
 }
 
-.cpu_module {
-  border-radius: 16px;
-  margin: 2px 4px 2px 4px;
-}
-
-.mem_module {
-  border-radius: 16px;
-  margin: 2px 4px 2px 4px;
+.iconbat,
+.iconmem,
+.iconcpu {
+  font-size: 13px;
+  // margin: 3px;
 }
 
 .bat_module {
-  border-radius: 16px;
-  margin: 2px 4px 2px 4px;
+  // border-radius: 16px;
+  // margin: 2px 4px 2px 4px;
+  color: #dae6cf;
+  font-size: 13px;
+  .iconbat {
+    font-size: 15px;
+  }
 }
+
+
+
+.cpu_module {
+  color: #a1bdce;
+  // margin: 2px 4px 2px 4px;
+  margin-right: 3px;
+
+  .iconcpu {
+    // margin-top: 4px;
+    margin-right: -10px;
+  }
+}
+
+.mem_module {
+  color: #e0b089;
+  margin-right: 5px;
+  // margin: 2px 4px 2px 4px;
+  .iconmem {
+    // margin-left: 6px;
+  }
+}
+
 
 
 scale trough {

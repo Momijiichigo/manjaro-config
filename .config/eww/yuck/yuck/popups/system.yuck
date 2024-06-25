@@ -1,0 +1,155 @@
+; system popup
+; cpu usage, memory usage, battery status
+(include "yuck/components/circ_progress.yuck")
+(defwidget system []
+  (eventbox
+    :onhoverlost "~/.config/eww/scripts/pop system"
+    (box
+      :class "sys_win"
+      :orientation "v"
+      :space-evenly "false"
+      :hexpand "false"
+      :vexpand "false" 
+      :spacing 0
+      (box :class "box" :orientation "h" :space-evenly "false"
+        (circ-prog 
+          :value {EWW_BATTERY["BAT0"].capacity}
+          :class "bat"
+          :thickness 9
+          (label
+            :unindent false
+            :text "${
+              EWW_BATTERY["BAT0"].status == "Charging"
+                ? battery_icons_charging?.[
+                  round(EWW_BATTERY["BAT0"].capacity / 10, 0)
+                ] ?: battery_icons_charging[10]
+                : battery_icons?.[
+                  round(EWW_BATTERY["BAT0"].capacity / 10, 0)
+                ] ?: battery_icons[10]
+            } "
+            :class "icon_bat"
+            :limit-width 2
+            :show-truncated false
+            :wrap false)
+        )
+        (box
+          :orientation "v"
+          :space-evenly "false"
+          :spacing 0
+          :hexpand "false"
+          :vexpand "false"
+          (label
+            :text "battery"
+            :halign "start"
+            :class "title"
+            :limit-width 9
+            :show-truncated false
+            :wrap false)
+          (label
+            :text "${EWW_BATTERY["BAT0"].capacity}%"
+            :halign "start"
+            :class "text_bat_sub"
+            :limit-width 22
+            :show-truncated false
+            :wrap false)
+          (label
+            :text "${EWW_BATTERY["BAT0"].status}"
+            :halign "start"
+            :class "text_bat_sub"
+            :limit-width 22
+            :show-truncated false
+            :wrap false)
+        )
+      )
+      (label :text "" :class "sep" :halign "center")
+      (box :class "box" :orientation "h" :space-evenly "false" :halign "start"
+        (circ-prog
+          :value {EWW_RAM.used_mem_perc}
+          :class "mem"
+          :thickness 9
+          (label
+            :text " "
+            :class "icon_mem"
+            :limit-width 2
+            :show-truncated false
+            :wrap false
+            :angle 0.0
+          )
+        )
+        (box
+          :orientation "v"
+          :space-evenly "false"
+          :spacing 0
+          :hexpand "false"
+          :vexpand "false"
+          (label
+            :text "memory"
+            :halign "start"
+            :class "title"
+            :limit-width 9
+            :show-truncated false
+            :wrap false)
+          (label
+            :text "${EWW_RAM.used_mem} | ${EWW_RAM.total_mem}mb "
+            :halign "start"
+            :class "text_mem_sub"
+            :limit-width 22
+            :show-truncated false
+            :wrap false)
+          (label
+            :text "${round(EWW_RAM.free_mem, 1)}mb free"
+            :halign "start"
+            :class "text_mem_sub"
+            :limit-width 22
+            :show-truncated false
+            :wrap false)
+        )
+      )
+      (label :text "" :class "sep" :halign "center")
+      (box :class "box" :orientation "h" :space-evenly "false"
+        (circ-prog 
+          :value {EWW_CPU.avg}
+          :class "cpu"
+          :thickness 9
+          (label
+            :text " "
+            :class "icon_cpu"
+            :limit-width 2
+            :show-truncated false
+            :wrap false)
+        )
+        (box
+          :orientation "v"
+          :space-evenly "false"
+          :spacing 0
+          :hexpand "false"
+          :vexpand "false"
+          (label
+            :text "CPU"
+            :halign "start"
+            :class "title"
+            :limit-width 9
+            :show-truncated false
+            :wrap false)
+          (label
+            :text "${round(EWW_CPU.avg, 1)}%"
+            :halign "start"
+            :class "text_bat_sub"
+            :limit-width 22
+            :show-truncated false
+            :wrap false)
+        )
+      )
+      (label :text "" :class "sep" :halign "center")
+      (box :class "box" :orientation "h" :space-evenly "false"
+        (label
+          :text "Storage")
+        (progress
+          :class "storage"
+          :value {EWW_DISK["/"].used_perc}
+          :orientation "h"
+        )
+      )
+    )
+  )
+)

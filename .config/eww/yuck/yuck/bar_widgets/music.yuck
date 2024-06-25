@@ -1,0 +1,47 @@
+;;  Music 
+(defwidget music [] 
+  (eventbox
+    :onhover "eww update music_reveal=true && ~/.config/eww/scripts/pop music"
+    :onhoverlost "eww update music_reveal=false"
+    (box
+      :class "music_module"
+      :orientation "h"
+      :space-evenly "false"
+      (box
+        :class "song_cover_art"
+        :style "background-image: url('${
+          cover_art == ""
+            ? "images/music.png"
+            : cover_art
+        }');"
+      )
+      (label 
+        :class "song"
+        :text song
+      )
+      (revealer
+        :transition "slideright"
+        :reveal music_reveal
+        :duration "350ms"
+        (box :orientation "h" 
+          (button
+            :class "song_btn_prev"
+            :onclick "playerctl previous"
+            ""
+          )
+          (button 
+            :class "song_btn_play"
+            :onclick "playerctl play-pause"
+            {song_status == "Playing" ? " " : " "} 
+          )
+          (button 
+            :class "song_btn_next"
+            :onclick "playerctl next"
+            ""
+          )
+        )
+      )
+    )
+  )
+)
+

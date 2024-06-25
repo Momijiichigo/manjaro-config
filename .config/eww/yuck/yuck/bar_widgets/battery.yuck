@@ -1,0 +1,22 @@
+(defwidget bat []
+  (box :class "bat_module" :vexpand "false" :hexpand "false"
+    (label 
+      :class "iconbat"
+      :tooltip "${EWW_BATTERY["BAT0"].status}"
+      :show-truncated false
+      :wrap false
+      :text {
+        EWW_BATTERY["BAT0"].status == "Charging"
+          ? battery_icons_charging
+            ?.[round(EWW_BATTERY["BAT0"].capacity / 10, 0)]
+            ?: battery_icons_charging[10]
+          : battery_icons
+            ?.[round(EWW_BATTERY["BAT0"].capacity / 10, 0)]
+            ?: battery_icons[10]
+      }
+    )
+    (label
+      :text "${EWW_BATTERY["BAT0"].capacity}%"
+    )
+  )
+)
