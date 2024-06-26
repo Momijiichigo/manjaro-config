@@ -53,9 +53,9 @@
       (box
         :space-evenly true  
         :halign "end"
-        (bat)
         (mem)
         (cpu)
+        (bat)
       )
     )
 
