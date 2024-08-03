@@ -27,15 +27,15 @@
       (powermenu_entry
         :label "Hibernate"
         :icon "󰖔"
-        :onclick "sleep 0.1 && gtklock & systemctl hibernate & eww close powermenu &")
+        :onclick "sleep 0.1 && hyprlock & systemctl hibernate & eww close powermenu &")
       (powermenu_entry
         :label "Sleep"
         :icon "󰤄"
-        :onclick "sleep 0.1 && gtklock & systemctl suspend & eww close powermenu &")
+        :onclick "sleep 0.1 && hyprlock & systemctl suspend & eww close powermenu &")
       (powermenu_entry
         :label "Lock"
         :icon ""
-        :onclick "sleep 0.1 && gtklock & eww close powermenu &")
+        :onclick "sleep 0.1 && hyprlock & eww close powermenu &")
       (powermenu_entry
         :label "Sign out"
         :icon "󰗼"

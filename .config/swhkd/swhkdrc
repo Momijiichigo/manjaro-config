@@ -13,7 +13,7 @@ super + Return
   alacritty
 
 super + e
-  XDG_MENU_PREFIX=arch- kbuildsycoca6 && dolphin
+  XDG_MENU_PREFIX=plasma- kbuildsycoca6 && dolphin
 
 # Clipboard manager
 super + v
@@ -24,13 +24,17 @@ alt + space
   wofi --show drun
 
 # Screenshot and copy to Clipboard
-super + shift + 5
+super + alt + 5
   slurp | grim -g - - | wl-copy && \
-  hyprctl notify 1 2000 0 "Screenshot copied"
+  notify-send --icon photo "Screenshot copied" &
 
-# make sxhkd reload its configuration files:
+# screen recording
+super + alt + 6
+  kooha
+
+# make swhkd reload its configuration files:
 super + Escape
-  sudo pkill -HUP swhkd
+  pkexec pkill -HUP swhkd && pkexec swhkd
 
 
 # show power menu when power button is pressed
@@ -65,15 +69,18 @@ super + alt + {q,r}
 # super + {_,shift + }w
 #   bspc node -{c,k}
 
+super + g
+  hyprctl dispatch hy3:makegroup tab, ephemeral
+
 super + w
-  hyprctl dispatch killactive
+  hyprctl dispatch hy3:killactive
 
 # alternate between the tiled and monocle layout
-super + m
-  hyprctl dispatch fullscreen 2
+# super + m
+#   hyprctl dispatch fullscreen 2
 
-super + t
-  hyprctl dispatch togglesplit
+super + {_, alt} + t
+  hyprctl dispatch hy3:changegroup {opposite, toggletab}
 
 # send the newest marked node to the newest preselected node
 #super + y
@@ -101,8 +108,9 @@ super + f
 #
 
 # focus the node in the given direction
-super + {h,j,k,l}
-  hyprctl dispatch movefocus {l,d,u,r}
+super + {_, alt} + {h,j,k,l}
+  hyprctl dispatch {movefocus, hy3:focustab} {l,d,u,r}
+
 
 # move window in the given direction
 super + shift + {h,j,k,l}
@@ -116,9 +124,15 @@ super + shift + {h,j,k,l}
 # super + {_,shift + }c
 # 	bspc node -f {next,prev}.local.!hidden.window
 
-# focus the next/previous desktop in the current monitor
-alt + {_ +, shift + }bracket{left,right}
-  hyprctl dispatch {workspace, movetoworkspace} {"r-1", "r+1"}
+# focus/move-window-to the next/previous desktop in the current monitor
+# alt + {_ +, shift + }bracket{left,right}
+#   hyprctl dispatch {workspace, movetoworkspace} {"r-1", "r+1"}
+alt + bracket{left,right}
+  hyprctl dispatch workspace {"r-1", "r+1"}
+
+alt + shift + bracket{left,right}
+  hyprctl dispatch hy3:movetoworkspace {"r-1", "r+1"}, follow
+
 
 # # focus the last node/desktop
 # super + {grave,Tab}
@@ -132,7 +146,7 @@ alt + {_ +, shift + }bracket{left,right}
 
 # focus or send to the given desktop
 super + {_, shift} + {1-9,0}
-  hyprctl dispatch {workspace, movetoworkspace} '^{1-9,10}'
+  hyprctl dispatch {workspace, hy3:movetoworkspace} {1-9,10}
 
 # #
 # # preselect
@@ -168,4 +182,4 @@ super + {_, shift} + {1-9,0}
 
 # resize windows
 super + ctrl + {h,j,k,l}
-  hyprctl dispatch resizeactive {-30 0, 0 30, 0 -30, 30 0}
+  hyprctl dispatch resizeactive {-50 0, 0 50, 0 -50, 50 0}

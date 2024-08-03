@@ -1,0 +1,74 @@
+.wallpaper_widget {
+
+  &, * {
+    // for debuggin purpose
+    // border: 1px solid red;
+
+  }
+  font-size: 40px;
+  font-family: Source Sans Variable, Source Han Sans JP, Cantarell;
+  color: #dddddd;
+  .clock {
+    // margin-right: 40px;
+    .clock_wday_year {
+      .date {
+        font-size: 0.9em;
+      }
+      .weekday {
+        font-size: 1.8em;
+        font-weight: 300;
+        margin-top: -0.1em;
+        margin-bottom: -0.2em;
+      }
+      .year {
+        font-size: 0.7em;
+      }
+      margin-right: 0.4em;
+    }
+    box {
+      .time {
+        font-size: 5em;
+        font-weight: lighter;
+        margin-bottom: -0.3em;
+        .time-progress {
+          margin-bottom: 0.4em;
+          margin-top: 0.4em;
+          margin-left: 0.15em;
+          margin-right: 0.15em;
+          trough {
+            all: unset;
+            min-height: 2px;
+            min-width: 4px;
+            background-color: #444444;
+            border-radius: 24px;
+            highlight {
+              all: unset;
+              background-color: #dddddd;
+              border-radius: 24px;
+            }
+          }
+        }
+      }
+
+      .music_info {
+
+        margin-bottom: -1.2em;
+        .song_cover_art {
+          
+          background-size: cover;
+          background-position: center;
+          min-height: 1em;
+          min-width:  1.5em;
+          margin: 2px 0.3em 2px 0.5em;
+        }
+        .title {
+          font-size: 0.6em;
+          font-weight: 300;
+        }
+        .artist {
+          font-size: 0.4em;
+        }
+      }
+    }
+  }
+}

@@ -24,7 +24,7 @@ switch (arg) {
 // ps o command | grep -qE '[/ \w]+\.config/eww/scripts/wifi/index\.ts main'
 //
 async function mainLoop() {
-  const foundProcess = await $`ps o command | grep -E '[/ \w]+\.config/eww/scripts/wifi/index\.ts main'`
+  const foundProcess = await $`ps o command | rg '[/ \w]+\.config/eww/scripts/wifi/index\.ts main'`
     .nothrow()
     .text();
   console.log("foundProcess:", foundProcess)

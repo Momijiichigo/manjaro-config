@@ -1,5 +1,9 @@
 (defwidget bat []
-  (box :class "bat_module" :vexpand "false" :hexpand "false"
+  (box 
+    :class "bat_module"
+    :vexpand "false"
+    :hexpand "false"
+    :style "color: ${EWW_BATTERY["BAT0"].capacity < 20 ? "#fc8665" : "#dae6cf"};"
     (label 
       :class "iconbat"
       :tooltip "${EWW_BATTERY["BAT0"].status}"

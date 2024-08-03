@@ -1,9 +1,11 @@
-
+(include "./yuck/wallp_widgets/clock.yuck")
 (defwidget wallp-widget []
   
   (box
-    (label
-      :text "${round(EWW_DISK["/"]?.used_perc, 1)}%"
-    )
+    :class "wallpaper_widget"
+    :space-evenly false
+
+    (clock)
+
   )
 )

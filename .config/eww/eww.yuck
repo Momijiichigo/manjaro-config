@@ -1,11 +1,22 @@
 (include "./yuck/variables.yuck")
 
-(defwindow bar [screen]
+(defwindow bar [screen ?width]
   :geometry
     (geometry
       :x "0%"
-      :y "2px"
-      :width "99.5%"
+      ;; currently the variable is not in the scope
+      ;; so the code below gives an error
+
+      ; :y {is_one_window_wspace ? "0px" : "2px"}
+      ; :width {
+      ;   is_one_window_wspace ? (
+      ;     width == "" ? "100%" : "${width}px"
+      ;   ) : (
+      ;     width == "" ? "99.5%" : "${width*0.995}px"
+      ;   )
+      ; }
+      :y "0px"
+      :width {width == "" ? "99.5%" : "${width*0.995}px"}
       :height "10px"
       :anchor "top center"
     )
@@ -14,6 +25,7 @@
   :exclusive true
   (box
     :class "bar_class"
+    :style "border-radius: ${is_one_window_wspace ? "0px" : "8px"}"
     :orientation "h"
     (left :screen screen)
     (center)
@@ -22,14 +34,14 @@
 )
 
 (defwidget sep []
-  (box :class "module-2" :vexpand "false" :hexpand "false"
+  (box :vexpand "false" :hexpand "false"
     (label :class "separ" :text "|")
   )
 )
 
 (include "./yuck/bar_widgets/bright.yuck")
-(include "./yuck/bar_widgets/volume.yuck")
 (include "./yuck/bar_widgets/wifi.yuck")
+(include "./yuck/bar_widgets/bluetooth.yuck")
 
 (include "./yuck/bar_widgets/battery.yuck")
 (include "./yuck/bar_widgets/memory.yuck")
@@ -37,15 +49,25 @@
 
 (include "./yuck/bar_widgets/clock.yuck")
 
+(include "./yuck/bar_widgets/notification.yuck")
+
 (defwidget right []
   (box
     :orientation "h"
     :space-evenly false  
     :halign "end"
     :class "right_modules"
-    (bright)
-    (volume)
+    ; (bright)
+    ; (volume)
+    (bluetooth)
     (wifi)
+
+    (sep)
+
+    (systray
+      :spacing 12
+      :icon-size 16
+    )
     (sep)
     
     (eventbox
@@ -53,11 +75,15 @@
       (box
         :space-evenly true  
         :halign "end"
-        (mem)
-        (cpu)
+        ; (mem)
+        ; (cpu)
         (bat)
       )
     )
+
+    (sep)
+
+    (notification_icon)
 
     (sep)
 
@@ -118,20 +144,6 @@
 )
 
 
-
-(include "./yuck/popups/audio.yuck")
-(defwindow audio_ctl
-  :geometry 
-    (geometry
-      :x "0px" 
-      :y "5px"
-      :anchor "top right"
-      :width "280px" 
-      :height "60px"
-    )
-  (audio)
-)
-
 (include "./yuck/popups/system.yuck")
 (defwindow system
   :geometry 
@@ -165,11 +177,11 @@
 (defwindow wallpaper_sys
   :geometry 
     (geometry
-      :x "0px" 
-      :y "0px" 
-      :anchor "right"
-      :width "100px" 
-      :height "100px"
+      :x "13%" 
+      :y "33%" 
+      :anchor "top right"
+      :width "700px" 
+      :height "400px"
     )
   :namespace "wallpaper"
   :focusable false

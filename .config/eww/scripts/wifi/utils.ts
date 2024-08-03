@@ -5,7 +5,7 @@ export async function getEssid() {
     .text()
     .then((text) => {
       const lines = text.split("\n")
-      const essidLine = lines.find((line) => line.includes("wlp"))
+      const essidLine = lines.find((line) => line.includes("wlp") || line.includes("wlan") )
       const nameStrLength = lines[0].indexOf("UUID")
 
       return essidLine?.slice(0, nameStrLength).trim() || "No Wifi Connected"

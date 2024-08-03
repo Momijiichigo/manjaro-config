@@ -4,7 +4,7 @@
   (eventbox
     :onhoverlost "~/.config/eww/scripts/pop music"
     (box
-      :class "music_pop"
+      :class "popup music_pop"
       :orientation "h" 
       :space-evenly "false" 
       :vexpand "false" 

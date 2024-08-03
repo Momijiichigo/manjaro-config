@@ -14,8 +14,16 @@ type Workspace = {
 }
 export function getWorkspaces() {
   const proc = Bun.spawnSync(["hyprctl", "workspaces", "-j"])
-  const workspaces: Workspace[] = JSON.parse(proc.stdout.toString());
-
+  let workspaces: Workspace[] = []
+  try {
+    workspaces = JSON.parse(proc.stdout.toString());
+  } catch (e) {
+    // sometimes returns strings like:
+    // "Hyprland IPC didn't respond in time"
+    console.error(e)
+    console.error(proc.stdout.toString())
+    return "[]"
+  }
   // console.log(workspaces)
 
   const monitorWorkspaces: number[][] = []

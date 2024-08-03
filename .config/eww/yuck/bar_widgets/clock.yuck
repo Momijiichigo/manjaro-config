@@ -12,26 +12,34 @@
         :text {formattime(EWW_TIME, "%m/%d")}
       )
       (label
-        :text {formattime(EWW_TIME, "\%I")}
+        :text {formattime(EWW_TIME, "%a")}
+        :class "weekday"
+      )
+      (label
+        :text {formattime(EWW_TIME, "\%H")}
         :class "clock_hour_class"
       )
-      (label :text "" :class "clock_time_sep" )
+      (scale
+        :class "time-progress"
+        :value {formattime(EWW_TIME, "%S")}
+        :max 60
+        :round-digits 0
+        :orientation "v"
+        :flipped true
+      )
+      ; (label :text "" :class "clock_time_sep" )
       (label
         :text {formattime(EWW_TIME, "\%M")}
         :class "clock_minute_class"
       )
-      (box
-        :orientation "v"
-        :class "clock_wday_year"
-        (label
-          :text {formattime(EWW_TIME, "%a")}
-          :class "weekday"
-        )
-        (label
-          :text {formattime(EWW_TIME, "%Y")}
-          :class "year"
-        )
-      )
+      ; (box
+      ;   :orientation "v"
+      ;   :class "clock_wday_year"
+      ;   (label
+      ;     :text {formattime(EWW_TIME, "%Y")}
+      ;     :class "year"
+      ;   )
+      ; )
     )
   )
 )

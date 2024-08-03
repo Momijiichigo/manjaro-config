@@ -1,7 +1,7 @@
 #!/usr/bin/sh
 
 
-current_monitor=$(hyprctl activeworkspace | grep -oP 'monitorID: \K\d')
+current_monitor=$(hyprctl activeworkspace | rg 'monitorID: (.+)' -o -r '$1')
 calendar() {
     LOCK_FILE="$HOME/.cache/eww-calendar.lock"
     

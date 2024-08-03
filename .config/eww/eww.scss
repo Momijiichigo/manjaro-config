@@ -4,8 +4,7 @@
 
 * {
   all: unset;
-  font-family: feather;
-  font-family: FiraCode Nerd Font, DaddyTimeMono NF;
+  // font-family: FiraCode Nerd Font, DaddyTimeMono NF;
   // border: 1px solid red;
 }
 
@@ -17,9 +16,250 @@
 }
 
 /** General **/
+.bar_class,
+.sys_win {
+  font-family: FiraCode Nerd Font, DaddyTimeMono NF, Source Han Sans JP;
+}
+
 .bar_class {
+  font-size: 12px;
+  font-weight: 200;
   background-color: rgba(15, 15, 23, 0.6);
   border-radius: 8px;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+
+  .separ {
+    color: #3e424f;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: 0px 0.7em 0px 0.7em;
+  }
+
+  .clock_module {
+
+    color: #bfc9db;
+    font-weight: 400;
+    margin-right: 0.5em;
+
+    // .clock_wday_year {
+    //   margin: 0px;
+    //   margin-right: 8px;
+    //   .year {
+    //     font-size: 0.7em;
+    //     margin-bottom: -2px;
+    //   }
+    // }
+    .clock_date {
+      font-size: 1.1em;
+      margin: 0px;
+      margin-right: 0.4em;
+      // margin-top: 3px;
+    }
+
+    .weekday {
+      font-size: 1.2em;
+      // margin-bottom: -0.5em;
+      margin-right: 0.4em;
+      margin-left: 0.4em;
+    }
+
+    .clock_time_sep {
+      font-size: 1em;
+      margin: 0px 0px 0px 0px;
+    }
+
+    .time-progress {
+      margin-bottom: 0.2em;
+      margin-top: 0.1em;
+      margin-left: 0.15em;
+      margin-right: 0.15em;
+
+      trough {
+        all: unset;
+        min-width: 0.1em;
+        background-color: #444444;
+
+        highlight {
+          all: unset;
+          background-color: #bfc9db;
+          border-radius: 24px;
+        }
+      }
+    }
+
+    .clock_hour_class,
+    .clock_minute_class {
+      font-size: 1.3em;
+    }
+
+
+    .clock_minute_class {
+      margin: 0px 0.1em 0px 0.2em;
+    }
+
+    .clock_hour_class {
+      // font-weight: bold;
+      margin: 0px 0.3em 0px 0.2em;
+    }
+  }
+
+  .cpubar {
+    color: #a1bdce;
+    background-color: #38384d;
+    border-radius: 10px;
+  }
+
+  .membar {
+    color: #e0b089;
+    background-color: #38384d;
+    border-radius: 10px;
+  }
+
+
+  .brightbar trough highlight {
+    background-image: linear-gradient(to right, #e4c9af 30%, #f2cdcd 50%, #e0b089 100% *50);
+    border-radius: 10px;
+  }
+
+  .volbar trough highlight {
+    background-image: linear-gradient(to right, #afcee0 30%, #a1bdce 50%, #77a5bf 100% *50);
+    border-radius: 10px;
+  }
+
+  .volume_icon {
+    font-size: 1em;
+    color: #a1bdce;
+    margin: 0px 10px 0px 10px;
+  }
+
+
+  .module_essid {
+    font-size: 1em;
+    // color: #a1bdce;
+    margin: 0px 10px 0px 0px;
+    font-weight: 400;
+  }
+
+  .module-wif {
+    font-size: 1.2em;
+    color: #a1bdce;
+    border-radius: 100%;
+    margin: 0px 10px 0px 5px;
+  }
+
+  .module-notification {
+    color: #a1bdce;
+    margin: 0px 0.4em 0px 0px;
+    font-size: 1.1em;
+  }
+
+  .bright_icon {
+    font-size: 1em;
+    color: #e4c9af;
+    margin: 0px 10px 0px 10px;
+  }
+
+
+
+  .iconbat,
+  .iconmem,
+  .iconcpu {
+    font-size: 1em;
+  }
+
+  .bat_module {
+    // border-radius: 16px;
+    // margin: 2px 4px 2px 4px;
+    // color: #dae6cf;
+    font-size: 1em;
+    margin-left: -0.4em;
+
+    .iconbat {
+      font-size: 1.3em;
+    }
+  }
+
+
+
+  .cpu_module {
+    color: #a1bdce;
+    // margin: 2px 4px 2px 4px;
+    margin-right: 3px;
+
+    .iconcpu {
+      // margin-top: 4px;
+      margin-right: -10px;
+    }
+  }
+
+  .mem_module {
+    color: #e0b089;
+    margin-right: 5px;
+
+    // margin: 2px 4px 2px 4px;
+    .iconmem {
+      // margin-left: 6px;
+    }
+  }
+
+  .works {
+    font-size: 0.5em;
+    font-weight: normal;
+    margin: 0px 0px 0px 10px;
+    color: #a1bdce;
+    .workspace-dot {
+      border-radius: 3em;
+      padding: 0px 1.5em;
+      background-color: rgb(161, 207, 205, 0.4);
+      transition: 0.2s;
+      margin: 0.4em 0.6em;
+      &.active {
+        padding: 0px 3em;
+        background-color: rgba(161, 207, 205, 1);
+      }
+    }
+    // background-color: #0f0f17;
+  }
+
+  .music_module {
+    // padding: 0px 5px 0px 5px;
+    color: #bfc9db;
+
+    .song_cover_art {
+      background-size: cover;
+      background-position: center;
+      margin: 0.1em 0px 0.1em 0px;
+      min-height: 0.5em;
+      min-width: 1.5em;
+      // margin: 2px;
+      border-radius: 100px;
+    }
+
+    .song {
+      // color: #a1bdce;
+      font-size: 1em;
+      font-weight: 500;
+      margin: 0px 0px 0px 0.5em;
+    }
+
+    .song_btn_play {
+      // color: #a1bdce;
+      font-size: 1.2em;
+      margin: 0px 0px 0px 0.5em;
+
+    }
+
+
+    .song_btn_prev,
+    .song_btn_next {
+      // color: #bfc9db;
+      font-size: 1em;
+      margin: 0px 0px 0px 0.3em;
+
+    }
+
+  }
 }
 
 .module {
@@ -30,7 +270,7 @@
 /** tooltip!! **/
 tooltip.background {
   background-color: #0f0f17;
-  font-size: 15;
+  font-size: 15px;
   border-radius: 10px;
   color: #bfc9db;
 }
@@ -42,145 +282,6 @@ tooltip label {
 
 /** Widgets **/
 
-.clock_module {
-
-  color: #bfc9db;
-  .clock_wday_year {
-    margin: 0px;
-    margin-right: 8px;
-    .weekday {
-      font-size: 13px;
-      margin-bottom: -8px;
-    }
-    .year {
-      font-size: 8px;
-      margin-bottom: -2px;
-    }
-  }
-  .clock_date {
-    font-size: 14px;
-    margin: 0px;
-    margin-right: 10px;
-    margin-top: 3px;
-  }
-
-  .clock_time_sep {
-    font-size: 11px;
-    margin: 1px 0px 0px 0px;
-  }
-
-  .clock_hour_class,
-  .clock_minute_class {
-    font-size: 16px;
-  }
-
-
-  .clock_minute_class {
-    margin: 0px 10px 0px 3px;
-  }
-
-  .clock_hour_class {
-    // font-weight: bold;
-    margin: 0px 5px 0px 0px;
-  }
-}
-
-.cpubar {
-  color: #a1bdce;
-  background-color: #38384d;
-  border-radius: 10px;
-}
-
-.membar {
-  color: #e0b089;
-  background-color: #38384d;
-  border-radius: 10px;
-}
-
-
-.brightbar trough highlight {
-  background-image: linear-gradient(to right, #e4c9af 30%, #f2cdcd 50%, #e0b089 100% *50);
-  border-radius: 10px;
-}
-
-.volbar trough highlight {
-  background-image: linear-gradient(to right, #afcee0 30%, #a1bdce 50%, #77a5bf 100% *50);
-  border-radius: 10px;
-}
-
-.volume_icon {
-  font-size: 18px;
-  color: #a1bdce;
-  margin: 0px 10px 0px 10px;
-}
-
-
-.module_essid {
-  font-size: 12px;
-  // color: #a1bdce;
-  margin: 0px 10px 0px 0px;
-}
-
-.module-wif {
-  font-size: 14px;
-  color: #a1bdce;
-  border-radius: 100%;
-  margin: 0px 10px 0px 5px;
-}
-
-
-.bright_icon {
-  font-size: 15px;
-  color: #e4c9af;
-  margin: 0px 10px 0px 10px;
-}
-
-
-.separ {
-  color: #3e424f;
-  font-weight: bold;
-  font-size: 16px;
-  margin: 0px 8px 0px 8px;
-}
-
-.iconbat,
-.iconmem,
-.iconcpu {
-  font-size: 13px;
-  // margin: 3px;
-}
-
-.bat_module {
-  // border-radius: 16px;
-  // margin: 2px 4px 2px 4px;
-  color: #dae6cf;
-  font-size: 13px;
-  .iconbat {
-    font-size: 15px;
-  }
-}
-
-
-
-.cpu_module {
-  color: #a1bdce;
-  // margin: 2px 4px 2px 4px;
-  margin-right: 3px;
-
-  .iconcpu {
-    // margin-top: 4px;
-    margin-right: -10px;
-  }
-}
-
-.mem_module {
-  color: #e0b089;
-  margin-right: 5px;
-  // margin: 2px 4px 2px 4px;
-  .iconmem {
-    // margin-left: 6px;
-  }
-}
 
 
 
@@ -189,79 +290,19 @@ scale trough {
   background-color: #22242b;
   box-shadow: 0px 2px 3px 2px #06060b;
   border-radius: 16px;
-  min-height: 10px;
-  min-width: 70px;
+  // min-height: 10px;
+  // min-width: 70px;
   margin: 0px 10px 0px 0px;
 }
 
-.works {
-  font-size: 18px;
-  font-weight: normal;
-  margin: 0px 0px 0px 10px;
-  color: #a1bdce;
-  // background-color: #0f0f17;
-}
 
-// .0 , .01, .02, .03, .04, .05, .06,
-// .011, .022, .033, .044, .055, .066{
-//   margin: 0px 10px 0px 0px;
-// }
-
-// /* Unoccupied */
-// .0 {
-// color: #3e424f;
-// }
-// 
-// /* Occupied */
-// .01, .02, .03, .04, .05, .06 {
-//   color: #bfc9db;
-// }
-// 
-// /* Focused */
-// .011, .022, .033, .044, .055, .066 {
-//   color: #a1bdce;
-// }
-
-.music_module {
-  // padding: 0px 5px 0px 5px;
-
-  .song_cover_art {
-    background-size: cover;
-    background-position: center;
-    margin: 2px 0px 2px 0px;
-    min-height: 10px;
-    min-width: 23px;
-    // margin: 2px;
-    border-radius: 100px;
-  }
-
-  .song {
-    color: #a1bdce;
-    font-size: 14px;
-    font-weight: bold;
-    margin: 0px 0px 0px 10px;
-  }
-
-  .song_btn_play {
-    color: #a1bdce;
-    font-size: 20px;
-    margin: 0px 0px 0px 10px;
-
-  }
-
-
-  .song_btn_prev,
-  .song_btn_next {
-    color: #bfc9db;
-    font-size: 17px;
-    margin: 0px 0px 0px 7px;
-
-  }
-
-}
 
 
 // Popups 
+
+.popup {
+  font-family: Source Sans Variable, Source Han Sans JP, Cantarell;
+}
 
 @import './yuck/popups/powermenu.scss';
 
@@ -273,20 +314,14 @@ scale trough {
   font-weight: normal;
   border-radius: 16px;
   padding: 10px;
-
-  .clock_date {
-    font-size: 24px;
-    margin: 0px;
-    color: #d7beda;
-    min-height: 10px;
-  }
+  font-size: 24px;
 
   .cal-in {
     padding: 0px 10px 0px 10px;
     color: #bfc9db;
 
     calendar {
-      font-size: 22px;
+      font-size: 1em;
 
       &.highlight {
         padding: 20px;
@@ -333,7 +368,7 @@ calendar:indeterminate {
 
 .sys_win {
 
-  background-color: rgba(15, 15, 23, 0.7);
+  background-color: rgba(30, 30, 46, 0.5);
   border-radius: 16px;
   margin-right: 5px;
 
@@ -353,13 +388,13 @@ calendar:indeterminate {
   .text_mem_sub {
     font-size: 16px;
     color: #bbc5d7;
-    margin: 5px 0px 0px 25px;
+    // margin: 5px 0px 0px 25px;
   }
 
   .title {
     font-size: 21px;
-    font-weight: bold;
-    margin: 14px 0px 0px 25px;
+    font-weight: 400;
+    // margin: 14px 0px 0px 25px;
   }
 
   .icon_bat,
@@ -398,23 +433,48 @@ calendar:indeterminate {
     color: #e4c9af;
   }
 
-  progress.storage {
-    background-color: #38384d;
-    border-radius: 10px;
-    trough {
-      background-color: #22242b;
-      min-height: 2px;
-      min-width: 70px;
-      margin: 0px 10px 0px 0px;
-    
+
+  * {
+    // border: 1px solid red;
+
+  }
+  .storage trough {
+    all: unset;
+    background-color: #5c615f;
+    border-radius: 24px;
+    min-height: 3px;
+    min-width: 150px;
+    highlight {
+      all: unset;
+      background-color: #dab1fa;
+      border-radius: 24px;
+    }
+  }
+
+  .graph_mem {
+    // background-color: red;
+    border: 1px solid #38384d;
+
+    // padding: 30px;
+    // margin: 10px;
+    graph {
+      border-color: #38384d;
+      background-color: #e4c9af;
     }
   }
 }
 
 
 .music_pop {
+  * {
+
+    // border: 1px solid red;
+
+  }
+
+  color: #bfc9db;
   background-color: rgba(15, 15, 23, 0.6);
-  border-radius: 16px;
+  border-radius: 10px;
 
   .music_cover_art {
     background-size: cover;
@@ -423,41 +483,32 @@ calendar:indeterminate {
     box-shadow: 5px 5px 5px 5px #06060b;
     min-width: 170px;
     margin: 20px;
-    border-radius: 20px;
+    border-radius: 10px;
   }
 
   .music {
-    color: #a1bdce;
     font-size: 20px;
-    font-weight: bold;
-    margin: 20px 0px 0px -15px;
+    font-weight: 500;
+    margin: 20px 0px 0px 0px;
   }
 
   .music_artist {
-    color: #bbc5d7;
     font-size: 16px;
-    font-weight: normal;
-    margin: 0px 0px 0px 0px;
+    font-weight: 300;
+    margin: -10px 0px 0px 0px;
   }
 
-  .music_btn_prev,
-  .music_btn_play,
-  .music_btn_next {
-    font-family: Iosevka Nerd Font;
-  }
 
   .music_btn_prev {
-    color: #bbc5d7;
     font-size: 32px;
     font-weight: normal;
     margin: 0px 0px 0px 0px;
   }
 
   .music_btn_play {
-    color: #a1bdce;
     font-size: 48px;
     font-weight: normal;
-    margin: 0px 0px 0px 10px;
+    margin: 0px 0px 0px 0.38em;
   }
 
   .music_btn_next {
@@ -465,12 +516,6 @@ calendar:indeterminate {
     font-size: 32px;
     font-weight: normal;
     margin: 0px 0px 0px 0px;
-  }
-
-  .music_bar scale trough highlight {
-    all: unset;
-    background-image: linear-gradient(to right, #afcee0 30%, #a1bdce 50%, #77a5bf 100% *50);
-    border-radius: 24px;
   }
 
   .music_bar scale trough {
@@ -478,10 +523,19 @@ calendar:indeterminate {
     background-color: #232232;
     box-shadow: 0 6px 5px 2px #06060b;
     border-radius: 24px;
-    min-height: 13px;
+    min-height: 3px;
     min-width: 190px;
     margin-bottom: 30px;
+    margin-left: 0.5em;
+    highlight {
+      all: unset;
+      // background-image: linear-gradient(to right, #afcee0 30%, #a1bdce 50%, #77a5bf 100% *50);
+      background-color: #a1bdce;
+      border-radius: 24px;
+    }
   }
+
+
 
 }
 

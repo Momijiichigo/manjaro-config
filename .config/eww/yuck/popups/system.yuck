@@ -5,17 +5,21 @@
   (eventbox
     :onhoverlost "~/.config/eww/scripts/pop system"
     (box
-      :class "sys_win"
+      :class "popup sys_win"
       :orientation "v"
       :space-evenly "false"
       :hexpand "false"
       :vexpand "false" 
       :spacing 0
-      (box :class "box" :orientation "h" :space-evenly "false"
+      (box 
+        :class "box"
+        :orientation "h"
+        :space-evenly "false"
+        :spacing 20
         (circ-prog 
           :value {EWW_BATTERY["BAT0"].capacity}
           :class "bat"
-          :thickness 9
+          :thickness 3
           (label
             :unindent false
             :text "${
@@ -35,7 +39,7 @@
         (box
           :orientation "v"
           :space-evenly "false"
-          :spacing 0
+          :spacing 10
           :hexpand "false"
           :vexpand "false"
           (label
@@ -62,26 +66,31 @@
         )
       )
       (label :text "" :class "sep" :halign "center")
-      (box :class "box" :orientation "h" :space-evenly "false" :halign "start"
+      (box 
+        :class "box"
+        :orientation "h"
+        :space-evenly "false"
+        :halign "start"
+        :spacing 20
         (circ-prog
           :value {EWW_RAM.used_mem_perc}
           :class "mem"
-          :thickness 9
+          :thickness 3
           (label
             :text " "
             :class "icon_mem"
             :limit-width 2
             :show-truncated false
             :wrap false
-            :angle 0.0
+            :angle 90
           )
         )
         (box
           :orientation "v"
           :space-evenly "false"
-          :spacing 0
-          :hexpand "false"
-          :vexpand "false"
+          :spacing 10
+          ;:hexpand "false"
+          ;:vexpand "false"
           (label
             :text "memory"
             :halign "start"
@@ -90,14 +99,14 @@
             :show-truncated false
             :wrap false)
           (label
-            :text "${EWW_RAM.used_mem} | ${EWW_RAM.total_mem}mb "
+            :text "${round(EWW_RAM.used_mem / 1000000000, 2)} | ${round(EWW_RAM.total_mem / 1000000000, 1)} Mem"
             :halign "start"
             :class "text_mem_sub"
             :limit-width 22
             :show-truncated false
             :wrap false)
           (label
-            :text "${round(EWW_RAM.free_mem, 1)}mb free"
+            :text "${round((EWW_RAM.total_swap - EWW_RAM.free_swap) / 1000000000, 2)} | ${round(EWW_RAM.total_swap / 1000000000, 1)} Swap"
             :halign "start"
             :class "text_mem_sub"
             :limit-width 22
@@ -106,11 +115,15 @@
         )
       )
       (label :text "" :class "sep" :halign "center")
-      (box :class "box" :orientation "h" :space-evenly "false"
+      (box
+        :class "box"
+        :orientation "h"
+        :space-evenly "false"
+        :spacing 20
         (circ-prog 
           :value {EWW_CPU.avg}
           :class "cpu"
-          :thickness 9
+          :thickness 3
           (label
             :text " "
             :class "icon_cpu"
@@ -121,11 +134,10 @@
         (box
           :orientation "v"
           :space-evenly "false"
-          :spacing 0
+          :spacing 10
           :hexpand "false"
           :vexpand "false"
-          (label
-            :text "CPU"
+          (label :text "CPU"
             :halign "start"
             :class "title"
             :limit-width 9
@@ -141,12 +153,20 @@
         )
       )
       (label :text "" :class "sep" :halign "center")
-      (box :class "box" :orientation "h" :space-evenly "false"
+      (box 
+        :class "box"
+        :orientation "h"
+        :space-evenly "false"
+        :spacing 20
         (label
+          :class "title"
           :text "Storage")
-        (progress
+        (scale
           :class "storage"
           :value {EWW_DISK["/"].used_perc}
+          :min 0
+          :max 100
+          :active true
           :orientation "h"
         )
       )

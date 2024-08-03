@@ -1,9 +1,9 @@
 ;; Variables
-(defpoll volume_percent 
-  :interval "3s"
-  :initial 0
-  "amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
-(defpoll mic_percent :interval "3s" "amixer -D pulse sget Capture | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
+; (defpoll volume_percent 
+;   :interval "3s"
+;   :initial 0
+;   "amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
+; (defpoll mic_percent :interval "3s" "amixer -D pulse sget Capture | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
 (defpoll brightness_percent 
   :interval "5s"
   :initial 0
@@ -15,11 +15,16 @@
 (defvar wspaces "[[], [], [], []]")
 (defvar current_workspace "1")
 
+(defvar is_one_window_wspace false)
 (defvar vol_reveal false)
 (defvar br_reveal false)
 (defvar music_reveal false)
+(defvar bluetooth_reveal false)
 (defvar wifi_rev false)
 (defvar time_rev false)
+
+(defvar NOTIFICATION_ICON "󰂚")
+(defvar NOTIFICATION_ICON_COLOR "#a1bdce")
 
 
 (defvar battery_icons 
@@ -27,6 +32,14 @@
 )
 (defvar battery_icons_charging 
   `["󰢟", "󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"]`
+)
+
+(defvar bluetooth_icon "󰂯")
+(defvar bluetooth_icon_color "#8fc7f2")
+(defpoll bluetooth_connected_dev
+  :initial "No device connected"
+  :interval "1m"
+  "bluetoothctl devices Connected | rg 'Device [0-9:A-Z]+ (.+)$' -r '$1' -o"
 )
 
 (defpoll WLAN_ICON_COLOR 

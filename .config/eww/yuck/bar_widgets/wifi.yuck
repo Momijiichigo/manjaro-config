@@ -3,7 +3,7 @@
   (eventbox
     :onhover "eww update wifi_rev=true"
     :onhoverlost "eww update wifi_rev=false"
-    :onclick "nm-connection-editor"
+    :onclick "alacritty --class float --command nmtui &"
     (box
       :vexpand "false"
       :hexpand "false"
