@@ -2,23 +2,22 @@
 
 import {$} from "bun";
 
-export function getCurrentWorkspace() {
-  const proc = Bun.spawnSync(["hyprctl", "activewindow", "-j"])
-  
+export async function getCurrentWorkspace() {
+  const windowInfo: WindowInfo = await $`hyprctl activewindow -j`
+    .json()
+    .catch(() => ({workspace: {id: 0, name: ""}}))
+
   type WindowInfo = {
     workspace: {
       id: number,
       name: string,
     }
   }
-  const windowInfo: WindowInfo = JSON.parse(proc.stdout.toString());
-  return JSON.stringify(
-    windowInfo?.workspace?.id
-  )
+  return windowInfo?.workspace?.id ?? 0
 }
 
 export async function setEwwVar() {
-  $`eww update current_workspace="${getCurrentWorkspace()}"`
+  $`eww update current_workspace="${await getCurrentWorkspace()}"`
     .nothrow()
     .text()
 }

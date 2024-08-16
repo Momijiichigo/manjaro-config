@@ -63,8 +63,8 @@ function intervalLoop(interval = 2) {
 
 async function adjustBarDimension() {
   const activeWorkspaceInfo = await $`hyprctl activeworkspace -j`
-    .nothrow()
-    .json() as {
+    .json()
+    .catch(() => ({windows: 0})) as {
       windows: number
     };
   const isOneWindowWorkspace = activeWorkspaceInfo.windows === 1;
@@ -82,7 +82,7 @@ async function adjustBarDimension() {
  */
 function registerListeners() {
 
-  addS2Listener("workspacev2", async ([wsId, _wsName]) => {
+  addS2Listener("workspacev2", async (wsId, _wsName) => {
     await Promise.all([
       adjustBarDimension(),
       $`eww update current_workspace=${wsId}`
@@ -91,12 +91,12 @@ function registerListeners() {
     ])
   })
 
-  addS2Listener("monitoraddedv2", async ([dispId, dispName]) => {
+  addS2Listener("monitoraddedv2", async (dispId, dispName) => {
     monitorNameMap.set(dispName, Number(dispId));
 
     const screenInfos: ScreenInfo[] = await $`hyprctl monitors all -j`
-      .nothrow()
-      .json();
+      .json()
+      .catch(() => []);
     const screenInfo = screenInfos.find(s => s.name === dispName);
 
     let screenWidth = 0;

@@ -12,19 +12,10 @@ type Workspace = {
   "lastwindow": string,
   "lastwindowtitle": string,
 }
-export function getWorkspaces() {
-  const proc = Bun.spawnSync(["hyprctl", "workspaces", "-j"])
-  let workspaces: Workspace[] = []
-  try {
-    workspaces = JSON.parse(proc.stdout.toString());
-  } catch (e) {
-    // sometimes returns strings like:
-    // "Hyprland IPC didn't respond in time"
-    console.error(e)
-    console.error(proc.stdout.toString())
-    return "[]"
-  }
-  // console.log(workspaces)
+export async function getWorkspaces() {
+  const workspaces: Workspace[] = await $`hyprctl workspaces -j`
+    .json()
+    .catch(() => [])
 
   const monitorWorkspaces: number[][] = []
 
@@ -34,11 +25,11 @@ export function getWorkspaces() {
     workspaceList.push(ws.id)
     workspaceList.sort((a, b) => a - b)
   })
-  return JSON.stringify(monitorWorkspaces)
+  return monitorWorkspaces
 }
 
 export async function setEwwVar() {
-  $`eww update wspaces="${getWorkspaces()}"`.nothrow().text()
+  $`eww update wspaces="${JSON.stringify(await getWorkspaces())}"`.nothrow().text()
 }
 
 const arg = Bun.argv[2];
