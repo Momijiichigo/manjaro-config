@@ -7,7 +7,7 @@ import {Some, None, Option} from "rusty-enums"
 
 
 const S2Listeners: {
-  [key: string]: Array<(data: string[]) => Promise<void>>
+  [key: string]: Array<(...data: string[]) => Promise<void>>
 } = {}
 
 /**
@@ -18,7 +18,7 @@ const S2Listeners: {
  */
 export function addS2Listener(
   event: string,
-  listener: (data: string[]) => Promise<void>
+  listener: (...data: string[]) => Promise<void>
 ) {
   if (!S2Listeners[event]) {
     S2Listeners[event] = [];
@@ -67,7 +67,7 @@ export async function listenToS2EventLoop() {
       // console.log("event:", event, "data:", data)
 
       if (event in S2Listeners) {
-        await Promise.all(S2Listeners[event].map(listener => listener(data)))
+        await Promise.all(S2Listeners[event].map(listener => listener(...data)))
       }
     }
 

@@ -1,39 +1,16 @@
-(defwidget workspace_dot [active]
-  (revealer
-    :class "workspace-dot"
-    :transition "slideright"
-    :reveal active
-    :duration "300ms"
-    (box
-      :class "line ${active ? 'active' : ''}"
-    )
-  )
-
-)
-
 (defwidget workspaces [screen]
   (box
     :class "works"
     :orientation "h"
     :spacing 5
     :space-evenly false
-    ; Without this, the current_workspace won't be updated
-    ; (it's a bug of EWW)
-    ; (label
-    ;   :text current_workspace
-    ;   :class "phantom"
-    ; )
     (for entry in "${wspaces[screen]}"
-      ; (workspace_dot
-      ;   :active {entry == current_workspace}
-      ; )
       (button
         :class "workspace-dot ${entry == current_workspace ? 'active' : ''}"
         :onclick 
           "hyprctl dispatch workspace ${entry}
           eww update \
           current_workspace=\"$(./scripts/current_workspace.ts)\""
-        ; {entry == current_workspace ? "  " : "  "}
         ""
       )
     )

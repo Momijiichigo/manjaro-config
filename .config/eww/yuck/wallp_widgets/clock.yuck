@@ -1,6 +1,22 @@
+(defwindow wallpaper_clock
+  :geometry 
+    (geometry
+      :x "11%" 
+      :y "33%" 
+      :anchor "top right"
+      :width "650px"
+      :height "400px"
+    )
+  :namespace "wallpaper"
+  :focusable false
+  :stacking "bg"
+  :exclusive false
+  (clock)
+)
+(include "./yuck/wallp_widgets/music.yuck")
 (defwidget clock []
   (box
-    :class "clock"
+    :class "wallpaper_widget clock"
     :orientation "h"
     :space-evenly false
     :valign "center"
@@ -14,7 +30,7 @@
       :valign "center"
       (label
         :class "date"
-        :text {formattime(EWW_TIME, "%m / %d")}
+        :text {formattime(EWW_TIME, "%b %d")}
       )
       (label
         :text {formattime(EWW_TIME, "%a")}
@@ -30,36 +46,7 @@
       :space-evenly false
       :valign "center"
       :halign "end"
-      (box
-        :class "music_info"
-        :visible {song_status == "Playing" ? true : false}
-        :orientation "h"
-        :space-evenly false
-        :valign "center"
-        :halign "start"
-        :vexpand true
-        :hexpand true
-        (box
-          :class "song_cover_art"
-          :visible {cover_art == "" ? false : true}
-          :style "background-image: url('${cover_art}');"
-        )
-        (box
-          :orientation "v"
-          :space-evenly false
-          :valign "center"
-          (label
-            :class "title"
-            :xalign 0
-            :text song
-          )
-          (label
-            :class "artist"
-            :xalign 0
-            :text {song_artist == "" ? "..." : song_artist}
-          )
-        )
-      )
+      (wallpaper_music)
       (box
         :orientation "h"
         :space-evenly false
@@ -72,6 +59,7 @@
         (scale
           :class "time-progress"
           :value {formattime(EWW_TIME, "%S")}
+          :active false
           :max 60
           :round-digits 0
           :orientation "v"

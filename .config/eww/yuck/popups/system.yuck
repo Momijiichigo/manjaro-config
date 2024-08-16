@@ -31,7 +31,7 @@
                   round(EWW_BATTERY["BAT0"].capacity / 10, 0)
                 ] ?: battery_icons[10]
             } "
-            :class "icon_bat"
+            :class "icon icon_bat"
             :limit-width 2
             :show-truncated false
             :wrap false)
@@ -78,11 +78,11 @@
           :thickness 3
           (label
             :text " "
-            :class "icon_mem"
+            :class "icon icon_mem"
             :limit-width 2
             :show-truncated false
             :wrap false
-            :angle 90
+            ;:angle 90
           )
         )
         (box
@@ -126,7 +126,7 @@
           :thickness 3
           (label
             :text " "
-            :class "icon_cpu"
+            :class "icon icon_cpu"
             :limit-width 2
             :show-truncated false
             :wrap false)

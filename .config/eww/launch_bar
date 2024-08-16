@@ -30,9 +30,11 @@ do
   screen_counter=$((screen_counter+1))
 done
 
-eww open wallpaper_sys --screen 0 
+eww open wallpaper_clock --screen 0 
 
 # Run the main loop of wifi status listener
-nohup bun run $HOME/.config/eww/scripts/wifi/index.ts main &
+nohup bun run $HOME/.config/eww/scripts/wifi/index.ts main > /dev/null &
 # Run the main loop of notification (swaync) status listener
-nohup bun run $HOME/.config/eww/scripts/swaync/index.ts main &
+nohup bun run $HOME/.config/eww/scripts/swaync/index.ts main > /dev/null &
+# Run the main loop of music status listener
+nohup bun run $HOME/.config/eww/scripts/music/index.ts main > /dev/null &

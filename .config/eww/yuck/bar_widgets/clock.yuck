@@ -1,11 +1,12 @@
 
 (defwidget clock_module []
   (eventbox
-    :onhover "$HOME/.config/eww/scripts/pop calendar"
+    :onclick "$HOME/.config/eww/scripts/pop calendar"
     (box
       :class "module clock_module"
       :space-evenly "false"
       :orientation "h"
+      :tooltip {formattime(EWW_TIME, "%b %d, %Y")}
       ; :spacing "3"
       (label
         :class "clock_date"

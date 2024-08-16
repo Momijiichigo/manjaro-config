@@ -1,5 +1,9 @@
 (include "./yuck/variables.yuck")
 
+;; Wallpaper Widgets
+(include "./yuck/wallp_widgets/default.yuck")
+
+;; Desktop Bar
 (defwindow bar [screen ?width]
   :geometry
     (geometry
@@ -16,7 +20,7 @@
       ;   )
       ; }
       :y "0px"
-      :width {width == "" ? "99.5%" : "${width*0.995}px"}
+      :width {width == "" ? "100%" : "${width}px"}
       :height "10px"
       :anchor "top center"
     )
@@ -65,13 +69,23 @@
     (sep)
 
     (systray
-      :spacing 12
+      :class "systray"
+      :spacing 10
       :icon-size 16
     )
     (sep)
     
     (eventbox
-      :onhover "./scripts/pop system"
+      :onclick "eww update dont_sleep=${!dont_sleep}"
+      (label
+        :class "dont_sleep"
+        :tooltip {dont_sleep ? "Don't allow system to sleep" : "Allow system to sleep"}
+        :style {dont_sleep ? "color: #caa1ce;" : "color: #a1bdce;"}
+        :text {dont_sleep ? "󰒳 " : "󰒲 "}
+      )
+    )
+    (eventbox
+      :onclick "./scripts/pop system"
       (box
         :space-evenly true  
         :halign "end"
@@ -148,7 +162,7 @@
 (defwindow system
   :geometry 
     (geometry
-      :x "0px" 
+      :x "6px" 
       :y "5px" 
       :anchor "top right"
       :width "290px" 
@@ -170,22 +184,3 @@
 )
 
 
-;; Wallpaper Widgets
-
-;; System
-(include "./yuck/wallp_widgets/default.yuck")
-(defwindow wallpaper_sys
-  :geometry 
-    (geometry
-      :x "13%" 
-      :y "33%" 
-      :anchor "top right"
-      :width "700px" 
-      :height "400px"
-    )
-  :namespace "wallpaper"
-  :focusable false
-  :stacking "bg"
-  :exclusive false
-  (wallp-widget)
-)

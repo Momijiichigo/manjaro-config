@@ -16,6 +16,8 @@
 (defvar current_workspace "1")
 
 (defvar is_one_window_wspace false)
+; `dont_sleep` is used in `~/.config/hypr/hypridle.conf` to prevent the system from sleeping
+(defvar dont_sleep false)
 (defvar vol_reveal false)
 (defvar br_reveal false)
 (defvar music_reveal false)
@@ -51,25 +53,20 @@
 (defpoll WLAN_ICON :interval "5m" "bun run scripts/wifi/index.ts icon")
 
 
-(deflisten song
-  :initial ""
-  "playerctl metadata --format \"{{ xesam:title }}\" -F"
-)
-(deflisten song_artist
-  :initial ""
-  "playerctl metadata --format \"{{ xesam:artist }}\" -F"
-)
-
-(defpoll current_status
-  :interval "1s"
+(deflisten music_current_pos
   :initial 0
-  "~/.config/eww/scripts/music_info --time")
-(deflisten song_status
-  :initial "Stopped"
-  "playerctl -F status")
-(deflisten cover_art 
-  :initial "images/music.png"
-  "playerctl metadata --format \"{{ mpris:artUrl }}\" -F")
+  "playerctl -s metadata --format '{{ position }}' -F")
+
+;; e.g. `{ "spotify": "Playing", "vlc": "Paused" }`
+(defvar song_status_each `{}`)
+
+(deflisten current_music_player
+  :initial ""
+  "playerctl -s metadata --format '{{ playerName }}' -F")
+(defvar music_metadata `{}`)
+(defvar music_players `[]`)
+
+
 
 (defpoll calendar_day :interval "20h" "date '+%d'")
 (defpoll calendar_year :interval "20h" "date '+%Y'")

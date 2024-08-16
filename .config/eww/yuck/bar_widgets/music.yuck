@@ -1,7 +1,8 @@
 ;;  Music 
 (defwidget music [] 
   (eventbox
-    :onhover "eww update music_reveal=true && ~/.config/eww/scripts/pop music"
+    :onhover "eww update music_reveal=true"
+    :onclick "~/.config/eww/scripts/pop music"
     :onhoverlost "eww update music_reveal=false"
     (box
       :class "music_module"
@@ -10,14 +11,16 @@
       (box
         :class "song_cover_art"
         :style "background-image: url('${
-          cover_art == ""
-            ? "images/music.png"
-            : cover_art
+            music_metadata[current_music_player]?.["mpris:artUrl"]
+              ?: "images/music.png"
         }');"
       )
       (label 
         :class "song"
-        :text song
+        :limit-width 20
+        :text {
+          music_metadata[current_music_player]?.["xesam:title"] ?: ""
+        }
       )
       (revealer
         :transition "slideright"
@@ -26,17 +29,17 @@
         (box :orientation "h" 
           (button
             :class "song_btn_prev"
-            :onclick "playerctl previous"
+            :onclick "playerctl --player=${current_music_player} previous"
             ""
           )
           (button 
             :class "song_btn_play"
-            :onclick "playerctl play-pause"
-            {song_status == "Playing" ? " " : " "} 
+            :onclick "playerctl --player=${current_music_player} play-pause"
+            {song_status_each[current_music_player] == "Playing" ? " " : " "} 
           )
           (button 
             :class "song_btn_next"
-            :onclick "playerctl next"
+            :onclick "playerctl --player=${current_music_player} next"
             ""
           )
         )

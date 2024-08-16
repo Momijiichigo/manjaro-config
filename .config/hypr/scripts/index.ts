@@ -11,6 +11,14 @@ import {checkAndWarnBattery} from "./battery.ts"
 
 const monitorNameMap: Map<string, number> = new Map();
 
+/**
+ * List of displays that should not launch Eww bar
+ */
+const DISPLAYS_EWW_BLACKLIST = [
+  "GAOMON PD1320",
+]
+
+
 const arg = Bun.argv[2];
 switch (arg) {
   case "main": {
@@ -74,66 +82,67 @@ async function adjustBarDimension() {
  */
 function registerListeners() {
 
-  addS2Listener("workspacev2", async ([ws_id, _ws_name]) => {
+  addS2Listener("workspacev2", async ([wsId, _wsName]) => {
     await Promise.all([
       adjustBarDimension(),
-      $`eww update current_workspace=${ws_id}`
+      $`eww update current_workspace=${wsId}`
         .nothrow()
         .text()
     ])
   })
 
-  addS2Listener("monitoraddedv2", async ([disp_id, disp_name]) => {
-    monitorNameMap.set(disp_name, Number(disp_id));
+  addS2Listener("monitoraddedv2", async ([dispId, dispName]) => {
+    monitorNameMap.set(dispName, Number(dispId));
 
-    /*
-      # ------------ Workaround --------------
-      Currently (Eww 0.5.0) the dimension of 
-      the widget on another monitors are not correct
-      (the dimension of the first monitor is used for all monitors)
-      Below is a workaround to fix the issue
-    */
     const screenInfos: ScreenInfo[] = await $`hyprctl monitors all -j`
       .nothrow()
       .json();
-    const screenInfo = screenInfos.find(s => s.name === disp_name);
+    const screenInfo = screenInfos.find(s => s.name === dispName);
 
     let screenWidth = 0;
-    if (screenInfo) {
+    if (screenInfo && !DISPLAYS_EWW_BLACKLIST.includes(screenInfo.model)) {
+      /*
+        # ------------ Workaround --------------
+        Currently (Eww 0.5.0) the dimension of 
+        the widget on another monitors are not correct
+        (the dimension of the first monitor is used for all monitors)
+        Below is a workaround to fix the issue
+      */
       const {width, scale} = screenInfo;
       screenWidth = width / scale | 0;
+      
+      // End of the workaround ----------
+
+
+      await Promise.all([
+        $`eww open-many bar:bar_${dispName} \
+            --arg bar_${dispName}:screen=${dispId} \
+            --arg bar_${dispName}:width=${screenWidth}`
+          .nothrow()
+          .text(),
+        setEwwVarWspaces()
+      ])
 
     }
 
-    // End of the workaround ----------
+  })
 
-
+  addS2Listener("monitorremoved", async (dispName) => {
+    monitorNameMap.delete(dispName);
     await Promise.all([
-      $`eww open-many bar:bar_${disp_name} \
-          --arg bar_${disp_name}:screen=${disp_id} \
-          --arg bar_${disp_name}:width=${screenWidth}`
+      $`eww close bar_${dispName}`
         .nothrow()
         .text(),
       setEwwVarWspaces()
     ])
   })
 
-  addS2Listener("monitorremoved", async ([disp_name]) => {
-    monitorNameMap.delete(disp_name);
-    await Promise.all([
-      $`eww close bar_${disp_name}`
-        .nothrow()
-        .text(),
-      setEwwVarWspaces()
-    ])
-  })
-
-  addS2Listener("createworkspace", async ([ws_id, _ws_name]) => {
+  addS2Listener("createworkspace", async (wsId, _wsName) => {
     await Promise.all([
       adjustBarDimension(),
       setEwwVarWspaces()
     ])
-    console.log("createworkspace", ws_id)
+    console.log("createworkspace", wsId)
   })
 
   addS2Listener("destroyworkspace", async () => {
@@ -148,11 +157,21 @@ function registerListeners() {
     ])
   })
 
-  addS2Listener("movewindow", async () => {
+  // WINDOWADDRESS,WORKSPACEID,WORKSPACENAME
+  addS2Listener("movewindowv2", async (_windowAddress, _workspaceId, _workspaceName) => {
     await Promise.all([
       adjustBarDimension(),
       setEwwVarCurrentWspace()
     ])
+  })
+
+  // WINDOWADDRESS,WORKSPACENAME,WINDOWCLASS,WINDOWTITLE
+  addS2Listener("openwindow", async (_windowAddress, _workspaceName, _windowClass, _windowTitle) => {
+    await adjustBarDimension()
+  })
+
+  addS2Listener("closewindow", async (_windowAddress) => {
+    await adjustBarDimension()
   })
 
 }

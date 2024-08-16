@@ -24,7 +24,7 @@
 .bar_class {
   font-size: 12px;
   font-weight: 200;
-  background-color: rgba(15, 15, 23, 0.6);
+  background-color: rgba(30, 30, 33, 0.6);
   border-radius: 8px;
   border-top-right-radius: 0px;
   border-top-left-radius: 0px;
@@ -33,7 +33,7 @@
     color: #3e424f;
     font-weight: bold;
     font-size: 1.2em;
-    margin: 0px 0.7em 0px 0.7em;
+    margin: 0.1em 0.7em 0px 0.7em;
   }
 
   .clock_module {
@@ -160,7 +160,20 @@
     margin: 0px 10px 0px 10px;
   }
 
+  .systray {
+    background-color: rgba(196, 185, 175, 0.4);
+    border-radius: 0.5em;
+    margin: 0.2em -0.4em;
+    padding: 0px 0.7em;
+    // margin-right: 0.5em;
+  }
 
+
+  .dont_sleep {
+    font-size: 1.2em;
+    color: #a1bdce;
+    margin: 0px 0.7em 0px 0px;
+  }
 
   .iconbat,
   .iconmem,
@@ -224,7 +237,9 @@
 
   .music_module {
     // padding: 0px 5px 0px 5px;
+    font-family: Source Sans Variable, Source Han Sans JP, Cantarell;
     color: #bfc9db;
+    color: #e9f5ed;
 
     .song_cover_art {
       background-size: cover;
@@ -238,9 +253,9 @@
 
     .song {
       // color: #a1bdce;
-      font-size: 1em;
-      font-weight: 500;
-      margin: 0px 0px 0px 0.5em;
+      font-size: 1.2em;
+      font-weight: 400;
+      margin: -0.2em 0em -0.2em 0.5em;
     }
 
     .song_btn_play {
@@ -268,15 +283,17 @@
 }
 
 /** tooltip!! **/
-tooltip.background {
-  background-color: #0f0f17;
-  font-size: 15px;
-  border-radius: 10px;
-  color: #bfc9db;
-}
+tooltip {
+  &.background {
+    background-color: rgba(23, 21, 15, 0.6);
+    font-size: 13px;
+    border-radius: 0.3em;
+    color: #cddbbf;
+  }
 
-tooltip label {
-  margin: 6px;
+  label {
+    margin: 0.1em;
+  }
 }
 
 
@@ -302,75 +319,58 @@ scale trough {
 
 .popup {
   font-family: Source Sans Variable, Source Han Sans JP, Cantarell;
+  background-color: rgba(15, 15, 23, 0.6);
+  background-color: rgba(30, 30, 33, 0.6);
 }
 
 @import './yuck/popups/powermenu.scss';
 
 // Calendar
-.cal {
+
+calendar.popup {
   // background-color: #0f0f17;
-  background-color: rgba(15, 15, 23, 0.7);
-  font-family: FiraCode Nerd Font;
-  font-weight: normal;
-  border-radius: 16px;
-  padding: 10px;
-  font-size: 24px;
+  background-color: rgba(30, 30, 33, 0.6);
+  // font-family: FiraCode Nerd Font;
+  font-weight: 400;
+  border-radius: 10px;
+  font-size: 20px;
+  padding: 0.2em 0.4em;
 
-  .cal-in {
-    padding: 0px 10px 0px 10px;
-    color: #bfc9db;
-
-    calendar {
-      font-size: 1em;
-
-      &.highlight {
-        padding: 20px;
-      }
-    }
+  color: #dbcebf;
+  &.highlight {
+    padding: 20px;
+    color: #c9ac79;
+    background-color: rgba(50, 50, 70, 0.5);
   }
+  &.month {
+    color: #c9ac79;
+  }
+  &:selected {
+    color: #0f3e4d;
+    background-color: rgba(201, 172, 121, 0.9);
+  }
+  &.header {
+    color: #ccb387;
+    font-weight: 100;
+    background-color: rgba(15, 15, 23, 0);
+  }
+  &.button {
+    color: #9ecc87;
+    background-color: transparent;
+  }
+  &:indeterminate {
+    color: #989898;
+  }
+
+
 }
-
-calender {
-  color: #bfc9db;
-}
-
-calendar:selected {
-  color: #c371de;
-}
-
-calendar.header {
-  color: #a1bdce;
-  font-weight: bold;
-}
-
-calendar.button {
-  color: #afbea2;
-}
-
-calendar.highlight {
-  color: #a1bdce;
-  font-weight: bold;
-}
-
-calendar:indeterminate {
-  color: #bfc9db;
-}
-
-.color_border {
-  border-style: solid;
-  border-width: 2px;
-  border-color: #7bc1cc;
-}
-
-
-
 
 
 .sys_win {
 
-  background-color: rgba(30, 30, 46, 0.5);
+  // background-color: rgba(30, 30, 46, 0.5);
+
   border-radius: 16px;
-  margin-right: 5px;
 
   .box {
     border-radius: 16px;
@@ -381,6 +381,12 @@ calendar:indeterminate {
     color: #38384d;
     font-size: 18px;
     margin: 0px 10px 0px 10px;
+  }
+
+  .icon {
+    font-family: FiraCode Nerd Font;
+    font-size: 3em;
+    margin: 0.5em 0.3em 0.5em 0.5em;
   }
 
   .text_bat_sub,
@@ -396,14 +402,6 @@ calendar:indeterminate {
     font-weight: 400;
     // margin: 14px 0px 0px 25px;
   }
-
-  .icon_bat,
-  .icon_cpu,
-  .icon_mem {
-    font-size: 30px;
-    margin: 30px;
-  }
-
 
   .bat {
     color: #afbea2;
@@ -426,6 +424,11 @@ calendar:indeterminate {
   .icon_bat,
   .text_bat {
     color: #afbea2;
+  }
+
+  .icon_bat {
+    margin-left: 0.6em;
+    margin-right: 0.2em;
   }
 
   .icon_mem,
@@ -466,21 +469,25 @@ calendar:indeterminate {
 
 
 .music_pop {
+  min-height: 15.5em;
   * {
 
     // border: 1px solid red;
 
   }
+  .page {
+    // min-height: 15em;
+  }
 
-  color: #bfc9db;
-  background-color: rgba(15, 15, 23, 0.6);
+  color: #e9f5ed;
+  // background-color: rgba(15, 15, 23, 0.6);
   border-radius: 10px;
 
   .music_cover_art {
     background-size: cover;
     background-position: center;
     min-height: 100px;
-    box-shadow: 5px 5px 5px 5px #06060b;
+    box-shadow: 0.1em 0.1em 0.3em 0.3em rgba(19, 28, 28, 0.7);
     min-width: 170px;
     margin: 20px;
     border-radius: 10px;
@@ -488,7 +495,7 @@ calendar:indeterminate {
 
   .music {
     font-size: 20px;
-    font-weight: 500;
+    font-weight: 400;
     margin: 20px 0px 0px 0px;
   }
 
@@ -512,7 +519,6 @@ calendar:indeterminate {
   }
 
   .music_btn_next {
-    color: #bbc5d7;
     font-size: 32px;
     font-weight: normal;
     margin: 0px 0px 0px 0px;
@@ -520,17 +526,19 @@ calendar:indeterminate {
 
   .music_bar scale trough {
     all: unset;
-    background-color: #232232;
-    box-shadow: 0 6px 5px 2px #06060b;
+    background-color: #3e4c54;
+    box-shadow: 0 0.2em 0.2em 0.06em rgba(31, 51, 51, 0.6);
     border-radius: 24px;
     min-height: 3px;
     min-width: 190px;
     margin-bottom: 30px;
     margin-left: 0.5em;
+    margin-right: 0.5em;
     highlight {
       all: unset;
       // background-image: linear-gradient(to right, #afcee0 30%, #a1bdce 50%, #77a5bf 100% *50);
-      background-color: #a1bdce;
+      background-color: #e9f5ed;
+      box-shadow: 0 0 0.12em 0.12em rgba(145, 255, 255, 0.3);
       border-radius: 24px;
     }
   }
