@@ -2,10 +2,10 @@
   :geometry 
     (geometry
       :x "11%" 
-      :y "33%" 
+      :y "38%" 
       :anchor "top right"
-      :width "650px"
-      :height "400px"
+      :width "600px"
+      :height "300px"
     )
   :namespace "wallpaper"
   :focusable false

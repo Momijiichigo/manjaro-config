@@ -62,7 +62,7 @@ export async function listenToS2EventLoop() {
     for (const eventStr of eventLines) {
 
       const [event, dataStr] = eventStr.split(">>");
-      const data = dataStr.trim().split(",");
+      const data = dataStr?.trim().split(",");
 
       // console.log("event:", event, "data:", data)
 

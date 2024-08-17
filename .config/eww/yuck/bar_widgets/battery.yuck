@@ -3,10 +3,10 @@
     :class "bat_module"
     :vexpand "false"
     :hexpand "false"
+    :tooltip "${EWW_BATTERY["BAT0"].status}"
     :style "color: ${EWW_BATTERY["BAT0"].capacity < 20 ? "#fc8665" : "#dae6cf"};"
     (label 
       :class "iconbat"
-      :tooltip "${EWW_BATTERY["BAT0"].status}"
       :show-truncated false
       :wrap false
       :text {

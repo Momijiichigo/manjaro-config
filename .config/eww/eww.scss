@@ -33,7 +33,7 @@
     color: #3e424f;
     font-weight: bold;
     font-size: 1.2em;
-    margin: 0.1em 0.7em 0px 0.7em;
+    margin: 0em 0.5em -0.1em 0.5em;
   }
 
   .clock_module {
@@ -127,13 +127,6 @@
     border-radius: 10px;
   }
 
-  .volume_icon {
-    font-size: 1em;
-    color: #a1bdce;
-    margin: 0px 10px 0px 10px;
-  }
-
-
   .module_essid {
     font-size: 1em;
     // color: #a1bdce;
@@ -141,16 +134,23 @@
     font-weight: 400;
   }
 
-  .module-wif {
+  .icon {
     font-size: 1.2em;
-    color: #a1bdce;
     border-radius: 100%;
-    margin: 0px 10px 0px 5px;
+    margin: 0px 0.5em 0px 0.5em;
+  }
+
+  .icon.bluetooth {
+    // margin-right: 0em;
+  }
+
+  .icon.wifi {
+    margin: 0px 0.4em 0px 0.5em;
   }
 
   .module-notification {
     color: #a1bdce;
-    margin: 0px 0.4em 0px 0px;
+    margin: 0px 0.18em 0px 0px;
     font-size: 1.1em;
   }
 
@@ -227,6 +227,9 @@
       background-color: rgb(161, 207, 205, 0.4);
       transition: 0.2s;
       margin: 0.4em 0.6em;
+      &:hover {
+        background-color: rgba(161, 207, 205, 0.8);
+      }
       &.active {
         padding: 0px 3em;
         background-color: rgba(161, 207, 205, 1);
