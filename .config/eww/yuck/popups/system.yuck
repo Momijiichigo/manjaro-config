@@ -1,9 +1,20 @@
 ; system popup
 ; cpu usage, memory usage, battery status
 (include "yuck/components/circ_progress.yuck")
+
+(defwidget sys_popup_separator []
+  (box
+    :class "sep"
+    :halign "center"
+    :hexpand true
+    :space-evenly false
+    :spacing 0
+    (box)
+  )
+)
 (defwidget system []
   (eventbox
-    :onhoverlost "~/.config/eww/scripts/pop system"
+    :onhoverlost "~/.config/eww/scripts/popup.ts system"
     (box
       :class "popup sys_win"
       :orientation "v"
@@ -19,7 +30,7 @@
         (circ-prog 
           :value {EWW_BATTERY["BAT0"].capacity}
           :class "bat"
-          :thickness 3
+          :thickness 2
           (label
             :unindent false
             :text "${
@@ -65,7 +76,7 @@
             :wrap false)
         )
       )
-      (label :text "" :class "sep" :halign "center")
+      ;; (sys_popup_separator )
       (box 
         :class "box"
         :orientation "h"
@@ -75,7 +86,7 @@
         (circ-prog
           :value {EWW_RAM.used_mem_perc}
           :class "mem"
-          :thickness 3
+          :thickness 2
           (label
             :text " "
             :class "icon icon_mem"
@@ -114,7 +125,7 @@
             :wrap false)
         )
       )
-      (label :text "" :class "sep" :halign "center")
+      ;; (sys_popup_separator )
       (box
         :class "box"
         :orientation "h"
@@ -123,7 +134,7 @@
         (circ-prog 
           :value {EWW_CPU.avg}
           :class "cpu"
-          :thickness 3
+          :thickness 2
           (label
             :text " "
             :class "icon icon_cpu"
@@ -152,7 +163,7 @@
             :wrap false)
         )
       )
-      (label :text "" :class "sep" :halign "center")
+      ;; (sys_popup_separator )
       (box 
         :class "box"
         :orientation "h"
@@ -168,6 +179,30 @@
           :max 100
           :active true
           :orientation "h"
+        )
+      )
+      (sys_popup_separator )
+      (label
+        :class "title"
+        :text "swhkd"
+      )
+      (box
+        :class "box swhkd_control"
+        :orientation "h"
+        :spacing 20
+        (button
+          :onclick "sudo pkill -USR2 swhkd"
+          :tooltip "Resume key check"
+          (label
+            :text "󰑓"
+          )
+        )
+        (button
+          :onclick "sudo pkill -HUP swhkd"
+          :tooltip "Reload swhkd config"
+          (label
+            :text "󰑓"
+          )
         )
       )
     )

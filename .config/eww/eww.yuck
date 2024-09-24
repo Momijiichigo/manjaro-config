@@ -85,7 +85,7 @@
       )
     )
     (eventbox
-      :onclick "./scripts/pop system"
+      :onclick "./scripts/popup.ts system"
       (box
         :space-evenly true  
         :halign "end"

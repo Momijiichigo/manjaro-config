@@ -1,7 +1,7 @@
 
 (defwidget clock_module []
   (eventbox
-    :onclick "$HOME/.config/eww/scripts/pop calendar"
+    :onclick "$HOME/.config/eww/scripts/popup.ts calendar"
     (box
       :class "module clock_module"
       :space-evenly "false"

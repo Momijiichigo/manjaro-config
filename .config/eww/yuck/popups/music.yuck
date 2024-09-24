@@ -69,18 +69,14 @@
           :vexpand "false" 
           :hexpand "false" 
           :space-evenly "false"
-          (eventbox
-            :onscroll "echo {}" 
-
-            (scale 
-              :active false 
-              :max {music_metadata[player]?.["mpris:length"] ?: 100}
-              :value {
-                song_status_each[player] == "Playing"
-                  ? music_current_pos
-                  : 0
-              }
-            )
+          (scale 
+            :max {music_metadata[player]?.["mpris:length"] / 1000000 ?: 100}
+            :onchange "playerctl --player=${player} position {}"
+            :value {
+              song_status_each[player] == "Playing"
+                ? music_current_pos / 1000000
+                : 0
+            }
           )
         )
       )
@@ -90,7 +86,7 @@
 ;;  Music
 (defwidget music_pop []
   (eventbox
-    :onhoverlost "~/.config/eww/scripts/pop music"
+    :onhoverlost "~/.config/eww/scripts/popup.ts music_win"
     (scroll
       :class "popup music_pop"
       (literal

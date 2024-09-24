@@ -1,7 +1,7 @@
 ; calendar
 (defwidget cal []
   (eventbox
-    :onhoverlost "~/.config/eww/scripts/pop calendar"
+    :onhoverlost "~/.config/eww/scripts/popup.ts calendar"
     (calendar
       :class "popup"
       ; :day {formattime(EWW_TIME, "%d")}

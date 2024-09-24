@@ -2,7 +2,7 @@
 (defwidget music [] 
   (eventbox
     :onhover "eww update music_reveal=true"
-    :onclick "~/.config/eww/scripts/pop music"
+    :onclick "~/.config/eww/scripts/popup.ts music_win"
     :onhoverlost "eww update music_reveal=false"
     (box
       :class "music_module"
