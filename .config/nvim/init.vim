@@ -47,7 +47,6 @@ else
       \'coc-vimlsp',
       \'coc-lua',
       \'coc-tsserver',
-      \'coc-svelte',
       \'coc-rust-analyzer',
       \'coc-json',
       \'coc-deno',

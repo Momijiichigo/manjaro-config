@@ -28,7 +28,7 @@
       "filetypes": ["wgsl"]
     },
     "typst": {
-        "command": "/home/daichi/workspace/temp/typst-lsp/target/release/typst-lsp",
+        "command": "tinymist lsp",
         "filetypes": ["typst"]
     }
   }

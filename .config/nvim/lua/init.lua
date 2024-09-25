@@ -29,29 +29,36 @@ require("lazy").setup({
   "folke/neodev.nvim",
 
   -- LSP / language features
-  {
-    "neovim/nvim-lspconfig",
-    config = function()
-      -- require("mason").setup()
-      -- require("mason-lspconfig").setup()
-      require'lspconfig'.typst_lsp.setup {
-        settings = {
-          exportPdf = "onSave" -- Choose onType, onSave or never.
-          -- serverPath = "" -- Normally, there is no need to uncomment it.
-        }
-      }
-    end,
-    -- dependencies = {
-    --   "williamboman/mason-lspconfig.nvim",
-    -- },
-  },
+  -- -- requires tinymist
   -- {
   --   "williamboman/mason.nvim",
+  --   opts = {
+  --     ensure_installed = {
+  --       "tinymist",
+  --     },
+  --   },
   -- },
+  -- -- add tinymist to lspconfig
   -- {
-  --   "williamboman/mason-lspconfig.nvim",
+  --   "neovim/nvim-lspconfig",
   --   dependencies = {
-  --     "williamboman/mason.nvim",
+  --     "mason.nvim",
+  --     "williamboman/mason-lspconfig.nvim",
+  --   },
+  --   ---@class PluginLspOpts
+  --   opts = {
+  --     ---@type lspconfig.options
+  --     servers = {
+  --       tinymist = {
+  --         --- todo: these configuration from lspconfig maybe broken
+  --         single_file_support = true,
+  --         root_dir = function()
+  --           return vim.fn.getcwd()
+  --         end,
+  --         --- See [Tinymist Server Configuration](https://github.com/Myriad-Dreamin/tinymist/blob/main/Configuration.md) for references.
+  --         settings = {}
+  --       },
+  --     },
   --   },
   -- },
   {
@@ -140,6 +147,30 @@ require("lazy").setup({
     end,
   },
   {
+    'echasnovski/mini.nvim',
+    version = false,
+    init = function()
+      -- require(<name of module>).setup({})
+      require('mini.move').setup()
+      require('mini.surround').setup()
+      require('mini.icons').setup()
+      require('mini.comment').setup()
+      if not vim.g.neovide then
+        local animate = require('mini.animate')
+        animate.setup({
+          cursor = {
+            -- Whether to enable this animation
+            enable = true,
+
+            -- Timing of animation (how steps will progress in time)
+            timing = animate.gen_timing.quadratic({ duration = 100, unit = "total" }), --<function: implements linear total 250ms animation duration>,
+          },
+        })
+      end
+
+    end,
+  },
+  {
     'Julian/lean.nvim',
     event = { 'BufReadPre *.lean', 'BufNewFile *.lean' },
     dependencies = {
@@ -158,6 +189,10 @@ require("lazy").setup({
   {
     'kaarmu/typst.vim',
     ft = 'typst',
+  },
+  {
+    "waycrate/swhkd-vim",
+    ft = "swhkd",
   },
   {
     'elkowar/yuck.vim',
@@ -248,7 +283,17 @@ require("lazy").setup({
     "tpope/vim-fugitive",
   },
   -- Note taking
-
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    ft = {
+      "markdown",
+      "tex",
+    },
+    opts = {},
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+  },
   {
     -- draw diagrams
     "jbyuki/venn.nvim",
@@ -360,6 +405,12 @@ require("lazy").setup({
   },
 
   "github/copilot.vim",
+
+  --- For fun
+
+  -- liquid simulation
+  'eandrju/cellular-automaton.nvim',
+
 
 
 })

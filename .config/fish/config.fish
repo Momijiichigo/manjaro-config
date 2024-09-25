@@ -2,10 +2,6 @@ set -x DENO_INSTALL $HOME/.deno
 set -x WINEPREFIX $HOME/.proton/Proton Experimental/pfx
 set -U SXHKD_SHELL sh
 
-# set -x JAVA_HOME /usr/lib/jvm/default-runtime
-set -x ANDROID_HOME $HOME/Android/Sdk
-set -x NDK_HOME "$ANDROID_HOME/ndk/25.1.8937393"
-
 
 fish_add_path $DENO_INSTALL/bin
 fish_add_path $HOME/.cargo/bin
