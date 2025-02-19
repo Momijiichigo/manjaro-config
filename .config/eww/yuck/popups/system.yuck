@@ -74,6 +74,42 @@
             :limit-width 22
             :show-truncated false
             :wrap false)
+          (box
+            :orientation "h"
+            :space-evenly "false"
+            :spacing 10
+            (label
+              :text "power mode"
+              :halign "start"
+              :class "text_bat_sub"
+              :limit-width 22
+              :show-truncated false
+              :wrap false)
+            (scale
+              :class "power_mode"
+              ; power modes
+              :marks "[a, b, c]"
+              :min 0
+              :max 3
+              :value power_mode
+              :onchange "~/.config/hypr/scripts/power_battery.ts set_mode {}"
+              ; :draw-value true
+            )
+          )
+          ; (scale
+          ;   :class "power_mode"
+          ;   ; power modes
+          ;   marks: [
+          ;     {value: 0, label: ""},
+          ;     {value: 1, label: ""},
+          ;     {value: 2, label: ""},
+          ;     {value: 3, label: ""},
+          ;   ]
+          ;   :min 0
+          ;   :max 3
+          ;   :value 3
+          ;   :draw-value true
+          ; )
         )
       )
       ;; (sys_popup_separator )
@@ -181,30 +217,30 @@
           :orientation "h"
         )
       )
-      (sys_popup_separator )
-      (label
-        :class "title"
-        :text "swhkd"
-      )
-      (box
-        :class "box swhkd_control"
-        :orientation "h"
-        :spacing 20
-        (button
-          :onclick "sudo pkill -USR2 swhkd"
-          :tooltip "Resume key check"
-          (label
-            :text "󰑓"
-          )
-        )
-        (button
-          :onclick "sudo pkill -HUP swhkd"
-          :tooltip "Reload swhkd config"
-          (label
-            :text "󰑓"
-          )
-        )
-      )
+      ; (sys_popup_separator )
+      ; (label
+      ;   :class "title"
+      ;   :text "swhkd"
+      ; )
+      ; (box
+      ;   :class "box swhkd_control"
+      ;   :orientation "h"
+      ;   :spacing 20
+      ;   (button
+      ;     :onclick "sudo pkill -USR2 swhkd"
+      ;     :tooltip "Resume key check"
+      ;     (label
+      ;       :text "󰑓"
+      ;     )
+      ;   )
+      ;   (button
+      ;     :onclick "sudo pkill -HUP swhkd"
+      ;     :tooltip "Reload swhkd config"
+      ;     (label
+      ;       :text "󰑓"
+      ;     )
+      ;   )
+      ; )
     )
   )
 )

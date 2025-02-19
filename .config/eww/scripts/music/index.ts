@@ -90,7 +90,7 @@ async function getMetadata() {
         metaObj.metadata[player] = {}
         metaObj.players.push(player)
       }
-      metaObj.metadata[player][prop] = value || "";
+      metaObj.metadata[player][prop] = value.trim() || "";
     }
   }
   return metaObj;

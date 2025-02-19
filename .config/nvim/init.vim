@@ -12,9 +12,14 @@ inoremap <C-l> <Right>
 cnoreabbrev <expr> ss getcmdtype() .. getcmdline() ==# ':ss' ? [getchar(), ''][1] .. "%s///g<Left><Left>" : 'ss'
 
 set clipboard=unnamedplus
+set completeopt=noinsert,menuone,popup
 
 if exists('g:vscode')
+  " use spaces for indentation
+  set expandtab
 
+  " indent width for c style language
+  set cindent shiftwidth=2
 "  set updatetime=100
 else
   function! SetupTheme()
@@ -47,7 +52,6 @@ else
       \'coc-vimlsp',
       \'coc-lua',
       \'coc-tsserver',
-      \'coc-rust-analyzer',
       \'coc-json',
       \'coc-deno',
       \'coc-css',
@@ -175,6 +179,7 @@ else
   nmap <silent> gy <Plug>(coc-type-definition)
   nmap <silent> gi <Plug>(coc-implementation)
   nmap <silent> gr <Plug>(coc-references)
+  nmap <silent> mm :CopilotChatOpen<CR>
 
   " Use K to show documentation in preview window.
   nnoremap <silent> K :call ShowDocumentation()<CR>

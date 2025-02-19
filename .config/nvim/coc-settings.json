@@ -1,16 +1,13 @@
 {
   "tsserver.enable": true,
   "tsserver.log": "verbose",
-  "svelte.enable-ts-plugin": true,
-  "tailwindCSS.includeLanguages": {
-    "rust": "html"
-  },
-  "inlayHint.enable": true,
-  "rust-analyzer.inlayHints.chainingHints.enable": true,
-  "rust-analyzer.inlayHints.closingBraceHints.enable": true,
+  // "tailwindCSS.includeLanguages": {
+  //   "rust": "html"
+  // },
   "Lua.workspace.library": [
     "/usr/share/nvim/runtime/lua"
   ],
+  "inlayHint.enable": true,
   "workspace.rootPatterns": [
     ".git",
     ".hg",
@@ -23,13 +20,38 @@
     "tailwind.config.ts"
   ],
   "languageserver": {
+    "rust": {
+      "command": "rust-analyzer",
+      "filetypes": ["rust"],
+      "initializationOptions": {
+        "inlayHints": {
+          "typeHints": {
+            "enable": true
+          },
+          "maxLength": 5,
+          "parameterHints": {
+            "enable": false
+          },
+          "chainingHints": {
+            "enable": true
+          },
+          "closingBraceHints": {
+            "enable": true
+          }
+        }
+      }
+    },
+    "hyprlang": {
+      "command": "hyprls",
+      "filetypes": ["hyprlang"]
+    },
     "wgsl": {
       "command": "wgsl_analyzer",
       "filetypes": ["wgsl"]
     },
     "typst": {
-        "command": "tinymist lsp",
-        "filetypes": ["typst"]
+      "command": "tinymist lsp",
+      "filetypes": ["typst"]
     }
   }
 }

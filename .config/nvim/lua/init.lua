@@ -16,6 +16,7 @@ vim.g.mapleader = "\\" -- make sure to set `mapleader` before lazy so your mappi
 
 vim.filetype.add({extension = {wgsl = "wgsl"}})
 vim.filetype.add({extension = {typst = "typ"}})
+vim.filetype.add({pattern = {["hypr.*%.conf"] = "hyprlang"}})
 
 if vim.g.neovide then
   -- Put anything you want to happen only in Neovide here
@@ -24,6 +25,7 @@ end
 
 
 require("lazy").setup({
+  lazy = true,
   "folke/which-key.nvim",
   { "folke/neoconf.nvim", cmd = "Neoconf" },
   "folke/neodev.nvim",
@@ -335,6 +337,38 @@ require("lazy").setup({
       })
     end
   },
+  -- Graphics
+  {
+    "3rd/image.nvim",
+    opts = {
+      backend = "ueberzug",
+      max_width = 100, -- tweak to preference
+      max_height = 12, -- ^
+      max_height_window_percentage = math.huge, -- this is necessary for a good experience
+      max_width_window_percentage = math.huge,
+      window_overlap_clear_enabled = true,
+      window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
+    }
+  },
+  -- Jupyter Notebooks
+  {
+    'goerz/jupytext.nvim',
+    version = '0.2.0',
+    event = { 'BufReadPre *.ipynb', 'BufNewFile *.ipynb' },
+    opts = {},  -- see Options
+  },
+  {
+    "benlubas/molten-nvim",
+    version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
+    dependencies = { "3rd/image.nvim" },
+    build = ":UpdateRemotePlugins",
+    event = { 'BufReadPre *.ipynb', 'BufNewFile *.ipynb' },
+    init = function()
+        -- these are examples, not defaults. Please see the readme
+        vim.g.molten_image_provider = "image.nvim"
+        vim.g.molten_output_win_max_height = 20
+    end,
+  },
 
 
   -- for Svelte
@@ -398,13 +432,31 @@ require("lazy").setup({
   {
     "akinsho/toggleterm.nvim",
     opts = {
-      open_mapping = [[<c-\>]],
+      open_mapping = [[<c-`>]],
     },
     enabled = true,
     -- tag = '*'
   },
 
+  -- Copilot
   "github/copilot.vim",
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    dependencies = {
+      { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
+      { "nvim-lua/plenary.nvim" }, -- for curl, log and async functions
+    },
+    build = "make tiktoken", -- Only on MacOS or Linux
+    opts = {
+      -- See Configuration section for options
+      model = 'claude-3.5-sonnet',
+      window = {
+        width = 0.2
+      },
+
+    },
+    -- See Commands section for default commands if you want to lazy load on them
+  },
 
   --- For fun
 

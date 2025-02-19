@@ -7,7 +7,7 @@ import {setEwwVar as setEwwVarWspaces} from "../../eww/scripts/workspaces"
 import {setEwwVar as setEwwVarCurrentWspace} from "../../eww/scripts/current_workspace"
 
 import {listenToS2EventLoop, addS2Listener} from "./event_handler.ts"
-import {checkAndWarnBattery} from "./battery.ts"
+import {checkAndWarnBattery, checkPowerMode, setPowerMode} from "./power_battery.ts"
 
 const monitorNameMap: Map<string, number> = new Map();
 
@@ -51,9 +51,10 @@ async function main() {
 /**
  * main loop that runs code every {interval} minutes
  */
-function intervalLoop(interval = 2) {
+async function intervalLoop(interval = 2) {
   // check battery percentage
-  checkAndWarnBattery();
+  await checkAndWarnBattery();
+  checkPowerMode();
   const intervalMs = interval * 60000;
 
   setTimeout(intervalLoop, intervalMs);

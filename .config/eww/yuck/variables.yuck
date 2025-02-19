@@ -36,6 +36,8 @@
   `["󰢟", "󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"]`
 )
 
+(defvar power_mode 1)
+
 (defvar bluetooth_icon "󰂯")
 (defvar bluetooth_icon_color "#8fc7f2")
 (defpoll bluetooth_connected_dev

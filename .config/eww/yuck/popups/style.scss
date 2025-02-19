@@ -96,6 +96,29 @@ calendar.popup {
     // margin: 5px 0px 0px 25px;
   }
 
+  .power_mode {
+    color: #e9f5ed;
+    // background-color: #38384d;
+    border-radius: 10px;
+    // border: 1px solid #38384d;
+    font-size: 0.6em;
+
+    trough {
+      all: unset;
+      background-color: #5c615f;
+      border-radius: 24px;
+      min-height: 0.8rem;
+      min-width: 5rem;
+
+      highlight {
+        all: unset;
+        background-color: #dab1fa;
+        border-radius: 24px;
+      }
+    }
+
+  }
+
   .bat {
     color: #afbea2;
     background-color: #38384d;
@@ -166,6 +189,7 @@ calendar.popup {
       border: 1px solid #38384d;
       border-radius: 1em;
       padding: 0.5em;
+
       label {
         font-size: 1.5em;
       }
@@ -232,29 +256,34 @@ calendar.popup {
     margin: 0px 0px 0px 0px;
   }
 
-  .music_bar scale trough {
-    all: unset;
-    background-color: #3e4c54;
-    box-shadow: 0 0.2em 0.2em 0.06em rgba(31, 51, 51, 0.6);
-    border-radius: 24px;
-    transition: 0.2s;
-    min-height: 3px;
+  .music_bar {
+    min-height: 1em;
     min-width: 190px;
-    margin-bottom: 30px;
+    margin-bottom: 1.5em;
     margin-left: 0.5em;
     margin-right: 0.5em;
 
-    highlight {
+    scale trough {
       all: unset;
-      // background-image: linear-gradient(to right, #afcee0 30%, #a1bdce 50%, #77a5bf 100% *50);
-      background-color: #e9f5ed;
-      box-shadow: 0 0 0.12em 0.12em rgba(145, 255, 255, 0.3);
+      background-color: #3e4c54;
+      box-shadow: 0 0.2em 0.2em 0.06em rgba(31, 51, 51, 0.6);
       border-radius: 24px;
+      transition: 0.15s;
+      min-width: 190px;
+      min-height: 3px;
+
+      highlight {
+        all: unset;
+        // background-image: linear-gradient(to right, #afcee0 30%, #a1bdce 50%, #77a5bf 100% *50);
+        background-color: #e9f5ed;
+        box-shadow: 0 0 0.12em 0.12em rgba(145, 255, 255, 0.3);
+        border-radius: 24px;
+      }
     }
   }
 
-  .music_bar:hover scale trough {
-    min-height: 1em;
+  .music_bar scale:hover trough {
+    min-height: 0.7em;
   }
 
 

@@ -31,7 +31,7 @@
       (powermenu_entry
         :label "Sleep"
         :icon "󰤄"
-        :onclick "sleep 0.1 && hyprlock & systemctl suspend & eww close powermenu &")
+        :onclick "sleep 0.1 && systemctl suspend & eww close powermenu &")
       (powermenu_entry
         :label "Lock"
         :icon ""
