@@ -1,6 +1,5 @@
 set -x DENO_INSTALL $HOME/.deno
 set -x WINEPREFIX $HOME/.proton/Proton Experimental/pfx
-set -U SXHKD_SHELL sh
 
 
 fish_add_path $DENO_INSTALL/bin
@@ -27,6 +26,7 @@ function spt
   /usr/bin/spotifyd
   /usr/bin/spt
 end
+
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!

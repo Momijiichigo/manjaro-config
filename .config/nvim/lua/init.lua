@@ -66,16 +66,16 @@ require("lazy").setup({
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdateSync",
-    opts = function()
+    config = function()
       -- Treesitter: wgsl
-      local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-      parser_config.wgsl = {
-          install_info = {
-              url = "https://github.com/szebniok/tree-sitter-wgsl",
-              files = {"src/parser.c"}
-          },
-      }
-      return {
+      -- local parser_config = require"nvim-treesitter.parsers".get_parser_configs()
+      -- parser_config.wgsl = {
+      --   install_info = {
+      --     url = "https://github.com/szebniok/tree-sitter-wgsl",
+      --     files = {"src/parser.c"},
+      --   },
+      -- }
+      require"nvim-treesitter.configs".setup {
         ensure_installed = {
           "rust",
           "toml",
@@ -90,10 +90,15 @@ require("lazy").setup({
           "wgsl",
         },
         highlight = {
-          enable = true
+          -- enable = true
         },
       }
-    end,
+
+    end
+    -- opts = function()
+    --   return {
+    --   }
+    -- end,
   },
   {
     "neoclide/coc.nvim",
@@ -189,8 +194,15 @@ require("lazy").setup({
     }
   },
   {
-    'kaarmu/typst.vim',
+    'chomosuke/typst-preview.nvim',
     ft = 'typst',
+    version = '1.*',
+    opts = {
+        dependencies_bin = {
+          ['tinymist'] = '/usr/bin/tinymist',
+          ['websocat'] = nil
+        },
+    }, -- lazy.nvim will implicitly calls `setup {}`
   },
   {
     "waycrate/swhkd-vim",
@@ -199,6 +211,10 @@ require("lazy").setup({
   {
     'elkowar/yuck.vim',
     ft = 'yuck',
+  },
+  {
+    "DingDean/wgsl.vim",
+    ft = "wgsl",
   },
   {
     "NoahTheDuke/vim-just",
@@ -338,37 +354,37 @@ require("lazy").setup({
     end
   },
   -- Graphics
-  {
-    "3rd/image.nvim",
-    opts = {
-      backend = "ueberzug",
-      max_width = 100, -- tweak to preference
-      max_height = 12, -- ^
-      max_height_window_percentage = math.huge, -- this is necessary for a good experience
-      max_width_window_percentage = math.huge,
-      window_overlap_clear_enabled = true,
-      window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
-    }
-  },
-  -- Jupyter Notebooks
-  {
-    'goerz/jupytext.nvim',
-    version = '0.2.0',
-    event = { 'BufReadPre *.ipynb', 'BufNewFile *.ipynb' },
-    opts = {},  -- see Options
-  },
-  {
-    "benlubas/molten-nvim",
-    version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
-    dependencies = { "3rd/image.nvim" },
-    build = ":UpdateRemotePlugins",
-    event = { 'BufReadPre *.ipynb', 'BufNewFile *.ipynb' },
-    init = function()
-        -- these are examples, not defaults. Please see the readme
-        vim.g.molten_image_provider = "image.nvim"
-        vim.g.molten_output_win_max_height = 20
-    end,
-  },
+  -- {
+  --   "3rd/image.nvim",
+  --   opts = {
+  --     backend = "ueberzug",
+  --     max_width = 100, -- tweak to preference
+  --     max_height = 12, -- ^
+  --     max_height_window_percentage = math.huge, -- this is necessary for a good experience
+  --     max_width_window_percentage = math.huge,
+  --     window_overlap_clear_enabled = true,
+  --     window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
+  --   }
+  -- },
+  -- -- Jupyter Notebooks
+  -- {
+  --   'goerz/jupytext.nvim',
+  --   version = '0.2.0',
+  --   event = { 'BufReadPre *.ipynb', 'BufNewFile *.ipynb' },
+  --   opts = {},  -- see Options
+  -- },
+  -- {
+  --   "benlubas/molten-nvim",
+  --   version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
+  --   dependencies = { "3rd/image.nvim" },
+  --   build = ":UpdateRemotePlugins",
+  --   event = { 'BufReadPre *.ipynb', 'BufNewFile *.ipynb' },
+  --   init = function()
+  --       -- these are examples, not defaults. Please see the readme
+  --       vim.g.molten_image_provider = "image.nvim"
+  --       vim.g.molten_output_win_max_height = 20
+  --   end,
+  -- },
 
 
   -- for Svelte
@@ -432,7 +448,7 @@ require("lazy").setup({
   {
     "akinsho/toggleterm.nvim",
     opts = {
-      open_mapping = [[<c-`>]],
+      open_mapping = [[<c-\>]],
     },
     enabled = true,
     -- tag = '*'

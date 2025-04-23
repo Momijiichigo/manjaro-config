@@ -46,12 +46,37 @@
       "filetypes": ["hyprlang"]
     },
     "wgsl": {
-      "command": "wgsl_analyzer",
-      "filetypes": ["wgsl"]
+      "command": "wgsl-analyzer",
+      "filetypes": ["wgsl"],
+      "initializationOptions": {
+        "inlayHints": {
+          "enabled": true,
+          "typeHints": true,
+          "parameterHints": true,
+          "structLayoutHints": false,
+          "typeVerbosity": "compact"
+        }
+      },
+      "settings": {
+        "wgsl-analyzer.inlayHints": {
+          "enabled": true,
+          "typeHints": true,
+          "parameterHints": true,
+          "structLayoutHints": false,
+          "typeVerbosity": "compact"
+        }
+      }
     },
-    "typst": {
-      "command": "tinymist lsp",
-      "filetypes": ["typst"]
+    "tinymist": {
+      "command": "tinymist",
+      "filetypes": ["typst"],
+      "initializationOptions": {
+        "semanticTokens": "enable"
+      },
+      "settings": {
+        "tinymist.semanticTokens": "enable",
+        "semanticTokens": "enable"
+      }
     }
   }
 }

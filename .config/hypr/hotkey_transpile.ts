@@ -4,7 +4,7 @@
 const flagMappings: Record<string, string> = {
   'locked': 'l',
   'release': 'r',
-  'longPress': 'o',
+  'long-press': 'o',
   'repeat': 'e',
   'non-consuming': 'n',
   'mouse': 'm',
