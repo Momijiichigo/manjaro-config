@@ -9,6 +9,7 @@
         :class "workspace-dot ${entry == current_workspace ? 'active' : ''}"
         :onclick 
           "hyprctl dispatch workspace ${entry}"
+        "${meta_pressed ? entry : " "}"
       )
     )
   )

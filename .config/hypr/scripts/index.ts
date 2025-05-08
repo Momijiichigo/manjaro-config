@@ -95,36 +95,39 @@ function registerListeners() {
   addS2Listener("monitoraddedv2", async (dispId, dispName) => {
     monitorNameMap.set(dispName, Number(dispId));
 
-    const screenInfos: ScreenInfo[] = await $`hyprctl monitors all -j`
-      .json()
-      .catch(() => []);
-    const screenInfo = screenInfos.find(s => s.name === dispName);
+    // const screenInfos: ScreenInfo[] = await $`hyprctl monitors all -j`
+    //   .json()
+    //   .catch(() => []);
+    // const screenInfo = screenInfos.find(s => s.name === dispName);
+    //
+    // let screenWidth = 0;
+    // if (screenInfo && !DISPLAYS_EWW_BLACKLIST.includes(screenInfo.model)) {
+    //   /*
+    //     # ------------ Workaround --------------
+    //     Currently (Eww 0.5.0) the dimension of 
+    //     the widget on another monitors are not correct
+    //     (the dimension of the first monitor is used for all monitors)
+    //     Below is a workaround to fix the issue
+    //   */
+    //   const {width, scale} = screenInfo;
+    //   screenWidth = width / scale | 0;
+    //
+    //   // End of the workaround ----------
+    //
+    //
+    await Promise.all([
+      $`eww open-many bar:bar_${dispName} \
+          --arg bar_${dispName}:screen=${dispId}`
+        .nothrow()
+        .text(),
+      $`eww open-many wallpaper_clock:wallpaper_clock_${dispName} \
+          --arg wallpaper_clock_${dispName}:screen=${dispId}`
+        .nothrow()
+        .text(),
+      setEwwVarWspaces()
+    ])
 
-    let screenWidth = 0;
-    if (screenInfo && !DISPLAYS_EWW_BLACKLIST.includes(screenInfo.model)) {
-      /*
-        # ------------ Workaround --------------
-        Currently (Eww 0.5.0) the dimension of 
-        the widget on another monitors are not correct
-        (the dimension of the first monitor is used for all monitors)
-        Below is a workaround to fix the issue
-      */
-      const {width, scale} = screenInfo;
-      screenWidth = width / scale | 0;
-      
-      // End of the workaround ----------
-
-
-      await Promise.all([
-        $`eww open-many bar:bar_${dispName} \
-            --arg bar_${dispName}:screen=${dispId} \
-            --arg bar_${dispName}:width=${screenWidth}`
-          .nothrow()
-          .text(),
-        setEwwVarWspaces()
-      ])
-
-    }
+    // }
 
   })
 

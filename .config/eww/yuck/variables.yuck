@@ -28,6 +28,8 @@
 (defvar NOTIFICATION_ICON "󰂚")
 (defvar NOTIFICATION_ICON_COLOR "#a1bdce")
 
+(defvar meta_pressed false)
+
 
 (defvar battery_icons 
   `["󰂎", "󰁺", "󰁼", "󰁽", "󰁾", "󰁿", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]`

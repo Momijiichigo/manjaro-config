@@ -20,17 +20,20 @@ fi
 screen_counter=0
 for monitor in "${monitor_array[@]}"
 do
-  echo "running: eww open-many bar:bar_$monitor \
-    --arg bar_$monitor:screen=$screen_counter"
+  # echo "running: eww open-many bar:bar_$monitor \
+  #   --arg bar_$monitor:screen=$screen_counter"
+  #
   eww open-many bar:bar_$monitor \
-    --arg bar_$monitor:screen=$screen_counter \
-    --arg bar_$monitor:width=
+    --arg bar_$monitor:screen=$screen_counter
+
+  eww open-many wallpaper_clock:wallpaper_clock_$monitor \
+    --arg wallpaper_clock_$monitor:screen=$screen_counter
 
 
   screen_counter=$((screen_counter+1))
 done
 
-eww open wallpaper_clock --screen 0 
+# eww open wallpaper_clock --screen 0 
 
 # Run the main loop of wifi status listener
 nohup bun run $HOME/.config/eww/scripts/wifi/index.ts main > /dev/null &
