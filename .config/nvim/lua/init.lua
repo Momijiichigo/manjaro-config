@@ -449,6 +449,7 @@ require("lazy").setup({
     "akinsho/toggleterm.nvim",
     opts = {
       open_mapping = [[<c-\>]],
+      shell = "fish"
     },
     enabled = true,
     -- tag = '*'
