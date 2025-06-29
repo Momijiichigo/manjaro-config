@@ -150,8 +150,9 @@ function transpileHotkeys(input: string): string[] {
     const keys = binding.keys.join(' ');
     const flags = binding.flags.join('');
     if (binding.command.startsWith('hyprctl dispatch')) {
-      const [, dispatcher, args] = binding.command.match(/hyprctl dispatch ([\w:]+)( .*)?/) || [];
-      return `bind${flags} = ${modKeys}, ${keys}, ${dispatcher}, ${args ?? ''}`;
+      let [, dispatcher, args] = binding.command.match(/hyprctl dispatch ([\w:]+)( .*)?/) || [];
+      args = args ? `, ${args}` : '';
+      return `bind${flags} = ${modKeys}, ${keys}, ${dispatcher}${args}`;
     } else {
       return `bind${flags} = ${modKeys}, ${keys}, exec, ${binding.command}`;
     }
