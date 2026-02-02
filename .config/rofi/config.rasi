@@ -1,1 +1,5 @@
+//@theme "/usr/share/rofi/themes/lb.rasi"
+//@theme "/home/daichi/.local/share/rofi/themes/DarkBlue.rasi"
+//@theme "/usr/share/rofi/themes/DarkBlue.rasi"
+//@theme "/home/daichi/.local/share/rofi/themes/DarkBlue.rasi"
 @theme "DarkBlue.rasi"

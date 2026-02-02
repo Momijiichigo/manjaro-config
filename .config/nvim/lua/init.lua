@@ -449,7 +449,6 @@ require("lazy").setup({
     "akinsho/toggleterm.nvim",
     opts = {
       open_mapping = [[<c-\>]],
-      shell = "fish"
     },
     enabled = true,
     -- tag = '*'
@@ -457,6 +456,11 @@ require("lazy").setup({
 
   -- Copilot
   "github/copilot.vim",
+  -- {
+  --   opts = {
+  --     enable = false,
+  --   }
+  -- },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     dependencies = {
@@ -466,12 +470,11 @@ require("lazy").setup({
     build = "make tiktoken", -- Only on MacOS or Linux
     opts = {
       -- See Configuration section for options
-      model = 'claude-3.5-sonnet',
+      model = 'gemini-2.5-pro',
       window = {
         width = 0.2
       },
-
-    },
+    }
     -- See Commands section for default commands if you want to lazy load on them
   },
 
@@ -479,6 +482,7 @@ require("lazy").setup({
 
   -- liquid simulation
   'eandrju/cellular-automaton.nvim',
+  { 'glacambre/firenvim', build = ":call firenvim#install(0)" },
 
 
 

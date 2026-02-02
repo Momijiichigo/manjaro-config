@@ -149,6 +149,10 @@ function transpileHotkeys(input: string): string[] {
     const modKeys = binding.modKeys.join(' ');
     const keys = binding.keys.join(' ');
     const flags = binding.flags.join('');
+    // modify to absolute path if command includes relative paths
+    binding.command = binding.command.replace(/\.\.?\/[^\s]*/g, (match) => {
+      return Bun.resolveSync(match, import.meta.dir);
+    });
     if (binding.command.startsWith('hyprctl dispatch')) {
       let [, dispatcher, args] = binding.command.match(/hyprctl dispatch ([\w:]+)( .*)?/) || [];
       args = args ? `, ${args}` : '';
