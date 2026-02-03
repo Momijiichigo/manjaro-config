@@ -71,7 +71,6 @@ else
       \'coc-deno',
       \'coc-css',
       \'coc-pyright',
-      \'@yaegassy/coc-tailwindcss3',
   \]
 
   :lua require('init')

@@ -30,39 +30,6 @@ require("lazy").setup({
   { "folke/neoconf.nvim", cmd = "Neoconf" },
   "folke/neodev.nvim",
 
-  -- LSP / language features
-  -- -- requires tinymist
-  -- {
-  --   "williamboman/mason.nvim",
-  --   opts = {
-  --     ensure_installed = {
-  --       "tinymist",
-  --     },
-  --   },
-  -- },
-  -- -- add tinymist to lspconfig
-  -- {
-  --   "neovim/nvim-lspconfig",
-  --   dependencies = {
-  --     "mason.nvim",
-  --     "williamboman/mason-lspconfig.nvim",
-  --   },
-  --   ---@class PluginLspOpts
-  --   opts = {
-  --     ---@type lspconfig.options
-  --     servers = {
-  --       tinymist = {
-  --         --- todo: these configuration from lspconfig maybe broken
-  --         single_file_support = true,
-  --         root_dir = function()
-  --           return vim.fn.getcwd()
-  --         end,
-  --         --- See [Tinymist Server Configuration](https://github.com/Myriad-Dreamin/tinymist/blob/main/Configuration.md) for references.
-  --         settings = {}
-  --       },
-  --     },
-  --   },
-  -- },
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdateSync",
@@ -177,33 +144,33 @@ require("lazy").setup({
 
     end,
   },
-  {
-    'Julian/lean.nvim',
-    event = { 'BufReadPre *.lean', 'BufNewFile *.lean' },
-    dependencies = {
-      'neovim/nvim-lspconfig',
-      'nvim-lua/plenary.nvim',
-      -- you also will likely want nvim-cmp or some completion engine
-    },
-    -- see details below for full configuration options
-    opts = {
-      lsp = {
-        on_attach = on_attach,
-      },
-      mappings = true,
-    }
-  },
-  {
-    'chomosuke/typst-preview.nvim',
-    ft = 'typst',
-    version = '1.*',
-    opts = {
-        dependencies_bin = {
-          ['tinymist'] = '/usr/bin/tinymist',
-          ['websocat'] = nil
-        },
-    }, -- lazy.nvim will implicitly calls `setup {}`
-  },
+  -- {
+  --   'Julian/lean.nvim',
+  --   event = { 'BufReadPre *.lean', 'BufNewFile *.lean' },
+  --   dependencies = {
+  --     'neovim/nvim-lspconfig',
+  --     'nvim-lua/plenary.nvim',
+  --     -- you also will likely want nvim-cmp or some completion engine
+  --   },
+  --   -- see details below for full configuration options
+  --   opts = {
+  --     lsp = {
+  --       on_attach = on_attach,
+  --     },
+  --     mappings = true,
+  --   }
+  -- },
+  -- {
+  --   'chomosuke/typst-preview.nvim',
+  --   ft = 'typst',
+  --   version = '1.*',
+  --   opts = {
+  --       dependencies_bin = {
+  --         ['tinymist'] = '/usr/bin/tinymist',
+  --         ['websocat'] = nil
+  --       },
+  --   }, -- lazy.nvim will implicitly calls `setup {}`
+  -- },
   {
     "waycrate/swhkd-vim",
     ft = "swhkd",
@@ -366,43 +333,12 @@ require("lazy").setup({
   --     window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
   --   }
   -- },
-  -- -- Jupyter Notebooks
-  -- {
-  --   'goerz/jupytext.nvim',
-  --   version = '0.2.0',
-  --   event = { 'BufReadPre *.ipynb', 'BufNewFile *.ipynb' },
-  --   opts = {},  -- see Options
-  -- },
-  -- {
-  --   "benlubas/molten-nvim",
-  --   version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
-  --   dependencies = { "3rd/image.nvim" },
-  --   build = ":UpdateRemotePlugins",
-  --   event = { 'BufReadPre *.ipynb', 'BufNewFile *.ipynb' },
-  --   init = function()
-  --       -- these are examples, not defaults. Please see the readme
-  --       vim.g.molten_image_provider = "image.nvim"
-  --       vim.g.molten_output_win_max_height = 20
-  --   end,
-  -- },
 
-
-  -- for Svelte
   {
     "othree/html5.vim",
     ft = {
       "svelte",
       "html",
-    },
-  },
-  -- "pangloss/vim-javascript",
-  {
-    "evanleck/vim-svelte",
-    ft = "svelte",
-    branch = "main",
-    dependencies = {
-      "othree/html5.vim",
-      "pangloss/vim-javascript",
     },
   },
   -- file explorer
@@ -455,28 +391,23 @@ require("lazy").setup({
   },
 
   -- Copilot
-  "github/copilot.vim",
+  -- "github/copilot.vim",
   -- {
+  --   "CopilotC-Nvim/CopilotChat.nvim",
+  --   dependencies = {
+  --     { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
+  --     { "nvim-lua/plenary.nvim" }, -- for curl, log and async functions
+  --   },
+  --   build = "make tiktoken", -- Only on MacOS or Linux
   --   opts = {
-  --     enable = false,
+  --     -- See Configuration section for options
+  --     model = 'gemini-2.5-pro',
+  --     window = {
+  --       width = 0.2
+  --     },
   --   }
+  --   -- See Commands section for default commands if you want to lazy load on them
   -- },
-  {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    dependencies = {
-      { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
-      { "nvim-lua/plenary.nvim" }, -- for curl, log and async functions
-    },
-    build = "make tiktoken", -- Only on MacOS or Linux
-    opts = {
-      -- See Configuration section for options
-      model = 'gemini-2.5-pro',
-      window = {
-        width = 0.2
-      },
-    }
-    -- See Commands section for default commands if you want to lazy load on them
-  },
 
   --- For fun
 
