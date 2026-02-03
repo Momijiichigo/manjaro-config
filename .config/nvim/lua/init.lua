@@ -413,7 +413,6 @@ require("lazy").setup({
 
   -- liquid simulation
   'eandrju/cellular-automaton.nvim',
-  { 'glacambre/firenvim', build = ":call firenvim#install(0)" },
 
 
 
