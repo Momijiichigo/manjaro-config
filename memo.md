@@ -76,12 +76,13 @@ Update the LSPs by `:CocUpdate`
 
 #### KMSCON
 
-`~/.config/kmscon/kmscon.conf`:
+`/etc/kmscon/kmscon.conf`:
 
 ```
 font-name=FiraCode Nerd Font, DejaVu Sans Mono, Source Han Sans JP
 font-size=18
 ```
+
 ## Desktop / Graphics
 
 ### Hyprland
