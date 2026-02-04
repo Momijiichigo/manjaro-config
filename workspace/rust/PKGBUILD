@@ -1,7 +1,7 @@
 
 pkgname=my-rust
-pkgver=1.67.1
-pkgrel=5
+pkgver=1.93.0
+pkgrel=1
 epoch=1
 arch=('x86_64')
 license=('MIT')
