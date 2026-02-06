@@ -25,7 +25,7 @@
   :exclusive true
   (box
     :class "bar_class"
-    :style "border-radius: ${is_one_window_wspace ? "0px" : "8px"}"
+    ; :style "border-radius: ${is_one_window_wspace ? "0px" : "8px"}"
     :orientation "h"
     (left :screen screen)
     (center)
