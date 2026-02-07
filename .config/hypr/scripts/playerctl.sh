@@ -1,14 +1,5 @@
-# usage
-# playerctl.sh {previous, next, play-pause}
-# -> runs:
-# swayosd-client --playerctl={previous, next, play-pause} --player=$(eww get current_music_player)
-# playerctl.sh position 5+
-# -> runs:
-# playerctl position 5+ --player=$(eww get current_music_player) && swayosd-client --custom-message="+5 seconds"
-# playerctl.sh toggle-loop
-# -> toggles through "None", "Track", or "Playlist" by checking current loop status with `playerctl loop` and setting the next one with `playerctl loop {None, Track, Playlist}`, and displays an osd message with swayosd-client
+#!/bin/sh
 
-#!/bin/bash
 PLAYER=$(eww get current_music_player)
 COMMAND=$1
 
