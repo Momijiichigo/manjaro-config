@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/sh
 
 PLAYER=$(eww get current_music_player)
 COMMAND=$1
