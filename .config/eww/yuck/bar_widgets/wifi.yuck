@@ -3,7 +3,7 @@
   (eventbox
     :onhover "eww update wifi_rev=true"
     :onhoverlost "eww update wifi_rev=false"
-    :onclick "alacritty --class float --command nmtui &"
+    :onclick "alacritty --class nmtui --command nmtui &"
     (label
       :class "icon wifi"
       :style "color: ${WLAN_ICON_COLOR};" 

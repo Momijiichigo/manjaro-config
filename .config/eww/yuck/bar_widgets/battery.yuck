@@ -4,7 +4,7 @@
     :vexpand "false"
     :hexpand "false"
     :tooltip "${EWW_BATTERY["BAT0"].status}"
-    :style "color: ${EWW_BATTERY["BAT0"].capacity < 20 ? "#fc8665" : "#dae6cf"};"
+    :style "color: ${round(EWW_BATTERY["BAT0"].capacity / 0.79, 0) < 20 ? "#fc8665" : "#dae6cf"};"
     (label 
       :class "iconbat"
       :show-truncated false
@@ -12,15 +12,15 @@
       :text {
         EWW_BATTERY["BAT0"].status == "Charging"
           ? battery_icons_charging
-            ?.[round(EWW_BATTERY["BAT0"].capacity / 10, 0)]
+            ?.[round(round(EWW_BATTERY["BAT0"].capacity / 0.79, 0) / 10, 0)]
             ?: battery_icons_charging[10]
           : battery_icons
-            ?.[round(EWW_BATTERY["BAT0"].capacity / 10, 0)]
+            ?.[round(round(EWW_BATTERY["BAT0"].capacity / 0.79, 0) / 10, 0)]
             ?: battery_icons[10]
       }
     )
     (label
-      :text "${EWW_BATTERY["BAT0"].capacity}%"
+      :text "${round(EWW_BATTERY["BAT0"].capacity / 0.79, 0)}%"
     )
   )
 )
