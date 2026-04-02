@@ -144,36 +144,32 @@ require("lazy").setup({
 
     end,
   },
-  -- {
-  --   'Julian/lean.nvim',
-  --   event = { 'BufReadPre *.lean', 'BufNewFile *.lean' },
-  --   dependencies = {
-  --     'neovim/nvim-lspconfig',
-  --     'nvim-lua/plenary.nvim',
-  --     -- you also will likely want nvim-cmp or some completion engine
-  --   },
-  --   -- see details below for full configuration options
-  --   opts = {
-  --     lsp = {
-  --       on_attach = on_attach,
-  --     },
-  --     mappings = true,
-  --   }
-  -- },
-  -- {
-  --   'chomosuke/typst-preview.nvim',
-  --   ft = 'typst',
-  --   version = '1.*',
-  --   opts = {
-  --       dependencies_bin = {
-  --         ['tinymist'] = '/usr/bin/tinymist',
-  --         ['websocat'] = nil
-  --       },
-  --   }, -- lazy.nvim will implicitly calls `setup {}`
-  -- },
   {
-    "waycrate/swhkd-vim",
-    ft = "swhkd",
+    'Julian/lean.nvim',
+    event = { 'BufReadPre *.lean', 'BufNewFile *.lean' },
+    dependencies = {
+      'neovim/nvim-lspconfig',
+      'nvim-lua/plenary.nvim',
+      -- you also will likely want nvim-cmp or some completion engine
+    },
+    -- see details below for full configuration options
+    opts = {
+      lsp = {
+        on_attach = on_attach,
+      },
+      mappings = true,
+    }
+  },
+  {
+    'chomosuke/typst-preview.nvim',
+    ft = 'typst',
+    version = '1.*',
+    opts = {
+        dependencies_bin = {
+          ['tinymist'] = '/usr/bin/tinymist',
+          ['websocat'] = nil
+        },
+    }, -- lazy.nvim will implicitly calls `setup {}`
   },
   {
     'elkowar/yuck.vim',
@@ -333,7 +329,6 @@ require("lazy").setup({
   --     window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
   --   }
   -- },
-
   {
     "othree/html5.vim",
     ft = {
@@ -408,11 +403,39 @@ require("lazy").setup({
   --   }
   --   -- See Commands section for default commands if you want to lazy load on them
   -- },
-
+  -- Claude Code
+  {
+    "coder/claudecode.nvim",
+    dependencies = { "folke/snacks.nvim" },
+    opts = {
+      terminal_cmd = "~/.local/bin/claude", -- Use output from 'which claude'
+    },
+    config = true,
+    keys = {
+      { "<leader>c", nil, desc = "AI/Claude Code" },
+      { "<leader>cc", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+      { "<leader>cf", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
+      { "<leader>cr", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
+      { "<leader>cC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
+      { "<leader>cm", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
+      { "<leader>cb", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
+      { "<leader>cs", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
+      {
+        "<leader>cs",
+        "<cmd>ClaudeCodeTreeAdd<cr>",
+        desc = "Add file",
+        ft = { "NvimTree", "neo-tree", "oil", "minifiles", "netrw" },
+      },
+      -- Diff management
+      -- { "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
+      -- { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
+    },
+  },
   --- For fun
 
   -- liquid simulation
   'eandrju/cellular-automaton.nvim',
+  { 'glacambre/firenvim', build = ":call firenvim#install(0)" },
 
 
 
