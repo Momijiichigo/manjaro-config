@@ -32,6 +32,8 @@ require("lazy").setup({
 
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
+    lazy = false,
     build = ":TSUpdateSync",
     config = function()
       -- Treesitter: wgsl
@@ -405,11 +407,14 @@ require("lazy").setup({
   -- },
   -- Claude Code
   {
-    "coder/claudecode.nvim",
+    -- "coder/claudecode.nvim",
+    "Momijiichigo/claudecode.nvim",
     dependencies = { "folke/snacks.nvim" },
     opts = {
       terminal_cmd = "~/.local/bin/claude", -- Use output from 'which claude'
+      coc_mcp = true
     },
+    build = ":ClaudeCodeInit",
     config = true,
     keys = {
       { "<leader>c", nil, desc = "AI/Claude Code" },
@@ -438,6 +443,22 @@ require("lazy").setup({
   { 'glacambre/firenvim', build = ":call firenvim#install(0)" },
 
 
+  {
+    "Momijiichigo/coc-nvim-mcp",
+    build = ":CocMcpUpdate",
+    opts = {
+
+    },
+  },
+  {
+    "Momijiichigo/gemini-nvim",
+    dependencies = { "Momijiichigo/coc-nvim-mcp" },
+    build = ":GeminiInit",
+    opts = {
+      split_width = 0.3,
+      coc_mcp = true
+    }
+  }
 
 })
 -- venn.nvim: enable or disable keymappings

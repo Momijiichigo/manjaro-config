@@ -7,6 +7,7 @@
   "Lua.workspace.library": [
     "/usr/share/nvim/runtime/lua"
   ],
+  "Lua.workspace.checkThirdParty": false,
   "inlayHint.enable": true,
   "workspace.rootPatterns": [
     ".git",
@@ -77,6 +78,11 @@
         "tinymist.semanticTokens": "enable",
         "semanticTokens": "enable"
       }
+    },
+    "fish-lsp": {
+      "command": "fish-lsp",
+      "filetypes": ["fish"],
+      "args": ["start"]
     }
   }
 }
