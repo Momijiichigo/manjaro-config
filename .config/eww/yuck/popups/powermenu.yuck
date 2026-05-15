@@ -19,11 +19,11 @@
       (powermenu_entry
         :label "Power off"
         :icon "󰐥"
-        :onclick "systemctl poweroff")
+        :onclick "hyprshutdown --post-cmd 'systemctl poweroff'")
       (powermenu_entry
         :label "Reboot"
         :icon "󰜉"
-        :onclick "systemctl reboot")
+        :onclick "hyprshutdown --post-cmd 'systemctl reboot'")
       (powermenu_entry
         :label "Hibernate"
         :icon "󰖔"
@@ -39,7 +39,7 @@
       (powermenu_entry
         :label "Sign out"
         :icon "󰗼"
-        :onclick "hyprctl dispatch exit 0")
+        :onclick "hyprshutdown -t 'Signing out...'")
     )
   )
 )
