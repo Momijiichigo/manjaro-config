@@ -410,6 +410,7 @@ require("lazy").setup({
     -- "coder/claudecode.nvim",
     "Momijiichigo/claudecode.nvim",
     dependencies = { "folke/snacks.nvim" },
+    branch = "feat/mcp-integration",
     opts = {
       terminal_cmd = "~/.local/bin/claude", -- Use output from 'which claude'
       coc_mcp = true

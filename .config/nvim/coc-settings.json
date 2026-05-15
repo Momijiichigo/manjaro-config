@@ -1,13 +1,6 @@
 {
   "tsserver.enable": true,
   "tsserver.log": "verbose",
-  // "tailwindCSS.includeLanguages": {
-  //   "rust": "html"
-  // },
-  "Lua.workspace.library": [
-    "/usr/share/nvim/runtime/lua"
-  ],
-  "Lua.workspace.checkThirdParty": false,
   "inlayHint.enable": true,
   "workspace.rootPatterns": [
     ".git",
@@ -41,10 +34,6 @@
           }
         }
       }
-    },
-    "hyprlang": {
-      "command": "hyprls",
-      "filetypes": ["hyprlang"]
     },
     "wgsl": {
       "command": "wgsl-analyzer",
