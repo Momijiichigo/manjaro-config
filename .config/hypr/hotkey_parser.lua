@@ -37,10 +37,9 @@ local function path_resolve(path)
     local pwd = pwd_raw:gsub("%s+$", "")
 
     if path:find("^%./") then
-        return pwd .. "/" .. path:sub(3)
+        return pwd .. "/.config/hypr/" .. path:sub(3)
     elseif path:find("^%.%./") then
-        local parent = pwd:match("(.*)/")
-        return (parent or pwd) .. "/" .. path:sub(4)
+        return pwd .. "/.config/" .. path:sub(3)
     end
     return path
 end

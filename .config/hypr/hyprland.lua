@@ -2,6 +2,7 @@
 -- Ported from hyprland.conf
 
 local hotkey_parser = require("hotkey_parser")
+require("events")
 
 ------------------
 ---- MONITORS ----
@@ -12,6 +13,13 @@ hl.monitor({
     mode     = "preferred",
     position = "auto-left",
     scale    = "auto",
+})
+
+hl.monitor({
+    output = "desc:HKC OVERSEAS LIMITED 24N1A 0000000000001",
+    mode   = "preferred",
+    position = "auto-left",
+    scale  = "auto",
 })
 
 hl.config({
@@ -28,13 +36,49 @@ hl.on("hyprland.start", function ()
     hl.exec_cmd("swaync")
     hl.exec_cmd("hyprpaper")
     hl.exec_cmd("hypridle")
-    hl.exec_cmd("~/.config/eww/launch_bar")
-    hl.exec_cmd("bun run ~/.config/hypr/scripts/index.ts main")
+    hl.exec_cmd("eww daemon")
+    -- hl.exec_cmd("~/.config/eww/launch_bar")
+    -- hl.exec_cmd("bun run ~/.config/hypr/scripts/index.ts main")
     hl.exec_cmd("fcitx5-remote")
     hl.exec_cmd("swayosd-server")
     hl.exec_cmd("systemctl --user start hyprpolkitagent")
     hl.exec_cmd("copyq")
     hl.exec_cmd("slimbookbattery --minimize")
+
+    -- hl.timer(
+    --     function()
+
+    for _, monitor in ipairs(hl.get_monitors()) do
+    hl.exec_cmd(
+      "eww open-many bar:bar_"
+      .. monitor.name
+      .. " --arg bar_"
+      .. monitor.name
+      .. ":screen="
+      .. monitor.id
+      )
+
+    hl.exec_cmd(
+      "eww open-many wallpaper_clock:wallpaper_clock_"
+      .. monitor.name
+      .. " --arg wallpaper_clock_"
+      .. monitor.name
+      .. ":screen="
+      .. monitor.id
+      )
+    end
+
+    hl.exec_cmd("bun run ~/.config/eww/scripts/wifi/index.ts main")
+    hl.exec_cmd("bun run ~/.config/eww/scripts/swaync/index.ts main")
+    hl.exec_cmd("bun run ~/.config/eww/scripts/music/index.ts main")
+    --     end,
+    --     {
+    --         timeout = 100,
+    --         type = "oneshot"
+    --     }
+    -- )
+
+
 end)
 
 -------------------------------
@@ -174,12 +218,15 @@ hl.window_rule({ name = "float-msedge-app", match = { initial_class = "msedge-_i
 hl.window_rule({
     name = "ueberzug",
     match = { initial_class = ".*ueberzug.*" },
+    content = "photo",
     float = true,
     no_focus = true,
     no_blur = true,
+    no_anim = true,
     opaque = true,
     border_size = 0,
-    rounding = 0
+    rounding = 0,
+    center = false,
 })
 
 hl.window_rule({
@@ -267,6 +314,4 @@ hl.layer_rule({ name = "blur-swaync", match = { namespace = "swaync-control-cent
 ---- KEYBINDINGS ----
 ---------------------
 
-
-hotkey_parser.parse_and_bind("/home/daichi/.config/hypr/hotkeys.conf")
-
+hotkey_parser.parse_and_bind(hotkey_parser.path_resolve("./hotkeys.conf"))

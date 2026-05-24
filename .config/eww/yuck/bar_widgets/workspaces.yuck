@@ -8,7 +8,7 @@
       (button
         :class "workspace-dot ${entry == current_workspace ? 'active' : ''}"
         :onclick 
-          "hyprctl dispatch workspace ${entry}"
+          "hyprctl dispatch 'hl.dsp.focus({ workspace = ${entry} })'"
         "${meta_pressed ? entry : " "}"
       )
     )
