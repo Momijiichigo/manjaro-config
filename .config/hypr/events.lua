@@ -141,3 +141,12 @@ hl.on("window.open",
         set_eww_wspaces()
     end
 )
+
+-- hl.on("window.urgent",
+--     ---@param window HL.Window
+--     function(window)
+--       hl.dsp.focus({ window = window })
+--       hl.exec_cmd("notify-send ".. window.title)
+--
+--     end
+-- )

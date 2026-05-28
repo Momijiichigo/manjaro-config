@@ -132,6 +132,34 @@ function M.move_win(args)
     end
 end
 
+function M.move_win_in_out_group(args)
+    local dir = type(args) == "table" and args.direction or args
+
+    local w = hl.get_active_window()
+    if not w then return end
+
+    -- Handle list if returned
+    if w[1] then w = w[1] end
+
+    if w.group then
+        hl.dispatch(hl.dsp.window.move({ out_of_group = dir }))
+    else
+        hl.dispatch(hl.dsp.window.move({ into_or_create_group = dir }))
+    end
+end
+
+function M.toggle_trackpad_while_typing()
+    local updated_val = not hl.get_config('input.touchpad.disable_while_typing')
+    hl.config({
+        input = {
+            touchpad = {
+                disable_while_typing = updated_val
+            }
+        }
+    })
+    hl.exec_cmd("swayosd-client --custom-message='Trackpad " .. (updated_val and "ON" or "OFF") .. " while key-typing'")
+end
+
 -- Helper to resolve nested table paths like "window.resize" in hl.dsp
 local function resolve_path(root, path)
     if not root or not path then return nil end
