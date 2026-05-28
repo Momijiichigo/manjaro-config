@@ -44,7 +44,8 @@ local function path_resolve(path)
     return path
 end
 
--- Brace expansion logic (handles {a; b; c}, {a, b, c} and {_})
+-- Bracket expansion logic (handles [a; b; c], [a, b, c] and [_])
+-- {} is reserved for Lua table literals in command args
 local function expand_braces(line)
     local results = { line }
     local has_expansion = true
@@ -54,14 +55,14 @@ local function expand_braces(line)
         local new_results = {}
 
         for _, current_line in ipairs(results) do
-            local open_curly = current_line:find("{")
-            local close_curly = current_line:find("}")
+            local open_bracket = current_line:find("%[")
+            local close_bracket = current_line:find("%]")
 
-            if open_curly and close_curly and close_curly > open_curly then
+            if open_bracket and close_bracket and close_bracket > open_bracket then
                 has_expansion = true
-                local before = current_line:sub(1, open_curly - 1)
-                local after = current_line:sub(close_curly + 1)
-                local inner = current_line:sub(open_curly + 1, close_curly - 1)
+                local before = current_line:sub(1, open_bracket - 1)
+                local after = current_line:sub(close_bracket + 1)
+                local inner = current_line:sub(open_bracket + 1, close_bracket - 1)
 
                 local parts
                 if inner:find(";") then
@@ -87,9 +88,9 @@ local function expand_braces(line)
     return results
 end
 
--- Handle numeric ranges like {1-9} or mixed like {1-9;0}
+-- Handle numeric ranges like [1-9] or mixed like [1-9;0]
 local function expand_ranges(input)
-    return input:gsub("{(.-)}", function(inner)
+    return input:gsub("%[(.-)%]", function(inner)
         local expanded_parts = {}
         -- Only split by ; for ranges
         for part in inner:gmatch("([^;]+)") do
@@ -103,7 +104,7 @@ local function expand_ranges(input)
                 table.insert(expanded_parts, p)
             end
         end
-        return "{" .. table.concat(expanded_parts, "; ") .. "}"
+        return "[" .. table.concat(expanded_parts, "; ") .. "]"
     end)
 end
 
@@ -171,26 +172,74 @@ local function resolve_path(root, path)
     return current
 end
 
--- Helper to parse "key1=val1, key2=val2" into a table
+-- Split args string by commas, respecting {} nesting
+local function split_args(args_str)
+    local parts = {}
+    local depth = 0
+    local current = ""
+    for i = 1, #args_str do
+        local c = args_str:sub(i, i)
+        if c == "{" then
+            depth = depth + 1
+            current = current .. c
+        elseif c == "}" then
+            depth = depth - 1
+            current = current .. c
+        elseif c == "," and depth == 0 then
+            table.insert(parts, current)
+            current = ""
+        else
+            current = current .. c
+        end
+    end
+    if current ~= "" then table.insert(parts, current) end
+    return parts
+end
+
+local function coerce_value(v)
+    if v == "true" then return true
+    elseif v == "false" then return false
+    elseif tonumber(v) then return tonumber(v)
+    else return v:match("^['\"]?(.-)['\"]?$") end
+end
+
+-- Helper to parse "key1=val1, key2=val2" or "{ key1=val1, key2=val2 }" into a table
 local function parse_args_table(args_str)
     local t = {}
     if not args_str or args_str == "" then return t end
-    for pair in args_str:gmatch("[^,]+") do
+
+    -- Strip outer {} Lua table literal: { ... }
+    local inner = args_str:match("^%s*{(.*)}%s*$")
+    if inner then args_str = inner end
+
+    for _, pair in ipairs(split_args(args_str)) do
         local k, v = pair:match("^%s*([%w_%.]+)%s*=%s*(.-)%s*$")
         if k and v then
-            if v == "true" then v = true
-            elseif v == "false" then v = false
-            elseif tonumber(v) then v = tonumber(v)
-            else v = v:match("^['\"]?(.-)['\"]?$") end
-            t[k] = v
+            -- Value may itself be a Lua table literal {k=v, ...}
+            local tbl_inner = v:match("^{(.*)}$")
+            if tbl_inner then
+                local sub = {}
+                for _, sub_pair in ipairs(split_args(tbl_inner)) do
+                    local sk, sv = sub_pair:match("^%s*([%w_%.]+)%s*=%s*(.-)%s*$")
+                    if sk and sv then sub[sk] = coerce_value(sv) end
+                end
+                t[k] = sub
+            else
+                t[k] = coerce_value(v)
+            end
         else
             local val = trim(pair)
-            if val ~= "" then
-                if val == "true" then val = true
-                elseif val == "false" then val = false
-                elseif tonumber(val) then val = tonumber(val)
-                else val = val:match("^['\"]?(.-)['\"]?$") end
-                table.insert(t, val)
+            -- Positional Lua table literal {k=v, ...}
+            local tbl_inner = val:match("^{(.*)}$")
+            if tbl_inner then
+                local sub = {}
+                for _, sub_pair in ipairs(split_args(tbl_inner)) do
+                    local sk, sv = sub_pair:match("^%s*([%w_%.]+)%s*=%s*(.-)%s*$")
+                    if sk and sv then sub[sk] = coerce_value(sv) end
+                end
+                table.insert(t, sub)
+            elseif val ~= "" then
+                table.insert(t, coerce_value(val))
             end
         end
     end
