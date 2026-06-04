@@ -158,7 +158,7 @@ function M.toggle_trackpad_while_typing()
             }
         }
     })
-    hl.exec_cmd("swayosd-client --custom-message='Trackpad " .. (updated_val and "ON" or "OFF") .. " while key-typing'")
+    hl.exec_cmd("swayosd-client --custom-message='Trackpad " .. (updated_val and "OFF" or "ON") .. " while key-typing'")
 end
 
 -- Helper to resolve nested table paths like "window.resize" in hl.dsp

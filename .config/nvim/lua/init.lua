@@ -1,4 +1,3 @@
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -14,9 +13,9 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = "\\" -- make sure to set `mapleader` before lazy so your mappings are correct
 
-vim.filetype.add({extension = {wgsl = "wgsl"}})
-vim.filetype.add({extension = {typst = "typ"}})
-vim.filetype.add({pattern = {["hypr.*%.conf"] = "hyprlang"}})
+vim.filetype.add({ extension = { wgsl = "wgsl" } })
+vim.filetype.add({ extension = { typst = "typ" } })
+vim.filetype.add({ pattern = { ["hypr.*%.conf"] = "hyprlang" } })
 
 if vim.g.neovide then
   -- Put anything you want to happen only in Neovide here
@@ -34,7 +33,7 @@ require("lazy").setup({
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
     lazy = false,
-    build = ":TSUpdateSync",
+    build = ":TSUpdate",
     config = function()
       -- Treesitter: wgsl
       -- local parser_config = require"nvim-treesitter.parsers".get_parser_configs()
@@ -44,7 +43,7 @@ require("lazy").setup({
       --     files = {"src/parser.c"},
       --   },
       -- }
-      require"nvim-treesitter.configs".setup {
+      require "nvim-treesitter.configs".setup {
         ensure_installed = {
           "rust",
           "toml",
@@ -62,7 +61,6 @@ require("lazy").setup({
           -- enable = true
         },
       }
-
     end
     -- opts = function()
     --   return {
@@ -79,13 +77,13 @@ require("lazy").setup({
     main = "ibl",
     opts = function()
       local highlight = {
-          "RainbowOrange",
-          "RainbowGreen",
-          "RainbowViolet",
-          -- "RainbowRed",
-          -- "RainbowYellow",
-          -- "RainbowCyan",
-          "RainbowBlue",
+        "RainbowOrange",
+        "RainbowGreen",
+        "RainbowViolet",
+        -- "RainbowRed",
+        -- "RainbowYellow",
+        -- "RainbowCyan",
+        "RainbowBlue",
       }
       local hooks = require "ibl.hooks"
       -- create the highlight groups in the highlight setup hook, so they are reset
@@ -106,31 +104,29 @@ require("lazy").setup({
         exclude = {
           filetypes = {
             -- "lua",
-	    -- "vim",
-	    -- "rust",
+            -- "vim",
+            -- "rust",
 
           }
         },
         indent = {
-	  -- highlight = highlight,
-	  char = "▏"
-	  -- char = "┊"
-	},
-	scope = {
-	  highlight = "RainbowBlue",
-	}
+          -- highlight = highlight,
+          char = "▏"
+          -- char = "┊"
+        },
+        scope = {
+          highlight = "RainbowBlue",
+        }
       }
     end,
   },
+  'nvim-mini/mini.move',
+  'nvim-mini/mini.surround',
+  'nvim-mini/mini.icons',
+  'nvim-mini/mini.comment',
   {
-    'echasnovski/mini.nvim',
-    version = false,
+    'nvim-mini/mini.animate',
     init = function()
-      -- require(<name of module>).setup({})
-      require('mini.move').setup()
-      require('mini.surround').setup()
-      require('mini.icons').setup()
-      require('mini.comment').setup()
       if not vim.g.neovide then
         local animate = require('mini.animate')
         animate.setup({
@@ -143,22 +139,23 @@ require("lazy").setup({
           },
         })
       end
-
     end,
+
   },
   {
     'Julian/lean.nvim',
     event = { 'BufReadPre *.lean', 'BufNewFile *.lean' },
+
     dependencies = {
-      'neovim/nvim-lspconfig',
-      'nvim-lua/plenary.nvim',
-      -- you also will likely want nvim-cmp or some completion engine
+      -- optional dependencies:
+
+      -- 'nvim-telescope/telescope.nvim', -- for Lean-specific pickers
+      -- 'andymass/vim-matchup',          -- for enhanced % motion behavior
+      -- 'andrewradev/switch.vim',        -- for switch support
+      -- 'tomtom/tcomment_vim',           -- for commenting
     },
-    -- see details below for full configuration options
-    opts = {
-      lsp = {
-        on_attach = on_attach,
-      },
+
+    opts = { -- see the manual for full configuration options
       mappings = true,
     }
   },
@@ -167,10 +164,10 @@ require("lazy").setup({
     ft = 'typst',
     version = '1.*',
     opts = {
-        dependencies_bin = {
-          ['tinymist'] = '/usr/bin/tinymist',
-          ['websocat'] = nil
-        },
+      dependencies_bin = {
+        ['tinymist'] = '/usr/bin/tinymist',
+        ['websocat'] = nil
+      },
     }, -- lazy.nvim will implicitly calls `setup {}`
   },
   {
@@ -199,31 +196,31 @@ require("lazy").setup({
     dependencies = { 'nvim-lua/plenary.nvim' },
     event = "BufRead Cargo.toml",
     config = function()
-        local crates = require('crates')
-	crates.setup()
-	local opts = { silent = true }
+      local crates = require('crates')
+      crates.setup()
+      local opts = { silent = true }
 
-	vim.keymap.set('n', '<leader>cv', crates.show_versions_popup, opts)
-	vim.keymap.set('n', '<leader>cf', crates.show_features_popup, opts)
-	vim.keymap.set('n', '<leader>cd', crates.show_dependencies_popup, opts)
+      vim.keymap.set('n', '<leader>cv', crates.show_versions_popup, opts)
+      vim.keymap.set('n', '<leader>cf', crates.show_features_popup, opts)
+      vim.keymap.set('n', '<leader>cd', crates.show_dependencies_popup, opts)
 
-	vim.keymap.set('n', '<leader>cu', crates.update_crate, opts)
-	vim.keymap.set('v', '<leader>cu', crates.update_crates, opts)
-	vim.keymap.set('n', '<leader>ca', crates.update_all_crates, opts)
-	vim.keymap.set('n', '<leader>cU', crates.upgrade_crate, opts)
-	vim.keymap.set('v', '<leader>cU', crates.upgrade_crates, opts)
-	vim.keymap.set('n', '<leader>cA', crates.upgrade_all_crates, opts)
+      vim.keymap.set('n', '<leader>cu', crates.update_crate, opts)
+      vim.keymap.set('v', '<leader>cu', crates.update_crates, opts)
+      vim.keymap.set('n', '<leader>ca', crates.update_all_crates, opts)
+      vim.keymap.set('n', '<leader>cU', crates.upgrade_crate, opts)
+      vim.keymap.set('v', '<leader>cU', crates.upgrade_crates, opts)
+      vim.keymap.set('n', '<leader>cA', crates.upgrade_all_crates, opts)
 
-	-- vim.keymap.set('n', '<leader>ct', crates.toggle, opts)
-	-- vim.keymap.set('n', '<leader>cr', crates.reload, opts)
+      -- vim.keymap.set('n', '<leader>ct', crates.toggle, opts)
+      -- vim.keymap.set('n', '<leader>cr', crates.reload, opts)
 
-	-- vim.keymap.set('n', '<leader>ce', crates.expand_plain_crate_to_inline_table, opts)
-	-- vim.keymap.set('n', '<leader>cE', crates.extract_crate_into_table, opts)
+      -- vim.keymap.set('n', '<leader>ce', crates.expand_plain_crate_to_inline_table, opts)
+      -- vim.keymap.set('n', '<leader>cE', crates.extract_crate_into_table, opts)
 
-	vim.keymap.set('n', '<leader>cH', crates.open_homepage, opts)
-	vim.keymap.set('n', '<leader>cR', crates.open_repository, opts)
-	vim.keymap.set('n', '<leader>cD', crates.open_documentation, opts)
-	vim.keymap.set('n', '<leader>cC', crates.open_crates_io, opts)
+      vim.keymap.set('n', '<leader>cH', crates.open_homepage, opts)
+      vim.keymap.set('n', '<leader>cR', crates.open_repository, opts)
+      vim.keymap.set('n', '<leader>cD', crates.open_documentation, opts)
+      vim.keymap.set('n', '<leader>cC', crates.open_crates_io, opts)
     end,
   },
   -- folder explorer
@@ -261,7 +258,7 @@ require("lazy").setup({
       "lambdalisue/fern.vim",
     },
   },
-  -- tasks with Git 
+  -- tasks with Git
   {
     "tpope/vim-fugitive",
   },
@@ -289,14 +286,14 @@ require("lazy").setup({
       vim.api.nvim_set_keymap('n', '<leader>v', ":lua Toggle_venn()<CR>", { noremap = true })
     end
   },
---  {
---    "lervag/vimtex",
---    ft = {
---      -- "markdown",
---      "tex",
---      "latex",
---    },
---  },
+  --  {
+  --    "lervag/vimtex",
+  --    ft = {
+  --      -- "markdown",
+  --      "tex",
+  --      "latex",
+  --    },
+  --  },
   {
     -- Latex features
     "jbyuki/nabla.nvim",
@@ -308,13 +305,13 @@ require("lazy").setup({
     config = function()
       vim.api.nvim_set_keymap(
         'n',
-	'<leader>p',
-	":lua require('nabla').popup()<CR>",
-	{ noremap = true }
+        '<leader>p',
+        ":lua require('nabla').popup()<CR>",
+        { noremap = true }
       )
-      require"nabla".enable_virt({
+      require "nabla".enable_virt({
         autogen = true, -- auto-regenerate ASCII art when exiting insert mode
-	silent = true,     -- silents error messages
+        silent = true,  -- silents error messages
       })
     end
   },
@@ -340,11 +337,13 @@ require("lazy").setup({
   },
   -- file explorer
   {
-    "nvim-telescope/telescope.nvim",
-    branch = '0.1.x',
+    'nvim-telescope/telescope.nvim',
+    version = '*',
     dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
+      'nvim-lua/plenary.nvim',
+      -- optional but recommended
+      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    }
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
@@ -418,14 +417,14 @@ require("lazy").setup({
     build = ":ClaudeCodeInit",
     config = true,
     keys = {
-      { "<leader>c", nil, desc = "AI/Claude Code" },
-      { "<leader>cc", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
-      { "<leader>cf", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
-      { "<leader>cr", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
+      { "<leader>c",  nil,                              desc = "AI/Claude Code" },
+      { "<leader>cc", "<cmd>ClaudeCode<cr>",            desc = "Toggle Claude" },
+      { "<leader>cf", "<cmd>ClaudeCodeFocus<cr>",       desc = "Focus Claude" },
+      { "<leader>cr", "<cmd>ClaudeCode --resume<cr>",   desc = "Resume Claude" },
       { "<leader>cC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
       { "<leader>cm", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
-      { "<leader>cb", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
-      { "<leader>cs", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
+      { "<leader>cb", "<cmd>ClaudeCodeAdd %<cr>",       desc = "Add current buffer" },
+      { "<leader>cs", "<cmd>ClaudeCodeSend<cr>",        mode = "v",                  desc = "Send to Claude" },
       {
         "<leader>cs",
         "<cmd>ClaudeCodeTreeAdd<cr>",
@@ -464,27 +463,27 @@ require("lazy").setup({
 })
 -- venn.nvim: enable or disable keymappings
 function _G.Toggle_venn()
-    local venn_enabled = vim.inspect(vim.b.venn_enabled)
-    if venn_enabled == "nil" then
-        vim.b.venn_enabled = true
-        vim.cmd[[setlocal ve=all]]
-        -- draw a line on HJKL keystokes
-        vim.api.nvim_buf_set_keymap(0, "n", "J", "<C-v>j:VBox<CR>", {noremap = true})
-        vim.api.nvim_buf_set_keymap(0, "n", "K", "<C-v>k:VBox<CR>", {noremap = true})
-        vim.api.nvim_buf_set_keymap(0, "n", "L", "<C-v>l:VBox<CR>", {noremap = true})
-        vim.api.nvim_buf_set_keymap(0, "n", "H", "<C-v>h:VBox<CR>", {noremap = true})
-        -- draw a box by pressing "f" with visual selection
-        vim.api.nvim_buf_set_keymap(0, "v", "f", ":VBox<CR>", {noremap = true})
-    else
-        vim.cmd[[setlocal ve=]]
-        vim.cmd[[mapclear <buffer>]]
-        vim.b.venn_enabled = nil
-    end
+  local venn_enabled = vim.inspect(vim.b.venn_enabled)
+  if venn_enabled == "nil" then
+    vim.b.venn_enabled = true
+    vim.cmd [[setlocal ve=all]]
+    -- draw a line on HJKL keystokes
+    vim.api.nvim_buf_set_keymap(0, "n", "J", "<C-v>j:VBox<CR>", { noremap = true })
+    vim.api.nvim_buf_set_keymap(0, "n", "K", "<C-v>k:VBox<CR>", { noremap = true })
+    vim.api.nvim_buf_set_keymap(0, "n", "L", "<C-v>l:VBox<CR>", { noremap = true })
+    vim.api.nvim_buf_set_keymap(0, "n", "H", "<C-v>h:VBox<CR>", { noremap = true })
+    -- draw a box by pressing "f" with visual selection
+    vim.api.nvim_buf_set_keymap(0, "v", "f", ":VBox<CR>", { noremap = true })
+  else
+    vim.cmd [[setlocal ve=]]
+    vim.cmd [[mapclear <buffer>]]
+    vim.b.venn_enabled = nil
+  end
 end
 
 -- terminal keymaps
 function _G.set_terminal_keymaps()
-  local opts = {buffer = 0}
+  local opts = { buffer = 0 }
   vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
   vim.keymap.set('t', 'jj', [[<C-\><C-n>]], opts)
   vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
@@ -495,4 +494,3 @@ end
 
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
-

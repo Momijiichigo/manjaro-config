@@ -45,39 +45,47 @@ hl.on("hyprland.start", function ()
     hl.exec_cmd("copyq")
     hl.exec_cmd("slimbookbattery --minimize")
 
-    -- hl.timer(
-    --     function()
 
-    for _, monitor in ipairs(hl.get_monitors()) do
-    hl.exec_cmd(
-      "eww open-many bar:bar_"
-      .. monitor.name
-      .. " --arg bar_"
-      .. monitor.name
-      .. ":screen="
-      .. monitor.id
-      )
 
-    hl.exec_cmd(
-      "eww open-many wallpaper_clock:wallpaper_clock_"
-      .. monitor.name
-      .. " --arg wallpaper_clock_"
-      .. monitor.name
-      .. ":screen="
-      .. monitor.id
-      )
-    end
+    hl.timer(
+        function()
+            for _, monitor in ipairs(hl.get_monitors()) do
+                hl.exec_cmd(
+                    "eww open-many bar:bar_"
+                    .. monitor.name
+                    .. " --arg bar_"
+                    .. monitor.name
+                    .. ":screen="
+                    .. monitor.id
+                )
 
-    hl.exec_cmd("bun run ~/.config/eww/scripts/wifi/index.ts main")
-    hl.exec_cmd("bun run ~/.config/eww/scripts/swaync/index.ts main")
-    hl.exec_cmd("bun run ~/.config/eww/scripts/music/index.ts main")
-    --     end,
-    --     {
-    --         timeout = 100,
-    --         type = "oneshot"
-    --     }
-    -- )
+                hl.exec_cmd(
+                    "eww open-many wallpaper_clock:wallpaper_clock_"
+                    .. monitor.name
+                    .. " --arg wallpaper_clock_"
+                    .. monitor.name
+                    .. ":screen="
+                    .. monitor.id
+                )
+            end
+            hl.exec_cmd("bun run ~/.config/eww/scripts/wifi/index.ts main")
+            hl.exec_cmd("bun run ~/.config/eww/scripts/music/index.ts main")
+        end,
+        {
+            timeout = 100,
+            type = "oneshot"
+        }
+    )
 
+    hl.timer(
+        function()
+            hl.exec_cmd("bun run ~/.config/eww/scripts/swaync/index.ts main")
+        end,
+        {
+            timeout = 5000,
+            type = "oneshot"
+        }
+    )
 
 end)
 
@@ -273,7 +281,7 @@ hl.window_rule({
 
 hl.window_rule({
     name = "thunar-rename",
-    match = { initial_class = "thunar", initial_title = "^Rename .*" },
+    match = { initial_class = "Thunar", initial_title = "^Rename .*" },
     float = true,
     size = "400 100"
 })
