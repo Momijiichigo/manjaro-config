@@ -280,8 +280,15 @@ hl.window_rule({
 })
 
 hl.window_rule({
+    name = "thunar",
+    match = { initial_class = "[Tt]hunar" },
+    float = true,
+    size = "750 600"
+})
+
+hl.window_rule({
     name = "thunar-rename",
-    match = { initial_class = "Thunar", initial_title = "^Rename .*" },
+    match = { initial_class = "[Tt]hunar", initial_title = "^Rename .*" },
     float = true,
     size = "400 100"
 })
