@@ -72,7 +72,7 @@ hl.on("hyprland.start", function ()
             hl.exec_cmd("bun run ~/.config/eww/scripts/music/index.ts main")
         end,
         {
-            timeout = 100,
+            timeout = 300,
             type = "oneshot"
         }
     )
@@ -97,6 +97,8 @@ hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
 hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
 hl.env("GDK_SCALE", "2")
+
+hl.env("AQ_DRM_DEVICES", "/dev/dri/card1:/dev/dri/card0")
 
 -----------------------
 ---- LOOK AND FEEL ----

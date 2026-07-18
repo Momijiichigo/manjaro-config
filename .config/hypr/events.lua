@@ -39,29 +39,37 @@ hl.on(
     end
 
 )
+hl.timer(
+    function()
 
-hl.on(
-    "monitor.added",
-    ---@param monitor HL.Monitor
-    function (monitor)
-        hl.exec_cmd(
-            "eww open-many bar:bar_"
-            .. monitor.name
-            .. " --arg bar_"
-            .. monitor.name
-            .. ":screen="
-            .. monitor.id
-        )
+        hl.on(
+            "monitor.added",
+            ---@param monitor HL.Monitor
+            function (monitor)
+                hl.exec_cmd(
+                    "eww open-many bar:bar_"
+                    .. monitor.name
+                    .. " --arg bar_"
+                    .. monitor.name
+                    .. ":screen="
+                    .. monitor.id
+                )
 
-        hl.exec_cmd(
-            "eww open-many wallpaper_clock:wallpaper_clock_"
-            .. monitor.name
-            .. " --arg wallpaper_clock_"
-            .. monitor.name
-            .. ":screen="
-            .. monitor.id
+                hl.exec_cmd(
+                    "eww open-many wallpaper_clock:wallpaper_clock_"
+                    .. monitor.name
+                    .. " --arg wallpaper_clock_"
+                    .. monitor.name
+                    .. ":screen="
+                    .. monitor.id
+                )
+            end
         )
-    end
+    end,
+    {
+        timeout = 300,
+        type = "oneshot"
+    }
 )
 
 
