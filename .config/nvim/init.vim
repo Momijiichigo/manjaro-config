@@ -108,31 +108,6 @@ else
   " indent width for c style language
   set cindent shiftwidth=2
 
-  " Fern: A file tree explorer -----
-  let g:fern#renderer = "nerdfont"
-  augroup my-glyph-palette
-    autocmd! *
-    autocmd FileType fern call glyph_palette#apply()
-    autocmd FileType fern set nonumber
-    autocmd FileType nerdtree,startify call glyph_palette#apply()
-  augroup END
-  
-  function! s:fern_settings() abort
-    nmap <silent> <buffer> p     <Plug>(fern-action-preview:toggle)
-    nmap <silent> <buffer> <C-p> <Plug>(fern-action-preview:auto:toggle)
-    nmap <silent> <buffer> <C-d> <Plug>(fern-action-preview:scroll:down:half)
-    nmap <silent> <buffer> <C-u> <Plug>(fern-action-preview:scroll:up:half)
-  endfunction
-  
-  augroup fern-settings
-    autocmd!
-    autocmd FileType fern call s:fern_settings()
-  augroup END
-
-  let g:fern#default_hidden=1
-  
-  :Fern . -drawer -wait -stay
-
   " -----------------------
 
 
@@ -253,11 +228,6 @@ else
   " provide custom statusline: lightline.vim, vim-airline.
 " set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-  " Find files using Telescope command-line sugar.
-  nnoremap <leader>ff <cmd>Telescope find_files<cr>
-  nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-  nnoremap <leader>fb <cmd>Telescope buffers<cr>
-  nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 endif
 

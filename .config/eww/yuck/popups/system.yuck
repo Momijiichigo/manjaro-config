@@ -50,7 +50,7 @@
         (box
           :orientation "v"
           :space-evenly "false"
-          :spacing 10
+          :spacing 3
           :hexpand "false"
           :vexpand "false"
           (label
@@ -135,7 +135,7 @@
         (box
           :orientation "v"
           :space-evenly "false"
-          :spacing 10
+          :spacing 5
           ;:hexpand "false"
           ;:vexpand "false"
           (label
@@ -200,14 +200,89 @@
         )
       )
       ;; (sys_popup_separator )
+      (box
+        :class "box"
+        :orientation "h"
+        :space-evenly "false"
+        :spacing 20
+        (box
+          :style {
+            "border-radius: 50%; border: 1.5px solid ${
+                card_power_state_icon_info[
+                  gpu_card_power_state
+                ][0]
+            };"
+          }
+          (label
+            :text { 
+              card_power_state_icon_info[
+                gpu_card_power_state
+              ][1]
+            }
+            ; :class "icon icon_cpu"
+            :style { 
+              "color: ${
+                card_power_state_icon_info[
+                  gpu_card_power_state
+                ][0]
+              }; font-size: 2em;"
+            }
+            :width 75
+            :height 75
+            ; :limit-width 2
+            :show-truncated false
+            :wrap false)
+        )
+        
+        (box
+          :orientation "v"
+          :space-evenly "false"
+          :spacing 10
+          :hexpand "false"
+          :vexpand "false"
+          (label :text "GPU Card"
+            :halign "start"
+            :class "title"
+            :limit-width 9
+            :show-truncated false
+            :wrap false)
+          (label
+            :text gpu_card_power_state
+            :halign "start"
+            :class "text_bat_sub"
+            :limit-width 22
+            :show-truncated false
+            :wrap false)
+        )
+      )
+      ; (box 
+      ;   :class "box"
+      ;   :orientation "h"
+      ;   :space-evenly "false"
+      ;   :spacing 20
+      ;   (label
+      ;     ; :class "title"
+      ;     :text "Nvidia Card\\nPower State")
+      ;   (label
+      ;     ; :class "title"
+      ;     :text NVIDIA_CARD_POWER_STATE)
+      ; )
       (box 
         :class "box"
         :orientation "h"
         :space-evenly "false"
         :spacing 20
-        (label
-          :class "title"
-          :text "Storage")
+        (box
+          :orientation "v"
+
+          (label
+            :class "title"
+            :text "Storage")
+
+          (label
+            ; :class "title"
+            :text "${round(EWW_DISK["/"].used_perc, 1)}%")
+        )
         (scale
           :class "storage"
           :value {EWW_DISK["/"].used_perc}

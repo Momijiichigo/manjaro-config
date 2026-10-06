@@ -49,25 +49,25 @@ hl.on("hyprland.start", function ()
 
     hl.timer(
         function()
-            for _, monitor in ipairs(hl.get_monitors()) do
-                hl.exec_cmd(
-                    "eww open-many bar:bar_"
-                    .. monitor.name
-                    .. " --arg bar_"
-                    .. monitor.name
-                    .. ":screen="
-                    .. monitor.id
-                )
-
-                hl.exec_cmd(
-                    "eww open-many wallpaper_clock:wallpaper_clock_"
-                    .. monitor.name
-                    .. " --arg wallpaper_clock_"
-                    .. monitor.name
-                    .. ":screen="
-                    .. monitor.id
-                )
-            end
+            -- for _, monitor in ipairs(hl.get_monitors()) do
+            --     hl.exec_cmd(
+            --         "eww open-many bar:bar_"
+            --         .. monitor.name
+            --         .. " --arg bar_"
+            --         .. monitor.name
+            --         .. ":screen="
+            --         .. monitor.id
+            --     )
+            --
+            --     hl.exec_cmd(
+            --         "eww open-many wallpaper_clock:wallpaper_clock_"
+            --         .. monitor.name
+            --         .. " --arg wallpaper_clock_"
+            --         .. monitor.name
+            --         .. ":screen="
+            --         .. monitor.id
+            --     )
+            -- end
             hl.exec_cmd("bun run ~/.config/eww/scripts/wifi/index.ts main")
             hl.exec_cmd("bun run ~/.config/eww/scripts/music/index.ts main")
         end,
@@ -222,6 +222,7 @@ hl.window_rule({
 })
 
 hl.window_rule({ name = "float-nm", match = { initial_class = "nm-connection-editor" }, float = true })
+hl.window_rule({ name = "float-hazkey-conf", match = { initial_class = "hazkey-settings" }, float = true })
 hl.window_rule({ name = "float-share-picker", match = { initial_class = "hyprland-share-picker" }, float = true })
 hl.window_rule({ name = "float-msedge-app", match = { initial_class = "msedge-_idgadaccgipmpannjkmfddolnnhmeklj-Default" }, float = true })
 
@@ -241,7 +242,7 @@ hl.window_rule({
 
 hl.window_rule({
     name = "float-utils",
-    match = { initial_class = "^float$" },
+    match = { initial_class = "^float.*" },
     float = true,
     size = "900 300",
     center = true
@@ -290,7 +291,7 @@ hl.window_rule({
 
 hl.window_rule({
     name = "thunar-rename",
-    match = { initial_class = "[Tt]hunar", initial_title = "^Rename .*" },
+    match = { initial_class = "[Tt]hunar", initial_title = "^(Rename|Create New Folder) .*" },
     float = true,
     size = "400 100"
 })

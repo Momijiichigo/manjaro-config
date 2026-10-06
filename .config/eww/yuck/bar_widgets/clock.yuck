@@ -6,11 +6,11 @@
       :class "module clock_module"
       :space-evenly "false"
       :orientation "h"
-      :tooltip {formattime(EWW_TIME, "%b %d, %Y")}
+      :tooltip {formattime(EWW_TIME, "%d %b, %Y")}
       ; :spacing "3"
       (label
         :class "clock_date"
-        :text {formattime(EWW_TIME, "%m/%d")}
+        :text {formattime(EWW_TIME, "%d/%m")}
       )
       (label
         :text {formattime(EWW_TIME, "%a")}

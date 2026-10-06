@@ -56,6 +56,20 @@
 (defpoll ESSID_WLAN :interval "5m" "bun run scripts/wifi/index.ts essid")
 (defpoll WLAN_ICON :interval "5m" "bun run scripts/wifi/index.ts icon")
 
+(defvar card_power_state_icon_info
+  `{
+    "D0": ["#eda8a1", ""],
+    "D1": ["#edd7a1", "󱐋"],
+    "D2": ["#e3eda1", "󱐋"],
+    "D3hot": ["#a0ada9", "󰞍"],
+    "D3cold": ["gray", "󰼮"]
+  }`
+)
+(defpoll gpu_card_power_state
+  :interval "5m"
+  ; :initial "D0"
+  "cat /sys/class/drm/card0/device/power_state"
+)
 
 (deflisten music_current_pos
   :initial 0

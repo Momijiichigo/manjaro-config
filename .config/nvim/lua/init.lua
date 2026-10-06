@@ -27,45 +27,40 @@ require("lazy").setup({
   lazy = true,
   "folke/which-key.nvim",
   { "folke/neoconf.nvim", cmd = "Neoconf" },
-  "folke/neodev.nvim",
-
+  {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    opts = {
+      library = {
+        { path = "snacks.nvim", words = { "Snacks", "snacks" } },
+      },
+    },
+  },
   {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
     lazy = false,
     build = ":TSUpdate",
-    config = function()
-      -- Treesitter: wgsl
-      -- local parser_config = require"nvim-treesitter.parsers".get_parser_configs()
-      -- parser_config.wgsl = {
-      --   install_info = {
-      --     url = "https://github.com/szebniok/tree-sitter-wgsl",
-      --     files = {"src/parser.c"},
-      --   },
-      -- }
-      require "nvim-treesitter.configs".setup {
-        ensure_installed = {
-          "rust",
-          "toml",
-          "javascript",
-          "typescript",
-          "vim",
-          "lua",
-          "python",
-          "fish",
-          "zig",
-          "julia",
-          "wgsl",
-        },
-        highlight = {
-          -- enable = true
-        },
-      }
-    end
-    -- opts = function()
-    --   return {
+    -- config = function()
+    --   require "nvim-treesitter.configs".setup {
+    --     ensure_installed = {
+    --       "rust",
+    --       "toml",
+    --       "javascript",
+    --       "typescript",
+    --       "vim",
+    --       "lua",
+    --       "python",
+    --       "fish",
+    --       "zig",
+    --       "julia",
+    --       "wgsl",
+    --     },
+    --     highlight = {
+    --       -- enable = true
+    --     },
     --   }
-    -- end,
+    -- end
   },
   {
     "neoclide/coc.nvim",
@@ -73,56 +68,38 @@ require("lazy").setup({
     build = ":CocUpdate",
   },
   {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
-    opts = function()
-      local highlight = {
-        "RainbowOrange",
-        "RainbowGreen",
-        "RainbowViolet",
-        -- "RainbowRed",
-        -- "RainbowYellow",
-        -- "RainbowCyan",
-        "RainbowBlue",
-      }
-      local hooks = require "ibl.hooks"
-      -- create the highlight groups in the highlight setup hook, so they are reset
-      -- every time the colorscheme changes
-      hooks.register(
-        hooks.type.HIGHLIGHT_SETUP,
-        function()
-          vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#ea6962" })
-          vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#d8a657" })
-          vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#7daea3" })
-          vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#d8985d" })
-          vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#a9b665" })
-          vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#c693a1" })
-          vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#89b482" })
-        end
-      )
-      return {
-        exclude = {
-          filetypes = {
-            -- "lua",
-            -- "vim",
-            -- "rust",
+    'nvim-mini/mini.move',
+    version = '*',
+    opts = {
+      mappings = {
+        -- Move visual selection in Visual mode. Defaults are Alt (Meta) + hjkl.
+        left = '<M-h>',
+        right = '<M-l>',
+        down = '<M-j>',
+        up = '<M-k>',
 
-          }
-        },
-        indent = {
-          -- highlight = highlight,
-          char = "▏"
-          -- char = "┊"
-        },
-        scope = {
-          highlight = "RainbowBlue",
-        }
-      }
-    end,
+        -- Move current line in Normal mode
+        line_left = '<M-h>',
+        line_right = '<M-l>',
+        line_down = '<M-j>',
+        line_up = '<M-k>',
+      },
+
+      -- Options which control moving behavior
+      options = {
+        -- Automatically reindent selection during linewise vertical move
+        reindent_linewise = true,
+      },
+    }
   },
-  'nvim-mini/mini.move',
-  'nvim-mini/mini.surround',
-  'nvim-mini/mini.icons',
+  {
+    'nvim-mini/mini.surround',
+    opts = {}
+  },
+  {
+    'nvim-mini/mini.icons',
+    opts = {},
+  },
   'nvim-mini/mini.comment',
   {
     'nvim-mini/mini.animate',
@@ -141,6 +118,244 @@ require("lazy").setup({
       end
     end,
 
+  },
+  {
+    "folke/snacks.nvim",
+    lazy = false,
+    priority = 1000,
+    ---@type snacks.Config
+    opts = {
+      explorer = {
+        enabled = true,
+      },
+      quickfile = {},
+      -- terminal = {
+      --   win = {
+      --     style = "terminal"
+      --   }
+      -- },
+      -- scroll = {},
+      toggle = {},
+      indent = {
+      },
+      input = {
+      },
+      image = {
+      },
+      notifier = {
+      },
+      lazygit = {
+      },
+      picker = {
+        win = {
+          -- input window
+          input = {
+            keys = {
+              -- to close the picker on ESC instead of going to normal mode,
+              -- add the following keymap to your config
+              -- ["<Esc>"] = { "close", mode = { "n", "i" } },
+              ["/"] = "toggle_focus",
+              ["<C-Down>"] = { "history_forward", mode = { "i", "n" } },
+              ["<C-Up>"] = { "history_back", mode = { "i", "n" } },
+              ["<C-c>"] = { "cancel", mode = "i" },
+              ["<C-w>"] = { "<c-s-w>", mode = { "i" }, expr = true, desc = "delete word" },
+              ["<CR>"] = { "confirm", mode = { "n", "i" } },
+              ["<Down>"] = { "list_down", mode = { "i", "n" } },
+              ["<Esc>"] = "cancel",
+              ["<S-CR>"] = { { "pick_win", "jump" }, mode = { "n", "i" } },
+              ["<S-Tab>"] = { "select_and_prev", mode = { "i", "n" } },
+              ["<Tab>"] = { "select_and_next", mode = { "i", "n" } },
+              ["<Up>"] = { "list_up", mode = { "i", "n" } },
+              ["<a-d>"] = { "inspect", mode = { "n", "i" } },
+              ["<a-f>"] = { "toggle_follow", mode = { "i", "n" } },
+              ["<a-h>"] = { "toggle_hidden", mode = { "i", "n" } },
+              ["<a-i>"] = { "toggle_ignored", mode = { "i", "n" } },
+              ["<a-r>"] = { "toggle_regex", mode = { "i", "n" } },
+              ["<a-m>"] = { "toggle_maximize", mode = { "i", "n" } },
+              ["<a-p>"] = { "toggle_preview", mode = { "i", "n" } },
+              ["<a-w>"] = { "cycle_win", mode = { "i", "n" } },
+              ["<c-a>"] = { "select_all", mode = { "n", "i" } },
+              ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
+              -- ["<c-d>"] = { "list_scroll_down", mode = { "i", "n" } },
+              ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
+              ["<c-g>"] = { "toggle_live", mode = { "i", "n" } },
+              ["<c-j>"] = { "list_down", mode = { "i", "n" } },
+              ["<c-k>"] = { "list_up", mode = { "i", "n" } },
+              ["<c-n>"] = { "list_down", mode = { "i", "n" } },
+              ["<c-p>"] = { "list_up", mode = { "i", "n" } },
+              ["<c-q>"] = { "qflist", mode = { "i", "n" } },
+              ["<c-s>"] = { "edit_split", mode = { "i", "n" } },
+              ["<c-t>"] = { "tab", mode = { "n", "i" } },
+              -- ["<c-u>"] = { "list_scroll_up", mode = { "i", "n" } },
+              ["<c-v>"] = { "edit_vsplit", mode = { "i", "n" } },
+              ["<c-r>#"] = { "insert_alt", mode = "i" },
+              ["<c-r>%"] = { "insert_filename", mode = "i" },
+              ["<c-r><c-a>"] = { "insert_cWORD", mode = "i" },
+              ["<c-r><c-f>"] = { "insert_file", mode = "i" },
+              ["<c-r><c-l>"] = { "insert_line", mode = "i" },
+              ["<c-r><c-p>"] = { "insert_file_full", mode = "i" },
+              ["<c-r><c-w>"] = { "insert_cword", mode = "i" },
+              ["<c-w>H"] = "layout_left",
+              ["<c-w>J"] = "layout_bottom",
+              ["<c-w>K"] = "layout_top",
+              ["<c-w>L"] = "layout_right",
+              ["?"] = "toggle_help_input",
+              ["G"] = "list_bottom",
+              ["gg"] = "list_top",
+              ["j"] = "list_down",
+              ["k"] = "list_up",
+              ["q"] = "cancel",
+            },
+            b = {
+              minipairs_disable = true,
+            },
+          },
+          -- result list window
+          list = {
+            keys = {
+              ["/"] = "toggle_focus",
+              ["<2-LeftMouse>"] = "confirm",
+              ["<CR>"] = "confirm",
+              ["<Down>"] = "list_down",
+              ["<Esc>"] = "cancel",
+              ["<S-CR>"] = { { "pick_win", "jump" } },
+              ["<S-Tab>"] = { "select_and_prev", mode = { "n", "x" } },
+              ["<Tab>"] = { "select_and_next", mode = { "n", "x" } },
+              ["<Up>"] = "list_up",
+              ["<a-d>"] = "inspect",
+              ["<a-f>"] = "toggle_follow",
+              ["<a-h>"] = "toggle_hidden",
+              ["<a-i>"] = "toggle_ignored",
+              ["<a-m>"] = "toggle_maximize",
+              ["<a-p>"] = "toggle_preview",
+              ["<a-w>"] = "cycle_win",
+              ["<c-a>"] = "select_all",
+              ["<c-b>"] = "preview_scroll_up",
+              ["<c-d>"] = "list_scroll_down",
+              ["<c-f>"] = "preview_scroll_down",
+              ["<c-j>"] = "list_down",
+              ["<c-k>"] = "list_up",
+              ["<c-n>"] = "list_down",
+              ["<c-p>"] = "list_up",
+              ["<c-q>"] = "qflist",
+              ["<c-g>"] = "print_path",
+              ["<c-s>"] = "edit_split",
+              ["<c-t>"] = "tab",
+              ["<c-u>"] = "list_scroll_up",
+              ["<c-v>"] = "edit_vsplit",
+              ["<c-w>H"] = "layout_left",
+              ["<c-w>J"] = "layout_bottom",
+              ["<c-w>K"] = "layout_top",
+              ["<c-w>L"] = "layout_right",
+              ["?"] = "toggle_help_list",
+              ["G"] = "list_bottom",
+              ["gg"] = "list_top",
+              ["i"] = "focus_input",
+              ["j"] = "list_down",
+              ["k"] = "list_up",
+              ["q"] = "cancel",
+              ["zb"] = "list_scroll_bottom",
+              ["zt"] = "list_scroll_top",
+              ["zz"] = "list_scroll_center",
+            },
+            wo = {
+              conceallevel = 2,
+              concealcursor = "nvc",
+            },
+          },
+          -- preview window
+          preview = {
+            keys = {
+              ["<Esc>"] = "cancel",
+              ["q"] = "cancel",
+              ["i"] = "focus_input",
+              ["<a-w>"] = "cycle_win",
+            },
+          },
+        },
+      }
+    },
+    keys = {
+      -- Top Pickers & Explorer
+      { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
+      { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
+      { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
+      { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
+      { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
+      { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
+      -- find
+      { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
+      { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
+      { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
+      { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
+      { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
+      { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
+      -- git
+      { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
+      { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
+      { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
+      { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
+      { "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
+      { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
+      { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
+      -- gh
+      { "<leader>gi", function() Snacks.picker.gh_issue() end, desc = "GitHub Issues (open)" },
+      { "<leader>gI", function() Snacks.picker.gh_issue({ state = "all" }) end, desc = "GitHub Issues (all)" },
+      { "<leader>gp", function() Snacks.picker.gh_pr() end, desc = "GitHub Pull Requests (open)" },
+      { "<leader>gP", function() Snacks.picker.gh_pr({ state = "all" }) end, desc = "GitHub Pull Requests (all)" },
+      -- Grep
+      { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
+      { "<leader>sB", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
+      { "<leader>sg", function() Snacks.picker.grep() end, desc = "Grep" },
+      { "<leader>sw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
+      -- search
+      { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
+      { '<leader>s/', function() Snacks.picker.search_history() end, desc = "Search History" },
+      { "<leader>sa", function() Snacks.picker.autocmds() end, desc = "Autocmds" },
+      { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
+      { "<leader>sc", function() Snacks.picker.command_history() end, desc = "Command History" },
+      { "<leader>sC", function() Snacks.picker.commands() end, desc = "Commands" },
+      { "<leader>sd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
+      { "<leader>sD", function() Snacks.picker.diagnostics_buffer() end, desc = "Buffer Diagnostics" },
+      { "<leader>sh", function() Snacks.picker.help() end, desc = "Help Pages" },
+      { "<leader>sH", function() Snacks.picker.highlights() end, desc = "Highlights" },
+      { "<leader>si", function() Snacks.picker.icons() end, desc = "Icons" },
+      { "<leader>sj", function() Snacks.picker.jumps() end, desc = "Jumps" },
+      { "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
+      { "<leader>sl", function() Snacks.picker.loclist() end, desc = "Location List" },
+      { "<leader>sm", function() Snacks.picker.marks() end, desc = "Marks" },
+      { "<leader>sM", function() Snacks.picker.man() end, desc = "Man Pages" },
+      { "<leader>sp", function() Snacks.picker.lazy() end, desc = "Search for Plugin Spec" },
+      { "<leader>sq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
+      { "<leader>sR", function() Snacks.picker.resume() end, desc = "Resume" },
+      { "<leader>su", function() Snacks.picker.undo() end, desc = "Undo History" },
+      { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
+      -- -- LSP
+      -- { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
+      -- { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
+      -- { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
+      -- { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
+      -- { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
+      -- { "gai", function() Snacks.picker.lsp_incoming_calls() end, desc = "C[a]lls Incoming" },
+      -- { "gao", function() Snacks.picker.lsp_outgoing_calls() end, desc = "C[a]lls Outgoing" },
+      -- { "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
+      -- { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
+      -- Other
+      { "<leader>z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
+      { "<leader>Z",  function() Snacks.zen.zoom() end, desc = "Toggle Zoom" },
+      { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
+      { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
+      { "<leader>n",  function() Snacks.notifier.show_history() end, desc = "Notification History" },
+      { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
+      { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
+      { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse", mode = { "n", "v" } },
+      { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
+      { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
+      -- { "<c-\\>",      function() Snacks.terminal() end, desc = "Toggle Terminal" },
+      -- { "<c-_>",      function() Snacks.terminal() end, desc = "which_key_ignore" },
+      { "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
+      { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
+    }
   },
   {
     'Julian/lean.nvim',
@@ -189,7 +404,6 @@ require("lazy").setup({
       "nvim-treesitter/nvim-treesitter",
     }
   },
-  "jghauser/mkdir.nvim",
   {
     'saecki/crates.nvim',
     tag = 'v0.4.0',
@@ -223,41 +437,6 @@ require("lazy").setup({
       vim.keymap.set('n', '<leader>cC', crates.open_crates_io, opts)
     end,
   },
-  -- folder explorer
-  {
-    "lambdalisue/fern.vim",
-  },
-  {
-    "lambdalisue/nerdfont.vim",
-    dependencies = {
-      "lambdalisue/fern.vim",
-    },
-  },
-  {
-    "lambdalisue/fern-renderer-nerdfont.vim",
-    dependencies = {
-      "lambdalisue/fern.vim",
-      "lambdalisue/nerdfont.vim",
-    },
-  },
-  {
-    "lambdalisue/fern-git-status.vim",
-    dependencies = {
-      "lambdalisue/fern.vim",
-    },
-  },
-  {
-    "lambdalisue/glyph-palette.vim",
-    dependencies = {
-      "lambdalisue/fern.vim",
-    },
-  },
-  {
-    "yuki-yano/fern-preview.vim",
-    dependencies = {
-      "lambdalisue/fern.vim",
-    },
-  },
   -- tasks with Git
   {
     "tpope/vim-fugitive",
@@ -275,76 +454,13 @@ require("lazy").setup({
     -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
   },
   {
-    -- draw diagrams
-    "jbyuki/venn.nvim",
-    ft = {
-      "markdown",
-      "tex",
-    },
-    config = function()
-      -- toggle keymappings for venn using <leader>v
-      vim.api.nvim_set_keymap('n', '<leader>v', ":lua Toggle_venn()<CR>", { noremap = true })
-    end
-  },
-  --  {
-  --    "lervag/vimtex",
-  --    ft = {
-  --      -- "markdown",
-  --      "tex",
-  --      "latex",
-  --    },
-  --  },
-  {
-    -- Latex features
-    "jbyuki/nabla.nvim",
-    ft = {
-      -- "markdown",
-      "tex",
-      "latex",
-    },
-    config = function()
-      vim.api.nvim_set_keymap(
-        'n',
-        '<leader>p',
-        ":lua require('nabla').popup()<CR>",
-        { noremap = true }
-      )
-      require "nabla".enable_virt({
-        autogen = true, -- auto-regenerate ASCII art when exiting insert mode
-        silent = true,  -- silents error messages
-      })
-    end
-  },
-  -- Graphics
-  -- {
-  --   "3rd/image.nvim",
-  --   opts = {
-  --     backend = "ueberzug",
-  --     max_width = 100, -- tweak to preference
-  --     max_height = 12, -- ^
-  --     max_height_window_percentage = math.huge, -- this is necessary for a good experience
-  --     max_width_window_percentage = math.huge,
-  --     window_overlap_clear_enabled = true,
-  --     window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
-  --   }
-  -- },
-  {
     "othree/html5.vim",
     ft = {
       "svelte",
       "html",
     },
   },
-  -- file explorer
-  {
-    'nvim-telescope/telescope.nvim',
-    version = '*',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      -- optional but recommended
-      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-    }
-  },
+
   {
     "nvim-treesitter/nvim-treesitter-context",
     dependencies = {
@@ -367,7 +483,7 @@ require("lazy").setup({
   },
 
   -- icons
-  "nvim-tree/nvim-web-devicons",
+  -- "nvim-tree/nvim-web-devicons",
 
   -- statusline
   {
@@ -461,31 +577,11 @@ require("lazy").setup({
   }
 
 })
--- venn.nvim: enable or disable keymappings
-function _G.Toggle_venn()
-  local venn_enabled = vim.inspect(vim.b.venn_enabled)
-  if venn_enabled == "nil" then
-    vim.b.venn_enabled = true
-    vim.cmd [[setlocal ve=all]]
-    -- draw a line on HJKL keystokes
-    vim.api.nvim_buf_set_keymap(0, "n", "J", "<C-v>j:VBox<CR>", { noremap = true })
-    vim.api.nvim_buf_set_keymap(0, "n", "K", "<C-v>k:VBox<CR>", { noremap = true })
-    vim.api.nvim_buf_set_keymap(0, "n", "L", "<C-v>l:VBox<CR>", { noremap = true })
-    vim.api.nvim_buf_set_keymap(0, "n", "H", "<C-v>h:VBox<CR>", { noremap = true })
-    -- draw a box by pressing "f" with visual selection
-    vim.api.nvim_buf_set_keymap(0, "v", "f", ":VBox<CR>", { noremap = true })
-  else
-    vim.cmd [[setlocal ve=]]
-    vim.cmd [[mapclear <buffer>]]
-    vim.b.venn_enabled = nil
-  end
-end
 
 -- terminal keymaps
 function _G.set_terminal_keymaps()
   local opts = { buffer = 0 }
   vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
-  vim.keymap.set('t', 'jj', [[<C-\><C-n>]], opts)
   vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
   vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
   vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
