@@ -14,7 +14,7 @@
 )
 (defwidget system []
   (eventbox
-    :onhoverlost "~/.config/eww/scripts/popup.ts system"
+    :onhoverlost "~/.config/eww/scripts/popup.ts close system"
     (box
       :class "popup sys_win"
       :orientation "v"
@@ -210,21 +210,21 @@
             "border-radius: 50%; border: 1.5px solid ${
                 card_power_state_icon_info[
                   gpu_card_power_state
-                ][0]
+                ]?.[0] ?: "gray"
             };"
           }
           (label
             :text { 
               card_power_state_icon_info[
                 gpu_card_power_state
-              ][1]
+              ]?.[1] ?: "gray"
             }
             ; :class "icon icon_cpu"
             :style { 
               "color: ${
                 card_power_state_icon_info[
                   gpu_card_power_state
-                ][0]
+                ]?.[0] ?: "gray"
               }; font-size: 2em;"
             }
             :width 75

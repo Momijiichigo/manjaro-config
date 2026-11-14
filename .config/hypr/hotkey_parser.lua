@@ -161,6 +161,38 @@ function M.toggle_trackpad_while_typing()
     hl.exec_cmd("swayosd-client --custom-message='Trackpad " .. (updated_val and "OFF" or "ON") .. " while key-typing'")
 end
 
+function M.toggle_hdr()
+    local monitor_name = "eDP-1"
+    local current_cm = hl.get_monitor(monitor_name).cm
+    if current_cm == "hdr" then
+      hl.monitor({
+        output = monitor_name,
+        cm = "srgb",
+      })
+      -- hl.config({
+      --   render = {
+      --     cm_sdr_eotf = "gamma22"
+      --   }
+      -- })
+      hl.exec_cmd("swayosd-client --brightness 30")
+      hl.exec_cmd("sleep 1 && swayosd-client --custom-message 'SDR'")
+
+    else
+      hl.monitor({
+        output = monitor_name,
+        cm = "hdr",
+      })
+
+      -- hl.config({
+      --   render = {
+      --     cm_sdr_eotf = "gamma22"
+      --   }
+      -- })
+      hl.exec_cmd("swayosd-client --brightness 60")
+      hl.exec_cmd("sleep 1 && swayosd-client --custom-message 'HDR'")
+    end
+end
+
 -- Helper to resolve nested table paths like "window.resize" in hl.dsp
 local function resolve_path(root, path)
     if not root or not path then return nil end

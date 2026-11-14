@@ -1,20 +1,21 @@
-# A TOML linter such as https://taplo.tamasfe.dev/ can use this schema to validate your config.
+# A TOML linter such as https://github.com/tombi-toml/tombi can use this schema to validate your config.
 # If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
-"$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
+
+#:schema https://yazi-rs.github.io/schemas/yazi.json
 
 [mgr]
-ratio          = [ 1, 4, 3 ]
-sort_by        = "alphabetical"
+ratio          = [ 2, 3, 4 ]
+sort_by        = "mtime"
 sort_sensitive = false
-sort_reverse 	 = false
+sort_reverse 	 = true
 sort_dir_first = true
 sort_translit  = false
+sort_fallback  = "alphabetical"
 linemode       = "none"
-show_hidden    = false
+show_hidden    = true
 show_symlink   = true
 scrolloff      = 5
-mouse_events   = [ "click", "scroll" ]
-title_format   = "Yazi: {cwd}"
+mouse_events   = [ "click", "scroll", "drag" ]
 
 [preview]
 wrap            = "no"
@@ -31,14 +32,15 @@ ueberzug_offset = [ 0, 0, 0, 0 ]
 [opener]
 edit = [
 	{ run = "${EDITOR:-vi} %s", desc = "$EDITOR",      for = "unix", block = true },
+	{ run = "nvim %s",          desc = "nvim",         for = "windows", block = true },
 	{ run = "code %s",          desc = "code",         for = "windows", orphan = true },
 	{ run = "code -w %s",       desc = "code (block)", for = "windows", block = true },
 ]
 play = [
-	{ run = "xdg-open %s1",                desc = "Play", for = "linux" },
-	{ run = "open %s",                     desc = "Play", for = "macos" },
-	{ run = 'start "" %s1', orphan = true, desc = "Play", for = "windows" },
-	{ run = "termux-open %s1",             desc = "Play", for = "android" },
+	{ run = "xdg-open %s1",    desc = "Play", for = "linux", orphan = true },
+	{ run = "open %s",         desc = "Play", for = "macos" },
+	{ run = 'start "" %s1',    desc = "Play", for = "windows", orphan = true },
+	{ run = "termux-open %s1", desc = "Play", for = "android" },
 	{ run = "mediainfo %s1; echo 'Press enter to exit'; read _", block = true, desc = "Show media info", for = "unix" },
 	{ run = "mediainfo %s1 & pause", block = true, desc = "Show media info", for = "windows" },
 ]
@@ -73,11 +75,10 @@ rules = [
 	{ mime = "image/*", use = [ "open", "reveal" ] },
 	# Media
 	{ mime = "{audio,video}/*", use = [ "play", "reveal" ] },
+	# Code
+	{ mime = "application/{json,ndjson,javascript,wine-extension-ini}", use = [ "edit", "reveal" ] },
 	# Archive
 	{ mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", use = [ "extract", "reveal" ] },
-	# JSON
-	{ mime = "application/{json,ndjson}", use = [ "edit", "reveal" ] },
-	{ mime = "*/javascript", use = [ "edit", "reveal" ] },
 	# Empty file
 	{ mime = "inode/empty", use = [ "edit", "reveal" ] },
 	# Virtual file system
@@ -87,8 +88,11 @@ rules = [
 ]
 
 [tasks]
-micro_workers    = 10
-macro_workers    = 10
+file_workers     = 3
+plugin_workers   = 5
+fetch_workers    = 5
+preload_workers  = 2
+process_workers  = 5
 bizarre_retry    = 3
 image_alloc      = 536870912  # 512MB
 image_bound      = [ 10000, 10000 ]
@@ -96,12 +100,15 @@ suppress_preload = false
 
 [plugin]
 fetchers = [
-	# Mimetype
-	{ id = "mime", url = "*/",         run = "mime.dir", prio = "high" },
-	{ id = "mime", url = "local://*",  run = "mime.local", prio = "high" },
-	{ id = "mime", url = "remote://*", run = "mime.remote", prio = "high" },
+	# MIME-type
+	{ url = "*/",         run = "mime.dir",    prio = "high", group = "mime" },
+	{ url = "local://*",  run = "mime.local",  prio = "high", group = "mime" },
+	{ url = "remote://*", run = "mime.remote", prio = "high", group = "mime" },
 ]
 spotters = [
+	# Multi-file
+	{ mime = "multi/*", run = "multi" },
+	# Folder
 	{ url = "*/", run = "folder" },
 	# Code
 	{ mime = "text/*", run = "code" },
@@ -168,6 +175,76 @@ previewers = [
 	{ url = "*", run = "file" },
 ]
 
+prepend_preloaders = [
+  # Markdown
+  { url = "*.{md,markdown,txt}", run = "mdv-previewer" },
+  # Office Documents
+  # { mime = "application/openxmlformats-officedocument.*", run = "office" },
+  # { mime = "application/oasis.opendocument.*", run = "office" },
+  # { mime = "application/ms-*", run = "office" },
+  # { mime = "application/msword", run = "office" },
+  # { name = "*.docx", run = "office" },
+]
+
+prepend_previewers = [
+  # Markdown
+  { url = "*.{md,markdown,txt,latex}", run = "mdv-previewer" },
+  # rich-cli plugin
+  { url = "*.csv", run = "rich-preview"}, # for csv files
+  { url = "*.rst", run = "rich-preview"}, # for restructured text (.rst) files
+  { url = "*.ipynb", run = "rich-preview"}, # for jupyter notebooks (.ipynb)
+  # Office Documents
+  # { mime = "application/openxmlformats-officedocument.*", run = "office" },
+  # { mime = "application/oasis.opendocument.*", run = "office" },
+  # { mime = "application/ms-*", run = "office" },
+  # { mime = "application/msword", run = "office" },
+  # { name = "*.docx", run = "office" },
+
+  # bat
+  # { mime = "text/*",              run = "bat" },
+  { mime = "application/json",    run = "bat" },
+  { mime = "application/x-yaml",  run = "bat" },
+  { mime = "application/toml",    run = "bat" },
+  { mime = "text/x-shellscript",    run = "bat" },
+
+  # Fallback globs for extensions that mime detection may miss
+  { url = "*.rs",       run = "bat" },
+  { url = "*.go",       run = "bat" },
+  { url = "*.zig",      run = "bat" },
+  { url = "*.jl",       run = "bat" },
+  { url = "*.py",       run = "bat" },
+  { url = "*.js",       run = "bat" },
+  { url = "*.ejs",      run = "bat" },
+  { url = "*.mjs",      run = "bat" },
+  { url = "*.ts",       run = "bat" },
+  { url = "*.tsx",      run = "bat" },
+  { url = "*.jsx",      run = "bat" },
+  { url = "*.lua",      run = "bat" },
+  { url = "*.vim",      run = "bat" },
+  { url = "*.lean",     run = "bat" },
+  { url = "*.sh",       run = "bat" },
+  { url = "*.fish",     run = "bat" },
+  { url = "*.typ",      run = "bat" },
+  { url = "*.c",        run = "bat" },
+  { url = "*.cpp",      run = "bat" },
+  { url = "*.h",        run = "bat" },
+  { url = "*.html",     run = "bat" },
+  { url = "*.htm",      run = "bat" },
+  { url = "*.xml",      run = "bat" },
+  { url = "*.css",      run = "bat" },
+  { url = "*.scss",     run = "bat" },
+  { url = "*.yaml",     run = "bat" },
+  { url = "*.yml",     run = "bat" },
+  { url = "*.toml",     run = "bat" },
+  { url = "*.ini",     run = "bat" },
+  { url = "*.wgsl",     run = "bat" },
+  { url = "*.lock",  mime = "text/*",  run = "bat" },
+  { url = "*CMakeLists.txt",      run = "bat" },
+  { url = "*Makefile",      run = "bat" },
+  { url = "*Makefile.in",      run = "bat" },
+]
+
+
 [input]
 cursor_blink = false
 
@@ -225,7 +302,7 @@ overwrite_offset = [ 0, 0, 50, 15 ]
 
 # quit
 quit_title  = "Quit?"
-quit_body   = "The following tasks are still running, are you sure you want to quit?"
+quit_body   = "There are unfinished tasks, quit anyway?\n(Open task manager with default key 'w')"
 quit_origin = "center"
 quit_offset = [ 0, 0, 50, 15 ]
 

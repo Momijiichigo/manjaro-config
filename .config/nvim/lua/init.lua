@@ -14,6 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = "\\" -- make sure to set `mapleader` before lazy so your mappings are correct
 
 vim.filetype.add({ extension = { wgsl = "wgsl" } })
+-- vim.filetype.add({ extension = { nbcl = "nbcl" } })
 vim.filetype.add({ extension = { typst = "typ" } })
 vim.filetype.add({ pattern = { ["hypr.*%.conf"] = "hyprlang" } })
 
@@ -42,6 +43,11 @@ require("lazy").setup({
     lazy = false,
     build = ":TSUpdate",
     -- config = function()
+    --   require("nvim-treesitter.parsers").nbcl = {
+    --     install_info = {
+    --       url = "https://github.com/NBCL-Lang/tree-sitter-nbcl"
+    --     }
+    --   }
     --   require "nvim-treesitter.configs".setup {
     --     ensure_installed = {
     --       "rust",
@@ -59,6 +65,17 @@ require("lazy").setup({
     --     highlight = {
     --       -- enable = true
     --     },
+    --     parsers = {
+    --       nbcl = {
+    --         install_info = {
+    --           url = "https://github.com/NBCL-Lang/tree-sitter-nbcl", -- local path or git repo
+    --           files = {"src/parser.c"},
+    --         },
+    --         filetype = "nbcl",
+    --         tier = 2, -- Important: set this to 2 so nvim-treesitter registers it properly
+    --       },
+    --     }
+    --
     --   }
     -- end
   },
@@ -449,8 +466,8 @@ require("lazy").setup({
       "tex",
     },
     opts = {},
-    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
-    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
     -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
   },
   {

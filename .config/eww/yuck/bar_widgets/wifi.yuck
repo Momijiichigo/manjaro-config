@@ -8,7 +8,7 @@
       :class "icon wifi"
       :style "color: ${WLAN_ICON_COLOR};" 
       :tooltip ESSID_WLAN
-      :text WLAN_ICON
+      :text "${WLAN_ICON} "
     )
     ; (box
     ;   :vexpand "false"

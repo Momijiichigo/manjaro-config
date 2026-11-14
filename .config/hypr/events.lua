@@ -43,22 +43,32 @@ hl.on(
   "monitor.added",
   ---@param monitor HL.Monitor
   function (monitor)
-    hl.exec_cmd(
-      "eww open-many bar:bar_"
-      .. monitor.name
-      .. " --arg bar_"
-      .. monitor.name
-      .. ":screen="
-      .. monitor.id
-    )
+    hl.timer(
+      function()
+        hl.exec_cmd(
+          -- "eww open-many frutiger_bar:frutiger_bar_eDP-1 --arg frutiger_bar_eDP-1:screen=0"
+          -- "eww open-many bar:bar_"
+          "eww open-many frutiger_bar:bar_"
+          .. monitor.name
+          .. " --arg bar_"
+          .. monitor.name
+          .. ":screen="
+          .. monitor.id
+        )
 
-    hl.exec_cmd(
-      "eww open-many wallpaper_clock:wallpaper_clock_"
-      .. monitor.name
-      .. " --arg wallpaper_clock_"
-      .. monitor.name
-      .. ":screen="
-      .. monitor.id
+        hl.exec_cmd(
+          "eww open-many wallpaper_clock:wallpaper_clock_"
+          .. monitor.name
+          .. " --arg wallpaper_clock_"
+          .. monitor.name
+          .. ":screen="
+          .. monitor.id
+        )
+      end,
+      {
+        timeout = 300,
+        type = "oneshot"
+      }
     )
   end
 )
@@ -103,6 +113,7 @@ local function set_eww_wspaces()
     end
 
     hl.exec_cmd('eww update wspaces=[' .. table.concat(parts, ",") .. ']')
+    -- hl.exec_cmd('ewwii update "wspaces=\\"[' .. table.concat(parts, "\\,") .. ']\\""')
 end
 
 
@@ -120,6 +131,7 @@ hl.on("workspace.active",
     ---@param workspace HL.Workspace
     function (workspace)
         hl.exec_cmd("eww update current_workspace=" .. workspace.id)
+        -- hl.exec_cmd("ewwii update current_workspace=" .. workspace.id)
     end
 )
 

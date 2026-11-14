@@ -12,7 +12,7 @@
         :vexpand "false" 
         :hexpand "false" 
         :style "background-image: url('${
-          music_metadata[player]?.["mpris:artUrl"]
+          music_metadata?.[player]?.["mpris:artUrl"]
             ?: "images/music.png"
         }');"
       )
@@ -28,7 +28,7 @@
           :wrap "true"
           :limit-width 17 
           :text {
-            music_metadata[player]?.["xesam:title"] ?: ""
+            music_metadata?.[player]?.["xesam:title"] ?: ""
           }
         )
         (label 
@@ -37,7 +37,7 @@
           :wrap "true" 
           :limit-width 18 
           :text {
-            music_metadata[player]?.["xesam:artist"] ?: "..."
+            music_metadata?.[player]?.["xesam:artist"] ?: "..."
           }
         )
         (box
@@ -48,18 +48,18 @@
           :vexpand "false" 
           :hexpand "false"
           (button 
-            :class "music_btn_prev" 
-            :onclick "playerctl --player=${player} previous"
+            :class "glass_block music_btn" 
+            :onclick "~/.config/eww/scripts/music/playerctl.sh previous"
             ""
           )
           (button 
-            :class "music_btn_play" 
-            :onclick "playerctl --player=${player} play-pause"
-            {song_status_each[player] == "Playing" ? " " : " "}
+            :class "glass_block music_btn" 
+            :onclick "~/.config/eww/scripts/music/playerctl.sh play-pause"
+            {song_status_each?.[player] == "Playing" ? "󰏤" : "󰐊"}
           )
           (button 
-            :class "music_btn_next" 
-            :onclick "playerctl --player=${player} next"
+            :class "glass_block music_btn" 
+            :onclick "~/.config/eww/scripts/music/playerctl.sh next"
             ""
           )
         )
@@ -70,10 +70,10 @@
           :hexpand "false" 
           :space-evenly "false"
           (scale 
-            :max {music_metadata[player]?.["mpris:length"] / 1000000 ?: 100}
-            :onchange "playerctl --player=${player} position {}"
+            :max {(music_metadata?.[player]?.["mpris:length"] ?: 0) / 1000000}
+            :onchange "~/.config/eww/scripts/music/playerctl.sh position {}"
             :value {
-              song_status_each[player] == "Playing"
+              song_status_each?.[player] == "Playing"
                 ? music_current_pos / 1000000
                 : 0
             }
@@ -86,7 +86,7 @@
 ;;  Music
 (defwidget music_pop []
   (eventbox
-    :onhoverlost "~/.config/eww/scripts/popup.ts music_win"
+    :onhoverlost "~/.config/eww/scripts/popup.ts close music_win"
     (scroll
       :class "popup music_pop"
       (literal

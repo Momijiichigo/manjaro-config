@@ -4,7 +4,9 @@
   (eventbox
     :onhover "eww update bluetooth_reveal=true"
     :onhoverlost "eww update bluetooth_reveal=false"
-    :onclick "pkexec rfkill unblock bluetooth && alacritty --class float --command bluetuith &"
+    ;; Add `$USER ALL=(ALL) NOPASSWD: /usr/bin/rfkill` to `/etc/sudoers.d/rfkill-unblock`
+    ;;  to make password-exemption of rfkill command
+    :onclick "rfkill unblock bluetooth && alacritty --class float --command bluetuith &"
     (label
       :class "icon bluetooth"
       :style "color: ${bluetooth_icon_color};" 

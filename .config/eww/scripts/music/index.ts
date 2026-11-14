@@ -54,6 +54,8 @@ async function updateMusicMetadata() {
   const info = await getMetadata();
   $`eww update music_metadata="${JSON.stringify(info.metadata)}"`.text();
   $`eww update music_players="${JSON.stringify(info.players)}"`.text();
+  // $`ewwii update music_metadata="${JSON.stringify(info.metadata)}"`.text().catch();
+  // $`ewwii update music_players="${JSON.stringify(info.players)}"`.text().catch();
   const song_status_each: {
     [player: string]: string
   } = {};
@@ -62,6 +64,8 @@ async function updateMusicMetadata() {
     song_status_each[player] = songStatus.trim();
   }))
   $`eww update song_status_each="${JSON.stringify(song_status_each)}"`.text();
+  // $`ewwii update song_status_each="${JSON.stringify(song_status_each)}"`.text().catch();
+
   // const currentMusicPlayer = await $`eww get current_music_player`.text();
   // console.log("currentMusicPlayer", currentMusicPlayer)
   // $`eww update current_music_player="${metadata.players[0]}"`.text();

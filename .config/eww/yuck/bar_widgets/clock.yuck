@@ -1,7 +1,7 @@
 
 (defwidget clock_module []
   (eventbox
-    :onclick "$HOME/.config/eww/scripts/popup.ts calendar"
+    :onclick "$HOME/.config/eww/scripts/popup.ts open calendar"
     (box
       :class "module clock_module"
       :space-evenly "false"
@@ -10,7 +10,7 @@
       ; :spacing "3"
       (label
         :class "clock_date"
-        :text {formattime(EWW_TIME, "%d/%m")}
+        :text {formattime(EWW_TIME, "%d-%m")}
       )
       (label
         :text {formattime(EWW_TIME, "%a")}

@@ -21,7 +21,9 @@
 (defvar vol_reveal false)
 (defvar br_reveal false)
 (defvar music_reveal false)
-(defvar bluetooth_reveal false)
+
+(defvar bluetooth_reveal false) ; deprecated - to be removed
+
 (defvar wifi_rev false)
 (defvar time_rev false)
 
@@ -45,7 +47,7 @@
 (defpoll bluetooth_connected_dev
   :initial "No device connected"
   :interval "1m"
-  "bluetoothctl devices Connected | rg 'Device [0-9:A-Z]+ (.+)$' -r '$1' -o"
+  "bluetoothctl devices Connected | rg 'Device [0-9:A-Z]+ (.+)$' -r '$1' -o || echo 'No device connected'"
 )
 
 (defpoll WLAN_ICON_COLOR 

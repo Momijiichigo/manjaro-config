@@ -3,6 +3,8 @@
 ;; Wallpaper Widgets
 (include "./yuck/wallp_widgets/default.yuck")
 
+(include "./yuck/frutiger_bar/bar.yuck")
+
 ;; Desktop Bar
 (defwindow bar [screen]
   :geometry
@@ -81,7 +83,7 @@
       )
     )
     (eventbox
-      :onclick "./scripts/popup.ts system"
+      :onclick "./scripts/popup.ts open system"
       (box
         :space-evenly true  
         :halign "end"
@@ -150,6 +152,7 @@
       :width "300px" 
       :height "60px"
     )
+  :namespace "eww-blur"
   (cal)
 )
 
@@ -164,6 +167,7 @@
       :width "290px" 
       :height "120px"
     )
+  :namespace "eww-blur"
   (system)
 )
 
@@ -176,6 +180,7 @@
   :screen 1
   :geometry 
     (geometry :x "0" :y "5px" :width 428 :height 104 :anchor "top center")
+  :namespace "eww-blur"
   (music_pop)
 )
 

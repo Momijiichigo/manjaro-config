@@ -75,6 +75,9 @@
     }
   },
   "json.schemaDownload.trustedDomains": {
-    "https://raw.githubusercontent.com": true
+    "https://raw.githubusercontent.com": true,
+    "https://pi.dev": true,
+    "https://schemas.wp.org": true,
+    "https://www.schemastore.org": true
   }
 }

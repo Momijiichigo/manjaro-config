@@ -25,6 +25,9 @@ if has("win32")
     \   },
     \   'cache_enabled': 0,
     \ }
+  set shell=fish.exe
+  set shellxquote=''
+  set shellcmdflag='-c'
 endif
 
 set completeopt=noinsert,menuone,popup
